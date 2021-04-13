@@ -10,6 +10,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { PhotoService } from "./photo.service";
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [PhotoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

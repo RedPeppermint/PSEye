@@ -10,8 +10,8 @@ import { UploadComponent } from "./upload/upload.component";
 
 
 const routes: Routes = [
-  { path: "dashboard", redirectTo: "", pathMatch: "full" },
-  { path: "", component: DashboardComponent },
+  { path: "", redirectTo: "dashboard", pathMatch: "full" },
+  { path: "dashboard", component: DashboardComponent },
   { path: "favorites", component: FavoritesComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
@@ -21,7 +21,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-  declarations: [],
+  exports: [RouterModule],
+  declarations: []
 })
 export class AppRoutingModule { }
