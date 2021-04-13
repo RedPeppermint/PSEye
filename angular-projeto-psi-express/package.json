@@ -1,0 +1,19 @@
+{
+  "name": "pseye",
+  "version": "1.0.0",
+  "description": "projeto psi",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.6.6",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.24.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "psi017",
+  "license": "ISC"
+}
