@@ -1,0 +1,37 @@
+*{
+     height: 100%;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  grid-template-rows: 45px auto;
+  grid-template-areas:
+  'head head'
+  'nav main';
+}
+
+#icon {
+  width: 50px;
+  height: 38px;
+  margin-top: 4px;
+  margin-left: 4px;
+}
+
+header {
+  grid-area: head;
+  border-bottom: solid 1px gray;
+}
+
+
+main {
+  grid-area: main;
+  margin: 20px;
+}
+
+
+nav {
+  grid-area: nav;
+}
