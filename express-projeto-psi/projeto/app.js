@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+const mongoose = require('mongoose');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var photosRouter = require('./routes/photos');
@@ -39,11 +39,11 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 if (db.collections.users === undefined) {
-  db.createCollection("users").then(console.log("User Collection Created"));
+  db.createCollection("users").then(() => console.log("User Collection Created"));
 }
 
 if (db.collections.photos === undefined) {
-  db.createCollection("photos").then(console.log("Photos Collection Created"));
+  db.createCollection("photos").then(() => console.log("Photos Collection Created"));
 }
 
 

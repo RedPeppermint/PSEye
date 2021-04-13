@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var photosController = require('./controllers/photosController')
+var photosController = require('../controllers/photosController')
 
 
 router.get('/:id', photosController.photo_get);
