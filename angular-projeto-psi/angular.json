@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-projeto-psi"
+    }
+  },
+  "defaultProject": "angular-projeto-psi",
+  "cli": {
+    "analytics": false
+  }
 }
