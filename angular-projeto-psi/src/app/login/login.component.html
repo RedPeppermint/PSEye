@@ -1,1 +1,33 @@
-<p>login works!</p>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+  </head>
+
+  <body>
+    <header>
+      <img src="../../assets/iconrec.png" id="icon" alt="icon">
+    </header>
+
+    <main>
+
+      <div class="login">
+        <input class="credentials" for="user" #username type="text" name="user" placeholder="Username">
+        <input class="credentials" for="user" #password type="password" name="pass" placeholder="Password">
+        <button type="button" id="button" (click)="login(username.value, password.value)">Login</button>
+        <div id="error" ng-style="{'border-color' : error ? 'red': '#D0CECE'}" >
+          {{error}}
+        </div>
+        <div id="signup" >
+          Don't have an account? <a routerLink="/register">Sign up</a>
+        </div>
+
+      </div>
+
+    </main>
+
+  </body>
+
+
+</html>

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -11,7 +12,7 @@ import { FavoritesComponent } from './favorites/favorites.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { PhotoService } from "./photo.service";
-
+import { UserService } from "./user.service";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { PhotoService } from "./photo.service";
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [PhotoService],
+  providers: [PhotoService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
