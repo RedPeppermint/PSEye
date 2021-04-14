@@ -1,7 +1,22 @@
 var UserModel = require('../schemas/user');
-var PhotoModel = require('../schemas/photo');
 
+// Login 
+exports.user_login = function(req, res) {
+    var user = req.query.user;
+    var pass = req.query.pass;
+    UserModel.findOne({ name: user, password: pass }, function(err, result) {
+        if (err) {
+            res.json({ error: "error while logging in user" });
+            return;
+        }
+        res.json("Login Successful");
+        return;
+    })
+    res.json("Login Failed");
+    return;
+}
 
+// get user
 exports.user_get = function(req, res) {
     id = req.params.id;
     UserModel.find({ _id: id }, function(err, model) {
@@ -13,29 +28,18 @@ exports.user_get = function(req, res) {
     });
 }
 
-exports.user_post = function(req, res) {
-    data = req.body;
-    UserModel.create({ name: data.name, password: data.password }, function(err, model) {
-        if (err) {
-            res.json({ Error: "error while creating user" });
-        } else {
-            res.json(model);
-        }
-    });
-}
-
 exports.user_delete = function(req, res) {
-    id = req.params.id;
-    UserModel.remove({ _id: id }, function(err) {
-        if (err) {
-            res.json({ Error: "User not found." });
-        } else {
-            res.json({ INFO: "User deleted" });
-        }
-    });
-}
-
-exports.user_put = function(req, res) {
+        id = req.params.id;
+        UserModel.remove({ _id: id }, function(err) {
+            if (err) {
+                res.json({ Error: "User not found." });
+            } else {
+                res.json({ INFO: "User deleted" });
+            }
+        });
+    }
+    // UC10 Registo do utilizador
+exports.user_post = function(req, res) {
     var user = req.query.user;
     var pass = req.query.pass;
 
@@ -71,13 +75,14 @@ function checkUsername(user, response) {
     if (user.length < 3) {
         response.error.push("Name has less than 3 characters")
     }
-    if (pass.length < 8) {
-        response.error.push("Password has less than 8 characters")
-    }
+
     return response;
 }
 
 function checkPassword(pass, response) {
+    if (pass.length < 8) {
+        response.error.push("Password has less than 8 characters")
+    }
     if (!hasUpper(pass)) {
         response.error.push("Password doesn't have uppercase characters")
     }

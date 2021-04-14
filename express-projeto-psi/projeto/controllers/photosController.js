@@ -1,5 +1,4 @@
 var PhotoModel = require('../schemas/photo');
-var UserModel = require('../schemas/user');
 
 exports.photo_get = function(req, res) {
     id = req.params.id;
