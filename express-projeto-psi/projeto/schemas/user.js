@@ -7,7 +7,7 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
     name: String,
     password: String,
-    photos_id: { type: Schema.Types.Array }
+    photos_id: { type: Schema.Types.Array, default: [] }
 });
 
 UserSchema.virtual("url").get(function () {

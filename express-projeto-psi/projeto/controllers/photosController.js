@@ -15,7 +15,8 @@ exports.photo_get = function (req, res) {
 
 exports.photo_post = function (req, res) {
     data = req.body;
-    if (data.description === undefined || data.photoBase64 === undefined || data.photo_id === undefined) {
+    id = data.user_id;
+    if (data.description === undefined || data.photoBase64 === undefined || data.photo_id === undefined || data.user_id === undefined) {
         res.json({ Error: "error while creating photo, not enough data." });
         return;
     }
@@ -24,7 +25,15 @@ exports.photo_post = function (req, res) {
             res.json({ Error: "error while creating photo" });
         }
         else {
-            res.json({ id: model._id, name: model.name, pet_id: model.pet_id })
+            UserModel.updateOne({ _id: id }, { $push: { photos_id: model._id } }, function (err) {
+                if (err) {
+                    PhotoModel.remove({ _id: model._id });
+                    res.json({ Error: "error while creating photo" });
+                }
+                else {
+                    res.json(model);
+                }
+            });
         }
     });
 }

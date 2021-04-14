@@ -29,8 +29,10 @@ app.use(function (req, res, next) {
   next(createError(404));
 });
 
-var mongoDB = 'mongodb://psi017:psi017@localhost:27017/psi017?retryWrites=true&authSource=psi017';
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+var mongoDB = 'mongodb+srv://admin:admin@heroes.p9t7b.mongodb.net/Projeto1?retryWrites=true&w=majority';
+mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true }).catch(function (err) {
+  console.log(err);
+});
 
 //Get the default connection
 var db = mongoose.connection;

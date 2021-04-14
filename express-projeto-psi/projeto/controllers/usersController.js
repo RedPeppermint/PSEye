@@ -15,24 +15,19 @@ exports.user_get = function (req, res) {
 }
 
 exports.user_post = function (req, res) {
-
+    data = req.body;
+    UserModel.create({ name: data.name, password: data.password }, function (err, model) {
+        if (err) {
+            res.json({ Error: "error while creating user" });
+        }
+        else {
+            res.json(model);
+        }
+    });
 }
 
 exports.user_put = function (req, res) {
 
-}
-
-exports.user_add_photo_put = function (req, res) {
-    id = req.params.id;
-    photoID = req.body.photoID;
-    PhotoModel.find({ _id: photoID }, function (err, model) {
-        if (err) {
-            res.json({ Error: "Photo not found." });
-        }
-        else {
-            UserModel.update({ _id: id }, { $push: { photos_id: photoID } });
-        }
-    });
 }
 
 exports.user_delete = function (req, res) {
