@@ -26,7 +26,8 @@ import { UserService } from "./user.service";
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [PhotoService, UserService],
   bootstrap: [AppComponent]
