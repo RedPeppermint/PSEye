@@ -2,18 +2,23 @@ var UserModel = require('../schemas/user');
 
 // Login 
 exports.user_login = function(req, res) {
-    var user = req.query.user;
-    var pass = req.query.pass;
-    UserModel.findOne({ name: user, password: pass }, function(err, result) {
+    var name = req.query.name;
+    var password = req.query.password;
+    UserModel.findOne({ name: name, password: password }, function(err, result) {
         if (err) {
             res.json({ error: "error while logging in user" });
-            return;
+            console.log("deu erro");
+        } else if (result) {
+            console.log("Consegui login");
+            res.json({
+                response: "Login Successful"
+            });
+        } else {
+            res.json({
+                response: "Login Failed"
+            });
         }
-        res.json("Login Successful");
-        return;
-    })
-    res.json("Login Failed");
-    return;
+    });
 }
 
 // get user
@@ -40,32 +45,29 @@ exports.user_delete = function(req, res) {
     }
     // UC10 Registo do utilizador
 exports.user_post = function(req, res) {
-    var user = req.query.user;
-    var pass = req.query.pass;
+    var name = req.query.name;
+    var password = req.query.password;
 
-    UserModel.find({ name: user }, function(err, results) {
+    UserModel.find({ name: name }, function(err, results) {
         if (err) {
             res.json({ error: "error while creating user" });
-            return;
-        }
-        if (!results.length) { // there is no one with that name
+        } else if (results) { // there is no one with that name
             var response = { error: [], existsUser: false };
-            response = checkUsername(user, response);
+            response = checkUsername(name, response);
             if (response.error) {
                 res.json(response);
-                return;
-            }
-            response = checkPassword(pass, response);
-            if (response.error) {
-                res.json(response);
-                return;
+            } else { // user ok
+                response = checkPassword(password, response);
+                if (response.error) {
+                    res.json(response);
+                } else { // password ok
+                    res.json({ msg: "Succsessful" });
+                }
             }
         } else { // there is someone with that name
             res.json({ error: [], existsUser: true });
-            return;
         }
-    })
-    res.json({ msg: "Succsessful" });
+    });
 }
 
 function checkUsername(user, response) {
