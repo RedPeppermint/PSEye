@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { User } from "../user";
 import { UserService } from "../user.service";
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +12,9 @@ import { UserService } from "../user.service";
 export class LoginComponent implements OnInit {
   title = "PSEye";
   error = "";
+  incomplete = false;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -20,20 +22,23 @@ export class LoginComponent implements OnInit {
   login(username: string, password: string): void {
     username = username.trim();
     if (!username || !password) {
-      this.error = "Campos obrigatórios";
+      this.displayError("Campos obrigatórios *");
+      this.incomplete = true;
       return;
     }
-/*
-    if(this.userService.getUser(username, password)) {
+
+    this.incomplete = false;
+    if(this.userService.loginUser(username, password)) {
+      this.router.navigate(['/dashboard']);
 
     } else {
-      displayError();
-    }*/
+      this.displayError("Username ou password errados");
+      return;
+    }
   }
-/*
-  displayError(): void {
-    this.error = "Username ou password errados";
 
+  displayError(msg : string): void {
+    this.error = msg;
   }
-*/
+
 }

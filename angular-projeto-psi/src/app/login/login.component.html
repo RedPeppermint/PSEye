@@ -7,16 +7,16 @@
 
   <body>
     <header>
-      <img src="../../assets/iconrec.png" id="icon" alt="icon">
+      <a routerLink="/login"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
     </header>
 
     <main>
-
+      <img src="../../assets/text.png" id="icontext" alt="PSEye">
       <div class="login">
-        <input class="credentials" for="user" #username type="text" name="user" placeholder="Username">
-        <input class="credentials" for="user" #password type="password" name="pass" placeholder="Password">
+        <input class="credentials" for="user" #username type="text" name="user" placeholder="Username" [style.border-color]="error ? 'red' : 'gray'">
+        <input class="credentials" for="user" #password type="password" name="pass" placeholder="Password" [style.border-color]="error ? 'red' : 'gray'">
         <button type="button" id="button" (click)="login(username.value, password.value)">Login</button>
-        <div id="error" ng-style="{'border-color' : error ? 'red': '#D0CECE'}" >
+        <div id="error">
           {{error}}
         </div>
         <div id="signup" >
