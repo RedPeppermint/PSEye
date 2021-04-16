@@ -2,8 +2,9 @@ var UserModel = require('../schemas/user');
 
 // Login 
 exports.user_login = function(req, res) {
-    var name = req.query.name;
-    var password = req.query.password;
+    console.log("Body: " + JSON.stringify(req.body));
+    var name = req.body.name;
+    var password = req.body.password;
     UserModel.findOne({ name: name, password: password }, function(err, result) {
         if (err) {
             res.json({
@@ -45,8 +46,8 @@ exports.user_delete = function(req, res) {
     }
     // UC10 Registo do utilizador
 exports.user_post = function(req, res) {
-    var name = req.query.name;
-    var password = req.query.password;
+    var name = req.body.name;
+    var password = req.body.password;
 
     UserModel.find({ name: name }, function(err, results) {
         if (err) {
