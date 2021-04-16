@@ -1,4 +1,5 @@
 var PhotoModel = require('../schemas/photo');
+var UserModel = require('../schemas/user');
 
 exports.photo_get = function(req, res) {
     id = req.params.id;
@@ -35,11 +36,18 @@ exports.photo_post = function(req, res) {
 }
 
 exports.photo_delete = function(req, res) {
-    PhotoModel.remove({ _id: id }, function(err) {
+    id = req.params.id;
+    PhotoModel.findByIdAndRemove({ _id: id }, function(err, result) {
         if (err) {
             res.json({ Error: "Photo not found." });
         } else {
-            res.json({ INFO: "Photo deleted" });
+            UserModel.findByIdAndUpdate(result.user_id, { $pull: { photos_id: id } }, function(err) {
+                if (err) {
+                    res.json({ Error: "Error trying to delete photo from user." });
+                } else {
+                    res.json({ INFO: "Photo deleted" });
+                }
+            });
         }
     });
 }

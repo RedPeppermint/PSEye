@@ -1,4 +1,5 @@
 var UserModel = require('../schemas/user');
+var PhotoModel = require('../schemas/photo');
 
 // Login 
 exports.user_login = function(req, res) {
