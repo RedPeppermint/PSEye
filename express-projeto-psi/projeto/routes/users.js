@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var usersController = require('../controllers/usersController');
 
-router.get('/login', usersController.user_login);
+router.post('/login', usersController.user_login);
 
 router.get('/:id', usersController.user_get);
 

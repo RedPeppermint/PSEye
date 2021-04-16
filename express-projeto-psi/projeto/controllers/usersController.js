@@ -4,7 +4,7 @@ var PhotoModel = require('../schemas/photo');
 // Login 
 exports.user_login = function(req, res) {
     console.log("Body: " + JSON.stringify(req.body));
-    var name = req.body.name;
+    var name = req.body.username;
     var password = req.body.password;
     UserModel.findOne({ name: name, password: password }, function(err, result) {
         if (err) {
@@ -36,16 +36,17 @@ exports.user_get = function(req, res) {
 }
 
 exports.user_delete = function(req, res) {
-        id = req.params.id;
-        UserModel.remove({ _id: id }, function(err) {
-            if (err) {
-                res.json({ Error: "User not found." });
-            } else {
-                res.json({ INFO: "User deleted" });
-            }
-        });
-    }
-    // UC10 Registo do utilizador
+    id = req.params.id;
+    UserModel.remove({ _id: id }, function(err) {
+        if (err) {
+            res.json({ Error: "User not found." });
+        } else {
+            res.json({ INFO: "User deleted" });
+        }
+    });
+}
+
+// UC10 Registo do utilizador
 exports.user_post = function(req, res) {
     var name = req.body.name;
     var password = req.body.password;

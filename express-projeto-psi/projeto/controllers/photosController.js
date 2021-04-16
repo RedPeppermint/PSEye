@@ -15,7 +15,7 @@ exports.photo_get = function(req, res) {
 exports.photo_post = function(req, res) {
     data = req.body;
     id = data.user_id;
-    if (data.description === undefined || data.photoBase64 === undefined || data.photo_id === undefined || data.user_id === undefined) {
+    if (data.photoBase64 === undefined || data.user_id === undefined) {
         res.json({ Error: "error while creating photo, not enough data." });
         return;
     }
