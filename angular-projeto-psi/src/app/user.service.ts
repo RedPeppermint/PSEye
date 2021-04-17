@@ -20,16 +20,9 @@ export class UserService {
 
   loginUser(user : string, pass: string): boolean {
     var url = this.url + "users/login" + "?name=" + user + "&password=" + pass;
-    var user = this.http.get<User>(url, this.httpOptions).pipe(map(count => count > 0),
-    defaultIfEmpty(false),
-   tap(_ => "logged in"),
-   catchError(_ => {
-          return of(false);
-      }));
-
-    if(!user) {
-      return false;
-    }
+    var ze = this.http.get(url, this.httpOptions).subscribe(data => {
+      console.log(data.response);
+    });
 
 
     return true;
