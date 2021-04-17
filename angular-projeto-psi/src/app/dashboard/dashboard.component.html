@@ -1,67 +1,68 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title>{{title}}</title>
-  </head>
 
-    <body>
-      <header>
-        <img src="../../assets/iconrec.png" id="icon" alt="icon">
-      </header>
-      <nav>
-        <ul>
-          <li>
-            <a routerLink="/profile">
-              My profile
-            </a>
+<head>
+  <meta charset="utf-8">
+  <title>{{title}}</title>
+</head>
 
-          </li>
-          <li>
-            <a routerLink="/favorites">
-            <!-- <img src="../../assets/starfilled.png" id="favs">  -->
-            My favorites
-          </a>
-        </li>
-        </ul>
-      </nav>
-      <div id="filter">
-        <form>
-          Search by:
-          <ul>
-            <li><input type="radio" name="search" value="Recentes"><label>Recent</label></li>
-            <li><input type="radio" name="search" value="Populares" checked><label>Popular</label></li>
-          </ul>
-        </form>
+<body>
+  <header>
+    <img src="../../assets/iconrec.png" id="icon" alt="icon">
+  </header>
+  <nav>
+    <ul>
+      <li>
+        <a routerLink="/profile">
+          My profile
+        </a>
+
+      </li>
+      <li>
+        <a routerLink="/favorites">
+          <!-- <img src="../../assets/starfilled.png" id="favs">  -->
+          My favorites
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <div id="filter">
+    <form>
+      Search by:
+      <ul>
+        <li><input type="radio" name="search" value="Recentes"><label>Recent</label></li>
+        <li><input type="radio" name="search" value="Populares" checked><label>Popular</label></li>
+      </ul>
+    </form>
+  </div>
+
+  <main>
+    <div class="photocontainer" *ngFor="let p of photos">
+      <div class="topcontainer">
+        {{p.user_id}}
+      </div>
+      <div class="photo">
+        <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
+      </div>
+      <div class="buttons">
+        <img src="../../assets/heartempty.png" alt="Like button" id="like">
+        <img src="../../assets/starempty.png" alt="Favorite button" id="fav">
+        <img src="../../assets/share.png" alt="Share button" id="share">
+        <!--  TODO: meter isto a atualizar com o ts  -->
+
+      </div>
+      <div class="description">
+        {{p.description}}
       </div>
 
-      <main>
-        <div class="photocontainer">
-          <div class="topcontainer">
-            User x
-          </div>
-          <div class="photo">
-            Photo
-          </div>
-          <div class="buttons">
-            <img src="../../assets/heartempty.png" alt="Like button" id="like">
-            <img src="../../assets/starempty.png" alt="Favorite button" id="fav">
-            <img src="../../assets/share.png" alt="Share button" id="share">
-             <!--  TODO: meter isto a atualizar com o ts  -->
-
-          </div>
-          <div class="description">
-            Just a description : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus.
-          </div>
-
-        </div>
+    </div>
 
 
-      </main>
-      <div id="upload">
-        <img src="../../assets/upload.png" alt="Update button">
-      </div>
-  </body>
+  </main>
+  <div id="upload">
+    <img src="../../assets/upload.png" alt="Update button">
+  </div>
+</body>
 
 
 </html>

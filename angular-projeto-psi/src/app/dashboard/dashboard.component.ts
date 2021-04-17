@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../user.service";
+import { PhotoService } from '../photo.service';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 @Component({
@@ -9,13 +10,25 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 })
 export class DashboardComponent implements OnInit {
   title = "PSEye";
-
-  constructor(private userService : UserService, private router: Router) { }
+  photos = [];
+  constructor(private userService: UserService, private router: Router, private photoService: PhotoService) { }
 
   ngOnInit(): void {
-    if(!this.userService.getUser()) {
+    if (!this.userService.getUser()) {
       this.router.navigate(['/dashboard']);
     }
+    this.getPhotos();
+  }
+
+  getPhotos(): void {
+    this.photoService.getMostLikedPhotos(50).subscribe(photos => {
+      photos.forEach(p => {
+        var img = new Image();
+        img.src = p.photoBase64;
+        p.image = img;
+        this.photos.push(p);
+      })
+    });
   }
 
 }
