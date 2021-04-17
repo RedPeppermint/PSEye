@@ -17,9 +17,9 @@ export class UploadComponent implements OnInit {
   handleFileInput(files: FileList) {
     const file = files.item(0);
     const reader = new FileReader();
-    var b = this.base64;
+    var b = this;
     reader.addEventListener("load", function () {
-      b = reader.result.toString();
+      b.base64 = reader.result.toString();
     }, false);
 
     if (file) {
