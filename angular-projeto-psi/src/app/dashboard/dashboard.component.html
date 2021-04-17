@@ -13,23 +13,41 @@
         <ul>
           <li>
             <a routerLink="/favorites">
-              <img src="" id="favs"> Favoritos
+              <img src="" id="favs"> Favorites
             </a>
           </li>
         </ul>
       </nav>
       <div id="filter">
         <form>
-          Pesquisar por:
+          Search by:
           <ul>
-            <li><input type="radio" name="Populares" value="Populares">Populares</li>
-            <li><input type="radio" name="Recentes" value="Recentes">Recentes</li>
+            <li><input type="radio" name="Populares" value="Populares"><label>Popular</label></li>
+            <li><input type="radio" name="Recentes" value="Recentes"><label>Recent</label></li>
           </ul>
         </form>
       </div>
 
       <main>
-        photos
+        <div class="photocontainer">
+          <div class="topcontainer">
+            user e opções e tal
+          </div>
+          <div class="photo">
+            Photo
+          </div>
+          <div class="buttons">
+            <img src="../../assets/heartempty.png" alt="Like button" id="like">
+            <img src="../../assets/starempty.png" alt="Favorite button" id="fav">
+             <!--  TODO: meter isto a atualizar com o ts  -->
+
+          </div>
+          <div class="description">
+            Just a description
+          </div>
+
+        </div>
+
       </main>
   </body>
 

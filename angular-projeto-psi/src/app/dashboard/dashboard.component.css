@@ -1,5 +1,6 @@
 *{
      height: 100%;
+     font-family: Poppins;
 }
 
 body {
@@ -28,29 +29,44 @@ header {
   background-color: white;
 }
 
-main {
-  margin: 20px;
-  grid-area: main;
-}
-
 nav {
   grid-area: nav;
-  background-color: white;
   border-top: solid 1px #D0CECE;
-  border-right: solid 1px #D0CECE;
+}
+
+nav ul {
+  margin: 15px;
 }
 
 #filter {
+  margin: 15px;
+  margin-top: 35px;
   grid-area: filter;
-  background-color: gray;
+
+}
+
+#filter li {
+  height: 25px;
+  font-weight: 300;
+}
+
+input[type=radio]{
+  height: 15px;
+  margin: 0px;
+  vertical-align: middle;
+}
+
+label {
+  margin-left: 5px;
+  vertical-align: middle;
+  font-size: 15px;
 }
 
 ul {
-  padding: 10px;
   list-style: none;
   border-bottom: solid 1px #D0CECE;
+  padding: 0px;
   margin: 0px;
-  padding-bottom: 0px;
 }
 
 a {
@@ -58,6 +74,58 @@ a {
   text-decoration: none;
 }
 
-li {
+ul li {
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 300;
   height: auto;
+}
+
+form {
+  padding: 10px;
+}
+
+nav ul li:hover {
+  background-color: #ebebeb;
+}
+
+main {
+  margin: 20px;
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  padding-left: 100px;
+  /* padding-right: 100px; */
+}
+
+.photocontainer img {
+  height: 35px;
+}
+
+.photocontainer {
+  border: solid 1px #D0CECE;
+  background-color: white;
+  border-radius: 10px;
+  width: 700px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.topcontainer {
+  height: 40px;
+  padding: 5px;
+}
+
+.photo {
+  height: 300px;
+}
+
+.buttons {
+  height: 40px;
+}
+
+.description {
+  height: 100px;
 }
