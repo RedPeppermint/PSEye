@@ -12,18 +12,25 @@
       <nav>
         <ul>
           <li>
-            <a routerLink="/favorites">
-              <img src="" id="favs"> Favorites
+            <a routerLink="/profile">
+              My profile
             </a>
+
           </li>
+          <li>
+            <a routerLink="/favorites">
+            <!-- <img src="../../assets/starfilled.png" id="favs">  -->
+            My favorites
+          </a>
+        </li>
         </ul>
       </nav>
       <div id="filter">
         <form>
           Search by:
           <ul>
-            <li><input type="radio" name="search" value="Populares" checked><label>Popular</label></li>
             <li><input type="radio" name="search" value="Recentes"><label>Recent</label></li>
+            <li><input type="radio" name="search" value="Populares" checked><label>Popular</label></li>
           </ul>
         </form>
       </div>
@@ -31,7 +38,7 @@
       <main>
         <div class="photocontainer">
           <div class="topcontainer">
-            user e opções e tal
+            User x
           </div>
           <div class="photo">
             Photo
@@ -39,16 +46,21 @@
           <div class="buttons">
             <img src="../../assets/heartempty.png" alt="Like button" id="like">
             <img src="../../assets/starempty.png" alt="Favorite button" id="fav">
+            <img src="../../assets/share.png" alt="Share button" id="share">
              <!--  TODO: meter isto a atualizar com o ts  -->
 
           </div>
           <div class="description">
-            Just a description
+            Just a description : Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus.
           </div>
 
         </div>
 
+
       </main>
+      <div id="upload">
+        <img src="../../assets/upload.png" alt="Update button">
+      </div>
   </body>
 
 
