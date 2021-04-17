@@ -10,7 +10,7 @@ import { UploadComponent } from "./upload/upload.component";
 
 
 const routes: Routes = [
-  { path: "", redirectTo: "dashboard", pathMatch: "full" },
+  { path: "", redirectTo: "login", pathMatch: "full" },//todo - ir para dashboard, fazer verificacao se ha user autenticado
   { path: "dashboard", component: DashboardComponent },
   { path: "favorites", component: FavoritesComponent },
   { path: "login", component: LoginComponent },

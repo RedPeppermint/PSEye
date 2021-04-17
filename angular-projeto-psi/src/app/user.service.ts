@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from "rxjs";
-import { HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { catchError, map, tap } from "rxjs/operators";
 import { defaultIfEmpty } from 'rxjs/operators';
 
@@ -11,6 +11,7 @@ import { User } from "./user";
 })
 export class UserService {
   private url = "http://localhost:3000/";
+  private user: string;
 
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -26,27 +27,31 @@ export class UserService {
     };
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
 
 
 
-  loginUser(user : string, pass: string): boolean {
+  loginUser(user: string, pass: string): Observable<any> {
     interface LoginResponse {
       response: boolean;
     }
 
     var url = this.url + "users/login";
-    const meme : User = {
+    const meme: User = {
       username: user,
       password: pass
     }
-    var response;
-    this.http.post<LoginResponse>(url, meme).subscribe(res => {
-      console.log(res.response)
-      response = res.response;
-    });
-    return response;
+    return this.http.post(url, meme);
+  }
+
+  //if no user, returns undefined
+  getUser(): string {
+    return this.user;
+  }
+
+  setUser(user: string) {
+    this.user = user;
   }
 
 }
