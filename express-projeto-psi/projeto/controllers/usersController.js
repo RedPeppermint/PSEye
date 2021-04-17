@@ -1,21 +1,23 @@
 var UserModel = require('../schemas/user');
+var PhotoModel = require('../schemas/photo');
 
 // Login 
 exports.user_login = function(req, res) {
-    var name = req.query.name;
-    var password = req.query.password;
+    console.log("Body: " + JSON.stringify(req.body));
+    var name = req.body.username;
+    var password = req.body.password;
     UserModel.findOne({ name: name, password: password }, function(err, result) {
         if (err) {
-            res.json({ error: "error while logging in user" });
-            console.log("deu erro");
-        } else if (result) {
-            console.log("Consegui login");
             res.json({
-                response: "Login Successful"
+                response: false
+            });
+        } else if (result) {
+            res.json({
+                response: true
             });
         } else {
             res.json({
-                response: "Login Failed"
+                response: false
             });
         }
     });
@@ -34,34 +36,39 @@ exports.user_get = function(req, res) {
 }
 
 exports.user_delete = function(req, res) {
-        id = req.params.id;
-        UserModel.remove({ _id: id }, function(err) {
-            if (err) {
-                res.json({ Error: "User not found." });
-            } else {
-                res.json({ INFO: "User deleted" });
-            }
-        });
-    }
-    // UC10 Registo do utilizador
+    id = req.params.id;
+    UserModel.remove({ _id: id }, function(err) {
+        if (err) {
+            res.json({ Error: "User not found." });
+        } else {
+            res.json({ INFO: "User deleted" });
+        }
+    });
+}
+
+// UC10 Registo do utilizador
 exports.user_post = function(req, res) {
-    var name = req.query.name;
-    var password = req.query.password;
+    var name = req.body.name;
+    var password = req.body.password;
 
     UserModel.find({ name: name }, function(err, results) {
         if (err) {
             res.json({ error: "error while creating user" });
-        } else if (results) { // there is no one with that name
+        } else if (!results.length) { // there is no one with that name
             var response = { error: [], existsUser: false };
             response = checkUsername(name, response);
-            if (response.error) {
+            if (response.error.length) {
                 res.json(response);
             } else { // user ok
                 response = checkPassword(password, response);
-                if (response.error) {
+                if (response.error.length) {
                     res.json(response);
-                } else { // password ok
-                    res.json({ msg: "Succsessful" });
+                } else { // password ok, criar user na base de dados
+                    var newUser = new UserModel(req.query);
+                    newUser.save(function(err, user) {
+                        if (err) { return next(err); }
+                        res.json({ msg: "Succsessful" });
+                    });
                 }
             }
         } else { // there is someone with that name
@@ -93,6 +100,7 @@ function checkPassword(pass, response) {
     }
     if (hasNumbers(pass))
         return response;
+    return response;
 }
 
 function hasUpper(pass) {
@@ -107,6 +115,6 @@ function hasNumbers(pass) {
     return /\d/.test(pass)
 }
 
-function alphanumeric(inputtxt) {
+function alphanumeric(pass) {
     return pass.match(/^[0-9a-zA-Z]+$/);
 }
