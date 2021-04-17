@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { User } from "../user";
 import { UserService } from "../user.service";
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { setupMaster } from 'node:cluster';
 
 @Component({
   selector: 'app-login',
@@ -29,19 +28,16 @@ export class LoginComponent implements OnInit {
     }
 
     this.incomplete = false;
-    this.userService.loginUser(username, password).subscribe(res => {
-      var response = res.response;
-      if (response) {
-        this.router.navigate(['/dashboard']);
-        this.userService.setUser(username);
-      } else {
-        this.displayError("Username ou password errados");
-      }
-    });
+    if(this.userService.loginUser(username, password)) {
+      this.router.navigate(['/dashboard']);
 
+    } else {
+      this.displayError("Username ou password errados");
+      return;
+    }
   }
 
-  displayError(msg: string): void {
+  displayError(msg : string): void {
     this.error = msg;
   }
 

@@ -102,13 +102,16 @@ main {
 
 .photocontainer img {
   height: 35px;
+  margin: 5px;
+  display: inline-block;
+
 }
 
 .photocontainer {
   border: solid 1px #D0CECE;
   background-color: white;
   border-radius: 10px;
-  width: 700px;
+  max-width: 700px;
   margin-top: 15px;
   margin-bottom: 15px;
 }
@@ -119,7 +122,9 @@ main {
 }
 
 .photo {
-  height: 300px;
+  width: auto;
+  max-height: 400px;
+  border: 1px solid black;
 }
 
 .buttons {
