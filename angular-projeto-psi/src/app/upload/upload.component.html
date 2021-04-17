@@ -1,1 +1,3 @@
-<p>upload works!</p>
+<input type="file" id="imageLoader" (change)="handleFileInput($event.target.files)">
+<br>
+<input type="button" id="button" (click)="log()" value="LOG">
