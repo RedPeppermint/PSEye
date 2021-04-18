@@ -28,17 +28,21 @@ export class LoginComponent implements OnInit {
     }
 
     this.incomplete = false;
-    if(this.userService.loginUser(username, password)) {
-      this.router.navigate(['/dashboard']);
-
-    } else {
-      this.displayError("Username ou password errados");
-      return;
-    }
+     this.userService.loginUser(username, password).subscribe(res => {
+      var response = res.response;
+      if (response) {
+        this.router.navigate(['/dashboard']);
+        this.userService.setUser(username);
+      } else {
+        this.displayError("Username ou password errados");
+      }
+    });
+    
   }
-
-  displayError(msg : string): void {
+  displayError(msg: string): void {
     this.error = msg;
   }
+
+ 
 
 }
