@@ -7,6 +7,7 @@ import { FavoritesComponent } from "./favorites/favorites.component";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { UploadComponent } from "./upload/upload.component";
+import { ProfileComponent } from "./profile/profile.component";
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: "favorites", component: FavoritesComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
+  { path: "profile/:id", component: ProfileComponent },
   { path: "upload", component: UploadComponent }
 ];
 
