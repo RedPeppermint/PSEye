@@ -8,6 +8,7 @@ exports.user_login = function(req, res) {
     var password = req.body.password;
     UserModel.findOne({ name: name, password: password }, function(err, result) {
         if (err) {
+
             res.json({
                 response: false
             });
