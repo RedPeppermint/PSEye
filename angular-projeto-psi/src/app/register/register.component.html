@@ -1,1 +1,44 @@
-<p>register works!</p>
+<!doctype html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+
+
+  <body>
+    <div id="site">
+
+      <main>
+        <div class="simbol">
+            <a routerLink="/login"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
+        </div>
+        <div class="user">
+            <a routerLink="/login"><img src="../../assets/user.png" id="user" alt="user"></a>
+        </div>
+        <div class="app1"></div>
+        <div class="app2"></div>
+        <div class="app3"></div>
+        <div class="text">
+          <p>PSEye</p>
+        </div>
+        <div class="register">
+          <div class="register2">
+            <input class="credentials" for="user" #name type="text" name="name" placeholder="Name" [style.border-color]="error ? 'red' : 'gray'">
+            <input class="credentials" for="user" #email type="text" name="email" placeholder="E-mail" [style.border-color]="error ? 'red' : 'gray'">
+            <input class="credentials" for="user" #username type="text" name="user" placeholder="Username" [style.border-color]="error ? 'red' : 'gray'">
+            <input class="credentials" for="user" #password type="password" name="pass" placeholder="Password" [style.border-color]="error ? 'red' : 'gray'">
+            <button type="button" id="button" >Register</button>
+            <div id="error">
+              {{error}}
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div>
+  </body>
+
+
+</html>

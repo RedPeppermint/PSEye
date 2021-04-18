@@ -10,11 +10,11 @@ function generateAndSendToken(user, res) {
 }
 
 // Login 
-exports.user_login = function (req, res) {
+exports.user_login = function(req, res) {
     console.log("Body: " + JSON.stringify(req.body));
     var name = req.body.username;
     var password = req.body.password;
-    UserModel.findOne({ name: name, password: password }, function (err, result) {
+    UserModel.findOne({ name: name, password: password }, function(err, result) {
         if (err) {
             res.json({
                 response: false
@@ -30,9 +30,9 @@ exports.user_login = function (req, res) {
 }
 
 // get user
-exports.user_get = function (req, res) {
+exports.user_get = function(req, res) {
     id = req.params.id;
-    UserModel.find({ _id: id }, function (err, model) {
+    UserModel.find({ _id: id }, function(err, model) {
         if (err) {
             res.json({ Error: "User not found." });
         } else {
@@ -41,9 +41,9 @@ exports.user_get = function (req, res) {
     });
 }
 
-exports.user_delete = function (req, res) {
+exports.user_delete = function(req, res) {
     id = req.params.id;
-    UserModel.remove({ _id: id }, function (err) {
+    UserModel.remove({ _id: id }, function(err) {
         if (err) {
             res.json({ Error: "User not found." });
         } else {
@@ -53,11 +53,11 @@ exports.user_delete = function (req, res) {
 }
 
 // UC10 Registo do utilizador
-exports.user_post = function (req, res) {
+exports.user_post = function(req, res) {
     var name = req.body.name;
     var password = req.body.password;
 
-    UserModel.find({ name: name }, function (err, results) {
+    UserModel.find({ name: name }, function(err, results) {
         if (err) {
             res.json({ error: "error while creating user" });
         } else if (!results.length) { // there is no one with that name
@@ -70,8 +70,8 @@ exports.user_post = function (req, res) {
                 if (response.error.length) {
                     res.json(response);
                 } else { // password ok, criar user na base de dados
-                    var newUser = new UserModel(req.query);
-                    newUser.save(function (err, user) {
+                    var newUser = new UserModel(req.body);
+                    newUser.save(function(err, user) {
                         if (err) { return next(err); }
                         res.json({ msg: "Succsessful" });
                     });
