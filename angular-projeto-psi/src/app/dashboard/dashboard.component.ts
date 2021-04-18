@@ -15,20 +15,32 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.userService.getUser()) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/login']);
     }
-    this.getPhotos();
+    this.getPhotos("recent");
   }
 
-  getPhotos(): void {
-    this.photoService.getMostLikedPhotos(50).subscribe(photos => {
-      photos.forEach(p => {
-        var img = new Image();
-        img.src = p.photoBase64;
-        p.image = img;
-        this.photos.push(p);
-      })
-    });
+  getPhotos(filter): void {
+    this.photos = [];
+    if(filter = "recent") {
+      this.photoService.getMostRecentPhotos(50).subscribe(photos => {
+        photos.forEach(p => {
+          var img = new Image();
+          img.src = p.photoBase64;
+          p.image = img;
+          this.photos.push(p);
+        })
+      });
+    } else {
+      this.photoService.getMostLikedPhotos(50).subscribe(photos => {
+        photos.forEach(p => {
+          var img = new Image();
+          img.src = p.photoBase64;
+          p.image = img;
+          this.photos.push(p);
+        })
+      });
+    }
   }
 
 }

@@ -82,6 +82,11 @@ input{
   color: white;
 }
 
+#button:hover{
+  cursor: pointer;
+}
+
+
 #error {
   /* margin-left: -65px; */
   margin-top: 10px;

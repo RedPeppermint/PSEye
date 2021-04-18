@@ -30,8 +30,8 @@
     <form>
       Search by:
       <ul>
-        <li><input type="radio" name="search" value="Recentes"><label>Recent</label></li>
-        <li><input type="radio" name="search" value="Populares" checked><label>Popular</label></li>
+        <li><input type="radio" name="search" value="Recentes" checked (click)="getPhotos('recent')"><label>Recent</label></li>
+        <li><input type="radio" name="search" value="Populares" (click)="getPhotos('favorites')"><label>Popular</label></li>
       </ul>
     </form>
   </div>
