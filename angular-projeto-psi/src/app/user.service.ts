@@ -29,29 +29,22 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-
-
-
   loginUser(user: string, pass: string): Observable<any> {
-    interface LoginResponse {
-      response: boolean;
-    }
-
     var url = this.url + "users/login";
-    const meme: User = {
+    const userObj: User = {
       username: user,
       password: pass
     }
-    return this.http.post(url, meme);
+    return this.http.post(url, userObj);
   }
 
   //if no user, returns undefined
   getUser(): string {
-    return this.user;
+    return sessionStorage.getItem("user");
   }
 
   setUser(user: string) {
-    this.user = user;
+    sessionStorage.setItem("user", user);
   }
 
 }

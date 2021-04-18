@@ -46,7 +46,4 @@ export class LoginComponent implements OnInit {
   displayError(msg: string): void {
     this.error = msg;
   }
-
- 
-
 }
