@@ -21,9 +21,10 @@ export class DashboardComponent implements OnInit {
   }
 
   getPhotos(filter): void {
+    console.log("Filtro: " + filter);
     this.photos = [];
-    if(filter = "recent") {
-      console.log("recent");
+    if(filter == "recent") {
+      console.log("Entrou no filter = recent");
 
       this.photoService.getMostRecentPhotos(50).subscribe(photos => {
         photos.forEach(p => {
@@ -34,7 +35,7 @@ export class DashboardComponent implements OnInit {
         })
       });
     } else {
-      console.log("não recent");
+      console.log("Entrou no filter = popular");
 
       this.photoService.getMostLikedPhotos(50).subscribe(photos => {
         photos.forEach(p => {

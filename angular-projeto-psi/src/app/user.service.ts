@@ -11,7 +11,6 @@ import { User } from "./user";
 })
 export class UserService {
   private url = "http://localhost:3000/";
-  private user: string;
 
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })

@@ -22,7 +22,7 @@ export class PhotoService {
     return this.http
       .request<Photo[]>("GET", this.url,
         {
-          body: '[{"filter": "likes", "number_of_results": "' + int.toString() + '"]',
+          body: '[{"filter": "likes", "number_of_results": "' + int.toString() + '"}]',
           headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         });
   }
@@ -32,7 +32,7 @@ export class PhotoService {
     return this.http
       .request<Photo[]>("GET", this.url,
         {
-          body: '[{"filter": "posted_at", "number_of_results": "' + int.toString() + '"]',
+          body: '[{"filter": "posted_at", "number_of_results": "' + int.toString() + '"}]',
           headers: new HttpHeaders({ 'Content-Type': 'application/json' })
         });
   }
