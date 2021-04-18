@@ -23,6 +23,8 @@ export class DashboardComponent implements OnInit {
   getPhotos(filter): void {
     this.photos = [];
     if(filter = "recent") {
+      console.log("recent");
+
       this.photoService.getMostRecentPhotos(50).subscribe(photos => {
         photos.forEach(p => {
           var img = new Image();
@@ -32,6 +34,8 @@ export class DashboardComponent implements OnInit {
         })
       });
     } else {
+      console.log("não recent");
+
       this.photoService.getMostLikedPhotos(50).subscribe(photos => {
         photos.forEach(p => {
           var img = new Image();
