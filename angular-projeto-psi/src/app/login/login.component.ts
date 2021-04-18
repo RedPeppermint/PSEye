@@ -17,6 +17,10 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
+    console.log("User ao entrar no login inicialmente:" + this.userService.getUser());
+    if(this.userService.getUser()){
+      this.router.navigate(["/dashboard"]);
+    }
   }
 
   login(username: string, password: string): void {
@@ -28,16 +32,16 @@ export class LoginComponent implements OnInit {
     }
 
     this.incomplete = false;
-     this.userService.loginUser(username, password).subscribe(res => {
+    this.userService.loginUser(username, password).subscribe(res => {
       var response = res.response;
       if (response) {
         this.router.navigate(['/dashboard']);
         this.userService.setUser(username);
+        console.log("User ao fazer login" + this.userService.getUser())
       } else {
         this.displayError("Username ou password errados");
       }
     });
-    
   }
   displayError(msg: string): void {
     this.error = msg;
