@@ -33,5 +33,10 @@ export class PhotoService {
       .request<Photo[]>("GET", this.url, { params: params });
   }
 
+  getPhotosById(number: number): Observable<Photo[]> {
+    let params = new HttpParams().set('_id', number.toString());
+
+    return this.http.request<Photo[]>("GET", this.url, { params: params });
+  }
 
 }
