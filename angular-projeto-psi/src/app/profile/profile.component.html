@@ -1,1 +1,27 @@
-<p>profile works!</p>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>{{title}}</title>
+</head>
+
+<body>
+  <header>
+    <a routerLink="/dashboard"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
+  </header>
+
+  <main>
+    <div class="photo" *ngFor="let p of photos">
+      <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
+    </div>
+
+
+  </main>
+  <div id="upload">
+    <img src="../../assets/upload.png" alt="Update button">
+  </div>
+</body>
+
+
+</html>
