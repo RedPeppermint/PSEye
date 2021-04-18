@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from "../user.service";
+import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -9,6 +12,7 @@ export class RegisterComponent implements OnInit {
   title = "PSEye";
   error = "";
   incomplete = false;
+  errorPassConf = "";
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -18,26 +22,37 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-
-  register(name: string, email: string, username: string, password: string): void {
+  register(name: string, email: string, username: string, password: string, conf: string): void {
     username = username.trim();
     email = email.trim();
-    if (!username || !password || !name || !email) {
-      this.displayError("Campos obrigatórios *");
+    
+    if (!username || !password || !name || !email || !conf) {
+      this.displayError("Necessary Fields *");
+      this.errorPassConf = "";
       this.incomplete = true;
       return;
     }
 
+    if(conf != password){
+      this.displayErrPass("Password confirmation doesn't match");
+      return;
+    }
+
     this.incomplete = false;
-    this.userService.loginUser(username, password).pipe(first())
-      .subscribe(
-        result => {
-          this.router.navigate(["/dashboard"])
-        },
-        err => this.displayError('Could not authenticate')
-      );;
+    this.userService.registerUser(username, password).subscribe(result => {
+      if(!result.error.length){
+        this.router.navigate(["/login"]);
+      } else{
+        // display errors
+      }
+    });
   }
+
   displayError(msg: string): void {
     this.error = msg;
+  }
+
+  displayErrPass(msg: string): void {
+    this.errorPassConf = msg;
   }
 }

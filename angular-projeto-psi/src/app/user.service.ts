@@ -42,6 +42,15 @@ export class UserService {
     );
   }
 
+   registerUser(user: string, pass: string): Observable<any> {
+    var url = this.url + "users/register";
+    const userObj: User = {
+      username: user,
+      password: pass
+    }
+    return this.http.post<any>(url, userObj);
+  }
+
   //if no user, returns undefined
   getUser(): string {
     return sessionStorage.getItem("access_token");

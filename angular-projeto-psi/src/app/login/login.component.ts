@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(["/dashboard"])
         },
         err => this.displayError('Could not authenticate')
-      );;
+      );
   }
   displayError(msg: string): void {
     this.error = msg;

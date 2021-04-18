@@ -21,18 +21,18 @@ export class ProfileComponent implements OnInit {
 
     this.user = this.userService.getUser();
 
-    this.getPhotosById(this.user._id);
+    // this.getPhotosById(this.user._id);
   }
 
-  getPhotosById(id: number): void {
-    this.photoService.getPhotosById().subscribe(photos => {
-      photos.forEach(p => {
-        var img = new Image();
-        img.src = p.photoBase64;
-        p.image = img;
-        this.photos.push(p);
-      })
-    });
-  }
-  }
+  // getPhotosById(id: number): void {
+  //   this.photoService.getPhotosById().subscribe(photos => {
+  //     photos.forEach(p => {
+  //       var img = new Image();
+  //       img.src = p.photoBase64;
+  //       p.image = img;
+  //       this.photos.push(p);
+  //     })
+  //   });
+  // }
+  // }
 }

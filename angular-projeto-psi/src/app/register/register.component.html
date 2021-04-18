@@ -7,38 +7,42 @@
 </head>
 
 
-  <body>
+<body>
     <div id="site">
 
-      <main>
-        <div class="simbol">
-            <a routerLink="/login"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
-        </div>
-        <div class="user">
-            <a routerLink="/login"><img src="../../assets/user.png" id="user" alt="user"></a>
-        </div>
-        <div class="app1"></div>
-        <div class="app2"></div>
-        <div class="app3"></div>
-        <div class="text">
-          <p>PSEye</p>
-        </div>
-        <div class="register">
-          <div class="register2">
-            <input class="credentials" for="user" #name type="text" name="name" placeholder="Name" [style.border-color]="error ? 'red' : 'gray'">
-            <input class="credentials" for="user" #email type="text" name="email" placeholder="E-mail" [style.border-color]="error ? 'red' : 'gray'">
-            <input class="credentials" for="user" #username type="text" name="user" placeholder="Username" [style.border-color]="error ? 'red' : 'gray'">
-            <input class="credentials" for="user" #password type="password" name="pass" placeholder="Password" [style.border-color]="error ? 'red' : 'gray'">
-            <button type="button" id="button" >Register</button>
-            <div id="error">
-              {{error}}
+        <main>
+            <div class="simbol">
+                <a routerLink="/login"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
             </div>
-          </div>
-        </div>
+            <div class="user">
+                <a routerLink="/login"><img src="../../assets/user.png" id="user" alt="user"></a>
+            </div>
+            <div class="app1"></div>
+            <div class="app2"></div>
+            <div class="app3"></div>
+            <div class="text">
+                <p>PSEye</p>
+            </div>
+            <div class="register">
+                <div class="register2">
+                    <input class="credentials" for="user" #name type="text" name="name" placeholder="Name" [style.border-color]="error ? 'red' : 'gray'">
+                    <input class="credentials" for="user" #email type="text" name="email" placeholder="E-mail" [style.border-color]="error ? 'red' : 'gray'">
+                    <input class="credentials" for="user" #username type="text" name="user" placeholder="Username" [style.border-color]="error ? 'red' : 'gray'">
+                    <input class="credentials" for="user" #password type="password" name="pass" placeholder="Password" [style.border-color]="(error || errorPassConf) ? 'red' : 'gray'">
+                    <input class="credentials" for="user" #confirmation type="password" name="conf" placeholder="Password confirmation" [style.border-color]="(error || errorPassConf) ? 'red' : 'gray'">
+                    <button type="button" id="button" (click)="register(name.value, email.value, username.value, password.value, confirmation.value)">Register</button>
+                    <div id="error" *ngIf="error || errorPassConf">
+                        {{error}} {{errorPassConf}}
+                    </div>
+                    <div id="login">
+                        Already have an account? <a routerLink="/login">Log in</a>
+                    </div>
+                </div>
+            </div>
 
-      </main>
+        </main>
     </div>
-  </body>
+</body>
 
 
 </html>
