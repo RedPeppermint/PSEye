@@ -10,9 +10,14 @@ import { UploadComponent } from './upload/upload.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { AppRoutingModule } from './app-routing.module';
-
+import { JwtModule } from '@auth0/angular-jwt';
 import { PhotoService } from "./photo.service";
 import { UserService } from "./user.service";
+import { UserGuard } from './user.guard'
+
+export function tokenGetter() {
+  return sessionStorage.getItem('access_token');
+}
 
 @NgModule({
   declarations: [
@@ -27,9 +32,16 @@ import { UserService } from "./user.service";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['localhost:3000'],
+        disallowedRoutes: ['localhost:3000/users/login']
+      }
+    })
   ],
-  providers: [PhotoService, UserService],
+  providers: [PhotoService, UserService, UserGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

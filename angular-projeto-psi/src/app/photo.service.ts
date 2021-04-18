@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserService } from "./user.service";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Photo } from "./photo";
 import { Observable, of } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
@@ -18,23 +18,19 @@ export class PhotoService {
   ) { }
 
 
-  getMostLikedPhotos(int: number): Observable<Photo[]> {
+  getMostLikedPhotos(number: number): Observable<Photo[]> {
+    let params = new HttpParams().set('filter', 'likes').set('number_of_results', number.toString());
+
     return this.http
-      .request<Photo[]>("GET", this.url,
-        {
-          body: '[{"filter": "likes", "number_of_results": "' + int.toString() + '"]',
-          headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-        });
+      .request<Photo[]>("GET", this.url, { params: params });
   }
 
 
-  getMostRecentPhotos(int: number): Observable<Photo[]> {
+  getMostRecentPhotos(number: number): Observable<Photo[]> {
+    let params = new HttpParams().set('filter', 'posted_at').set('number_of_results', number.toString());
+
     return this.http
-      .request<Photo[]>("GET", this.url,
-        {
-          body: '[{"filter": "posted_at", "number_of_results": "' + int.toString() + '"]',
-          headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-        });
+      .request<Photo[]>("GET", this.url, { params: params });
   }
 
 

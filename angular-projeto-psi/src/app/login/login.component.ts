@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { first } from 'rxjs/operators';
 import { User } from "../user";
 import { UserService } from "../user.service";
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     console.log("User ao entrar no login inicialmente:" + this.userService.getUser());
-    if(this.userService.getUser()){
+    if (this.userService.getUser()) {
       this.router.navigate(["/dashboard"]);
     }
   }
@@ -32,16 +32,13 @@ export class LoginComponent implements OnInit {
     }
 
     this.incomplete = false;
-    this.userService.loginUser(username, password).subscribe(res => {
-      var response = res.response;
-      if (response) {
-        this.router.navigate(['/dashboard']);
-        this.userService.setUser(username);
-        console.log("User ao fazer login" + this.userService.getUser())
-      } else {
-        this.displayError("Username ou password errados");
-      }
-    });
+    this.userService.loginUser(username, password).pipe(first())
+      .subscribe(
+        result => {
+          this.router.navigate(["/dashboard"])
+        },
+        err => this.displayError('Could not authenticate')
+      );;
   }
   displayError(msg: string): void {
     this.error = msg;

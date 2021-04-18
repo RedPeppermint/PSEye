@@ -53,8 +53,8 @@ exports.photo_update = function (req, res) {
 }
 
 exports.photos_get = function (req, res) {
-    filter = req.body.filter;
-    number_of_results = parseInt(req.body.number_of_results);
+    filter = req.query.filter;
+    number_of_results = parseInt(req.query.number_of_results);
     if (filter) {
         photosFiltered(res, filter, number_of_results);
     }

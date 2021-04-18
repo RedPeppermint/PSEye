@@ -11,8 +11,7 @@ import { User } from "./user";
 })
 export class UserService {
   private url = "http://localhost:3000/";
-  private user: string;
-
+  user: User;
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
   };
@@ -35,16 +34,25 @@ export class UserService {
       username: user,
       password: pass
     }
-    return this.http.post(url, userObj);
+    return this.http.post<{ token: string }>(url, userObj).pipe(
+      map(result => {
+        sessionStorage.setItem('access_token', result.token);
+        return true;
+      })
+    );
   }
 
   //if no user, returns undefined
   getUser(): string {
-    return sessionStorage.getItem("user");
+    return sessionStorage.getItem("access_token");
   }
 
   setUser(user: string) {
-    sessionStorage.setItem("user", user);
+    sessionStorage.setItem("access_token", user);
+  }
+
+  public get loggedIn(): boolean {
+    return (localStorage.getItem('access_token') !== null);
   }
 
 }
