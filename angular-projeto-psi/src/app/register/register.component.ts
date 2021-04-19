@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   error = "";
   incomplete = false;
   errorPassConf = "";
+  errors: Array<string>;
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -34,22 +35,28 @@ export class RegisterComponent implements OnInit {
     }
 
     if(conf != password){
+      this.error= "";
       this.displayErrPass("Password confirmation doesn't match");
       return;
     }
 
     this.incomplete = false;
+    this.error= "";
+    this.errorPassConf = "";
     this.userService.registerUser(username, password).subscribe(result => {
-      if(!result.error.length){
+      console.log(result);
+      if(!result.error.length && !result.existsUser){
         this.router.navigate(["/login"]);
-      } else{
-        // display errors
+      } else if(result.existsUser){
+          this.errors = ["There is already a user with that username"];
+      } else {
+          this.errors= result.error;
       }
     });
   }
 
   displayError(msg: string): void {
-    this.error = msg;
+    this.errors = [msg];
   }
 
   displayErrPass(msg: string): void {

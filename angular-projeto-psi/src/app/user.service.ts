@@ -34,9 +34,11 @@ export class UserService {
       username: user,
       password: pass
     }
-    return this.http.post<{ token: string }>(url, userObj).pipe(
+
+    return this.http.post<{ token: string, model: string }>(url, userObj).pipe(
       map(result => {
         sessionStorage.setItem('access_token', result.token);
+        sessionStorage.setItem('user', result.model);
         return true;
       })
     );
@@ -48,12 +50,18 @@ export class UserService {
       username: user,
       password: pass
     }
-    return this.http.post<any>(url, userObj);
+    return this.http.post<{error: Array<String>, existsUser: boolean}>(url, userObj);
   }
 
   //if no user, returns undefined
   getUser(): string {
     return sessionStorage.getItem("access_token");
+  }
+
+  getUserId(): string{
+
+
+    return JSON.parse(sessionStorage.getItem("user"))._id;
   }
 
   setUser(user: string) {

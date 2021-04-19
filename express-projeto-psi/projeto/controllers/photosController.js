@@ -21,7 +21,8 @@ function photosGetAll(res, number_of_results) {
 
 function photosFiltered(res, filter_used, number) {
     PhotoModel.find().sort({
-        [filter_used]: -1 }).limit(number).then(results => res.json(results)).catch(err => {
+        [filter_used]: -1
+    }).limit(number).then(results => res.json(results)).catch(err => {
         console.log(err);
         res.json({ Error: "Error while fetching photos." });
     })
@@ -71,6 +72,7 @@ exports.photo_post = function(req, res) {
         res.json({ Error: "error while creating photo, not enough data." });
         return;
     }
+
     PhotoModel.create({ description: data.description, photoBase64: data.photoBase64, user_id: data.user_id }, function(err, model) {
         if (err) {
             res.json({ Error: "error while creating photo" });

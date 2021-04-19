@@ -5,6 +5,7 @@ import { Photo } from "./photo";
 import { Observable, of } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -37,6 +38,23 @@ export class PhotoService {
     let params = new HttpParams().set('_id', number.toString());
 
     return this.http.request<Photo[]>("GET", this.url, { params: params });
+  }
+
+  uploadPhoto( description: string, photoBase64: string, user_id: string): Observable<any>{
+    
+    interface response {
+       description: string, 
+       photoBase64: string, 
+       user_id: string
+    }
+    const res : response = {
+      description: description,
+      photoBase64: photoBase64,
+      user_id: user_id
+    }
+
+    return this.http.post<{Error: String, photo: Photo}>(this.url, res);
+
   }
 
 }

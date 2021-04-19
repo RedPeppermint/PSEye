@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PhotoService } from "../photo.service";
+import { UserService } from "../user.service";
 
 @Component({
   selector: 'app-upload',
@@ -6,24 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit {
+  title = "PSEye";
+  base64: string;
 
-  base64: String;
-
-  constructor() { }
+  constructor(private photoService: PhotoService, private userService: UserService) { }
 
   ngOnInit(): void {
+
   }
 
-  handleFileInput(files: FileList) {
-    const file = files.item(0);
+  handleFileInput(files: any, description: string) {
+    const file = (files as HTMLInputElement).files[0];
     const reader = new FileReader();
-    var b = this;
-    reader.addEventListener("load", function () {
-      b.base64 = reader.result.toString();
-    }, false);
-
-    if (file) {
-      reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.base64 = reader.result as string;
+      this.photoService.uploadPhoto(description,this.base64,this.userService.getUserId()).subscribe(); 
     }
   }
 
