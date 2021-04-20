@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    console.log("User ao entrar no login inicialmente:" + this.userService.getUser());
     if (this.userService.getUser()) {
       this.router.navigate(["/dashboard"]);
     }
@@ -34,11 +33,11 @@ export class LoginComponent implements OnInit {
     this.incomplete = false;
     this.userService.loginUser(username, password).pipe(first())
       .subscribe(
-        result => {
+        result => { 
           this.router.navigate(["/dashboard"])
         },
         err => this.displayError('Could not authenticate')
-      );;
+      );
   }
   displayError(msg: string): void {
     this.error = msg;

@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken');
 function generateAndSendToken(user, res) {
     var token = jwt.sign({ userID: user._id }, shared_secret, { expiresIn: '2h' });
     res.json({
-        token
+        token,
+        model: JSON.stringify(user)
     });
 }
 
@@ -54,15 +55,17 @@ exports.user_delete = function(req, res) {
 
 // UC10 Registo do utilizador
 exports.user_post = function(req, res) {
-    var name = req.body.name;
+    var username = req.body.username;
     var password = req.body.password;
-
-    UserModel.find({ name: name }, function(err, results) {
+    console.log("Body: " + JSON.stringify(req.body));
+    UserModel.find({ name: username }, function(err, results) {
         if (err) {
-            res.json({ error: "error while creating user" });
+            res.json({
+                error: ["error while creating user"]
+            });
         } else if (!results.length) { // there is no one with that name
             var response = { error: [], existsUser: false };
-            response = checkUsername(name, response);
+            response = checkUsername(username, response);
             if (response.error.length) {
                 res.json(response);
             } else { // user ok
@@ -70,10 +73,13 @@ exports.user_post = function(req, res) {
                 if (response.error.length) {
                     res.json(response);
                 } else { // password ok, criar user na base de dados
-                    var newUser = new UserModel(req.body);
+                    var newUser = new UserModel({
+                        name: username,
+                        password: password
+                    });
                     newUser.save(function(err, user) {
                         if (err) { return next(err); }
-                        res.json({ msg: "Succsessful" });
+                        res.json({ error: [], existsUser: false });
                     });
                 }
             }

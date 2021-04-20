@@ -6,7 +6,7 @@ router.post('/login', usersController.user_login);
 
 router.get('/:id', usersController.user_get);
 
-router.post('/', usersController.user_post);
+router.post('/register', usersController.user_post);
 
 router.delete('/:id', usersController.user_delete);
 

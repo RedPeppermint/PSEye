@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>{{title}}</title>
-  </head>
+</head>
 
-  <body>
+<body>
     <header>
-      <a routerLink="/login"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
+        <a routerLink="/login"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
     </header>
 
     <main>
-      <img src="../../assets/text.png" id="icontext" alt="PSEye">
-      <div class="login">
-        <input class="credentials" for="user" #username type="text" name="user" placeholder="Username" [style.border-color]="error ? 'red' : 'gray'">
-        <input class="credentials" for="user" #password type="password" name="pass" placeholder="Password" [style.border-color]="error ? 'red' : 'gray'">
-        <button type="button" id="button" (click)="login(username.value, password.value)">Login</button>
-        <div id="error">
-          {{error}}
-        </div>
-        <div id="signup" >
-          Don't have an account? <a routerLink="/register">Sign up</a>
-        </div>
+        <img src="../../assets/text.png" id="icontext" alt="PSEye">
+        <div class="login">
+            <input class="credentials" for="user" #username type="text" name="user" placeholder="Username" [style.border-color]="error ? 'red' : 'gray'">
+            <input class="credentials" for="user" #password type="password" name="pass" placeholder="Password" [style.border-color]="error ? 'red' : 'gray'">
+            <button type="button" id="button" (click)="login(username.value, password.value)">Login</button>
+            <div id="error" *ngIf="error">
+                {{error}}
+            </div>
+            <div id="signup">
+                Don't have an account? <a routerLink="/register">Sign up</a>
+            </div>
 
-      </div>
+        </div>
 
     </main>
 
-  </body>
+</body>
 
 
 </html>
