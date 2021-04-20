@@ -35,7 +35,7 @@ export class UserService {
       password: pass
     }
 
-    return this.http.post<{ token: string, model: string }>(url, userObj));
+    return this.http.post<{ token: string, model: string }>(url, userObj);
   }
 
   registerUser(user: string, pass: string): Observable<any> {

@@ -34,9 +34,9 @@ export class LoginComponent implements OnInit {
     this.userService.loginUser(username, password)
       .subscribe(result => {
         if (!result.token || !result.model)
-          this.displayError('Could not authenticate')
+          this.displayError('Could not authenticate');
         else
-          this.router.navigate(["/dashboard"])
+          this.router.navigate(["/dashboard"]);
       }
       );
   }
