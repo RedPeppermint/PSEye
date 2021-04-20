@@ -28,21 +28,14 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  loginUser(user: string, pass: string): Observable<any> {
+  loginUser(user: string, pass: string): Observable<{ token: string, model: string }> {
     var url = this.url + "users/login";
     const userObj: User = {
       username: user,
       password: pass
     }
 
-    return this.http.post<{ token: string, model: string }>(url, userObj).pipe(
-      map(result => {
-        console.log(result)
-        sessionStorage.setItem('access_token', result.token);
-        sessionStorage.setItem('user', result.model);
-        return true;
-      })
-    );
+    return this.http.post<{ token: string, model: string }>(url, userObj));
   }
 
   registerUser(user: string, pass: string): Observable<any> {
