@@ -33,10 +33,15 @@ export class LoginComponent implements OnInit {
     this.incomplete = false;
     this.userService.loginUser(username, password)
       .subscribe(result => {
-        if (!result.token || !result.model)
+        if (!result.token || !result.model) {
           this.displayError('Could not authenticate');
-        else
+        }
+        else {
+          sessionStorage.setItem("access_token", result.token);
+          sessionStorage.setItem("user", result.model);
           this.router.navigate(["/dashboard"]);
+        }
+
       }
       );
   }
