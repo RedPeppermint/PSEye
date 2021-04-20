@@ -37,6 +37,7 @@ export class UserService {
 
     return this.http.post<{ token: string, model: string }>(url, userObj).pipe(
       map(result => {
+        console.log(result)
         sessionStorage.setItem('access_token', result.token);
         sessionStorage.setItem('user', result.model);
         return true;
@@ -69,7 +70,7 @@ export class UserService {
   }
 
   public get loggedIn(): boolean {
-    return (localStorage.getItem('access_token') !== null);
+    return (sessionStorage.getItem('access_token') !== null);
   }
 
 }

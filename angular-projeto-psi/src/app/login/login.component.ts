@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     this.incomplete = false;
     this.userService.loginUser(username, password).pipe(first())
       .subscribe(
-        result => { 
+        result => {
           this.router.navigate(["/dashboard"])
         },
         err => this.displayError('Could not authenticate')

@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 
 function generateAndSendToken(user, res) {
     var token = jwt.sign({ userID: user._id }, shared_secret, { expiresIn: '2h' });
+    console.log("TOKEN " + token);
     res.json({
         token: token,
         model: JSON.stringify(user)
