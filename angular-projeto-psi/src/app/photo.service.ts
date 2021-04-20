@@ -10,7 +10,7 @@ import { catchError, map, tap } from "rxjs/operators";
   providedIn: 'root'
 })
 export class PhotoService {
-  private url = "http://localhost:3000/photos";
+  private url = "http://localhost:3017/photos";
 
 
   constructor(
@@ -40,20 +40,20 @@ export class PhotoService {
     return this.http.request<Photo[]>("GET", this.url, { params: params });
   }
 
-  uploadPhoto( description: string, photoBase64: string, user_id: string): Observable<any>{
-    
+  uploadPhoto(description: string, photoBase64: string, user_id: string): Observable<any> {
+
     interface response {
-       description: string, 
-       photoBase64: string, 
-       user_id: string
+      description: string,
+      photoBase64: string,
+      user_id: string
     }
-    const res : response = {
+    const res: response = {
       description: description,
       photoBase64: photoBase64,
       user_id: user_id
     }
 
-    return this.http.post<{Error: String, photo: Photo}>(this.url, res);
+    return this.http.post<{ Error: String, photo: Photo }>(this.url, res);
 
   }
 

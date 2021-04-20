@@ -10,7 +10,7 @@ import { User } from "./user";
   providedIn: 'root'
 })
 export class UserService {
-  private url = "http://localhost:3000/";
+  private url = "http://localhost:3017/";
   user: User;
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
@@ -44,13 +44,13 @@ export class UserService {
     );
   }
 
-   registerUser(user: string, pass: string): Observable<any> {
+  registerUser(user: string, pass: string): Observable<any> {
     var url = this.url + "users/register";
     const userObj: User = {
       username: user,
       password: pass
     }
-    return this.http.post<{error: Array<String>, existsUser: boolean}>(url, userObj);
+    return this.http.post<{ error: Array<String>, existsUser: boolean }>(url, userObj);
   }
 
   //if no user, returns undefined
@@ -58,7 +58,7 @@ export class UserService {
     return sessionStorage.getItem("access_token");
   }
 
-  getUserId(): string{
+  getUserId(): string {
 
 
     return JSON.parse(sessionStorage.getItem("user"))._id;
