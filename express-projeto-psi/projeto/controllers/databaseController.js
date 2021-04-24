@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 const db = mongoose.connection;
 
 
-exports.init = function (req, res) {
+exports.initUsers = function (req, res) {
     db.collections.users.deleteMany({}, function (err) {
         if (err) {
             console.log(err);
@@ -31,6 +31,19 @@ exports.init = function (req, res) {
             });
 
             res.json({ Errors: "Errors:" + errors });
+        }
+    });
+
+}
+
+exports.initPhotos = function (req, res) {
+    db.collections.photos.deleteMany({}, function (err) {
+        if (err) {
+            console.log(err);
+            res.status(500).json({ Error: err });
+        }
+        else {
+            res.status(200).json({ INFO: "Photos deleted" });
         }
     });
 }

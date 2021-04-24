@@ -1,52 +1,52 @@
 var PhotoModel = require('../schemas/photo');
 var UserModel = require('../schemas/user');
-
-exports.photo_get = function(req, res) {
+const db = require('mongoose').connection;
+exports.photo_get = function (req, res) {
     id = req.params.id;
-    PhotoModel.find({ _id: id }, function(err, model) {
+    PhotoModel.find({ _id: id }, function (err, model) {
         if (err) {
-            res.json({ Error: "Photo not found." });
+            res.status(500).json({ Error: "Photo not found." });
         } else {
-            res.json(model);
+            res.status(200).json(model);
         }
     });
 }
 
 function photosGetAll(res, number_of_results) {
-    PhotoModel.find().limit(number_of_results).then(results => res.json(results)).catch(err => {
+    PhotoModel.find().limit(number_of_results).then(results => res.status(200).json(results)).catch(err => {
         console.log(err);
-        res.json({ Error: "Error while fetching photos." });
+        res.status(500).json({ Error: "Error while fetching photos." });
     });
 }
 
 function photosFiltered(res, filter_used, number) {
     PhotoModel.find().sort({
         [filter_used]: -1
-    }).limit(number).then(results => res.json(results)).catch(err => {
+    }).limit(number).then(results => res.status(200).json(results)).catch(err => {
         console.log(err);
-        res.json({ Error: "Error while fetching photos." });
+        res.status(500).json({ Error: "Error while fetching photos." });
     })
 
 }
 
 function like(photo_id, user_id, res) {
-    UserModel.find({ _id: user_id }, function(err, model) {
+    UserModel.find({ _id: user_id }, function (err, model) {
         if (err) {
             res.json({ Error: "User not found." });
         } else {
             console.log(model);
-            PhotoModel.updateOne({ _id: photo_id }, { $push: { likes: user_id } }, function(err) {
+            PhotoModel.updateOne({ _id: photo_id }, { $push: { likes: user_id } }, function (err) {
                 if (err) {
-                    res.json({ Error: "Error putting like on photo" });
+                    res.status(500).json({ Error: "Error putting like on photo" });
                 } else {
-                    res.json({ INFO: "Liked" });
+                    res.status(200).json({ INFO: "Liked" });
                 }
             });
         }
     });
 }
 
-exports.photo_update = function(req, res) {
+exports.photo_update = function (req, res) {
     id = req.params.id;
     action = req.body.action;
     user = req.body.user;
@@ -55,7 +55,7 @@ exports.photo_update = function(req, res) {
     }
 }
 
-exports.photos_get = function(req, res) {
+exports.photos_get = function (req, res) {
     filter = req.query.filter;
     number_of_results = parseInt(req.query.number_of_results);
     if (filter) {
@@ -65,41 +65,38 @@ exports.photos_get = function(req, res) {
     }
 }
 
-exports.photo_post = function(req, res) {
-    data = req.body;
-    id = data.user_id;
-    if (data.photoBase64 === undefined || data.user_id === undefined) {
-        res.json({ Error: "error while creating photo, not enough data." });
-        return;
-    }
-
-    PhotoModel.create({ description: data.description, photoBase64: data.photoBase64, user_id: data.user_id }, function(err, model) {
-        if (err) {
-            res.json({ Error: "error while creating photo" });
-        } else {
-            UserModel.updateOne({ _id: id }, { $push: { photos_id: model._id } }, function(err) {
-                if (err) {
-                    PhotoModel.remove({ _id: model._id });
-                    res.json({ Error: "error while creating photo" });
-                } else {
-                    res.json(model);
-                }
-            });
-        }
-    });
+exports.photo_post = function (req, res) {
+    photos = req.body.photos;
+    id = req.body.user_id;
+    PhotoModel.insertMany(photos).then(val => {
+        const ids = val.map(val => val._id);
+        UserModel.updateOne({ _id: id }, {
+            $push: { photos_id: { $each: ids } }
+        }, function (err) {
+            if (err) {
+                console.log(err);
+                res.status(500).json({ Error: "error while creating photo" });
+            } else {
+                res.status(200).json({ INFO: "Photos posted" });
+            }
+        });
+    }).catch((err) => {
+        console.log(err);
+        res.status(500).json({ Error: "error while creating photo" });
+    })
 }
 
-exports.photo_delete = function(req, res) {
+exports.photo_delete = function (req, res) {
     id = req.params.id;
-    PhotoModel.findByIdAndRemove({ _id: id }, function(err, result) {
+    PhotoModel.findByIdAndRemove({ _id: id }, function (err, result) {
         if (err) {
-            res.json({ Error: "Photo not found." });
+            res.status(500).json({ Error: "Photo not found." });
         } else {
-            UserModel.findByIdAndUpdate(result.user_id, { $pull: { photos_id: id } }, function(err) {
+            UserModel.findByIdAndUpdate(result.user_id, { $pull: { photos_id: id } }, function (err) {
                 if (err) {
-                    res.json({ Error: "Error trying to delete photo from user." });
+                    res.status(500).json({ Error: "Error trying to delete photo from user." });
                 } else {
-                    res.json({ INFO: "Photo deleted" });
+                    res.status(200).json({ INFO: "Photo deleted" });
                 }
             });
         }
