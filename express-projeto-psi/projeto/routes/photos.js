@@ -6,6 +6,8 @@ router.get('/', photosController.photos_get);
 
 router.get('/:id', photosController.photo_get);
 
+router.get("/favourites/:id", photosController.fav_photos_get);
+
 router.post('/', photosController.photo_post);
 
 router.delete('/:id', photosController.photo_delete);
