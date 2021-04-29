@@ -18,7 +18,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.userService.getUser()) {
-      this.router.navigate(["/dashboard"]);
+      var id = this.userService.getUserId();
+      var url = "profile/"+id;
+      this.router.navigate([url]);
     }
   }
 

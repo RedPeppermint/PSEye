@@ -9,7 +9,8 @@ var PhotoSchema = new Schema({
     photoBase64: { type: String, required: true },
     user_id: { type: Schema.Types.ObjectId, ref: 'User' },
     posted_at: { type: Date, default: Date.now },
-    likes: { type: Schema.Types.Array, default: [] }
+    likes: { type: Schema.Types.Array, default: [] },
+    faves: { type: Schema.Types, Array, default: [] }
 });
 
 PhotoSchema.virtual("url").get(function () {
