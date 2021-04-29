@@ -46,12 +46,33 @@ function like(photo_id, user_id, res) {
     });
 }
 
+function favourite(photo_id, user_id, res) {
+    UserModle.find({ _id: user_id }, function (err, model) {
+        if (err) {
+            res.json({ Error: "User not found." });
+        }
+        else {
+            console.log(model);
+            PhotoModel.uptadeOne({ _id: photo_id }, { $push: { faves: user_id } }, function (err) {
+                if (err) {
+                    res.status(500).json({ Error: "Error favouriting on photo" });
+                } else {
+                    res.status(200).json({ INFO: "Favourited" });
+                }
+            });
+        }
+    })
+}
+
 exports.photo_update = function (req, res) {
     id = req.params.id;
     action = req.body.action;
     user = req.body.user;
     if (action == "like") {
         like(id, user, res)
+    }
+    if (action == "favourite") {
+        favourite(id, user, res)
     }
 }
 

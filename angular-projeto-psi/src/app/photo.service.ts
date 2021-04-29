@@ -10,7 +10,8 @@ import { catchError, map, tap } from "rxjs/operators";
   providedIn: 'root'
 })
 export class PhotoService {
-  private url = "http://10.101.151.25:3017/photos";
+  // private url = "http://10.101.151.25:3017/photos";
+  private url = "http://localhost:3017/photos";
 
 
   constructor(

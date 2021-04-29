@@ -10,7 +10,8 @@ import { User } from "./user";
   providedIn: 'root'
 })
 export class UserService {
-  private url = "http://10.101.151.25:3017/";
+  // private url = "http://10.101.151.25:3017/";
+  private url = "http://localhost:3017/";
   user: User;
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
