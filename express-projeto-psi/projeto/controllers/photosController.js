@@ -47,13 +47,13 @@ function like(photo_id, user_id, res) {
 }
 
 function favourite(photo_id, user_id, res) {
-    UserModle.find({ _id: user_id }, function (err, model) {
+    UserModel.find({ _id: user_id }, function (err, model) {
         if (err) {
             res.json({ Error: "User not found." });
         }
         else {
             console.log(model);
-            PhotoModel.uptadeOne({ _id: photo_id }, { $push: { faves: user_id } }, function (err) {
+            PhotoModel.updateOne({ _id: photo_id }, { $push: { faves: user_id } }, function (err) {
                 if (err) {
                     res.status(500).json({ Error: "Error favouriting on photo" });
                 } else {
@@ -69,11 +69,14 @@ exports.photo_update = function (req, res) {
     action = req.body.action;
     user = req.body.user;
     if (action == "like") {
+        console.log("ACTION LIKE");
         like(id, user, res)
     }
-    if (action == "favourite") {
+    else if (action == "favourite") {
+        console.log("ACTION FAVOURITE");
         favourite(id, user, res)
     }
+
 }
 
 exports.photos_get = function (req, res) {
