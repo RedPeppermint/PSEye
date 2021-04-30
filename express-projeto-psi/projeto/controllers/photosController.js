@@ -80,7 +80,7 @@ function favourite(photo_id, user_id, res) {
 }
 
 exports.photo_update = function (req, res) {
-    id = req.params.id;
+    photo_id = req.params.id;
     action = req.body.action;
     user = getUserIDofToken(req);
     if (!user) {
@@ -89,10 +89,10 @@ exports.photo_update = function (req, res) {
     }
     if (action == "like") {
         console.log("ACTION LIKE");
-        like(id, user, res)
+        like(photo_id, user, res)
     } else if (action == "favourite") {
         console.log("ACTION FAVOURITE");
-        favourite(id, user, res)
+        favourite(photo_id, user, res)
     }
 }
 
