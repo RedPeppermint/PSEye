@@ -10,10 +10,9 @@ var PhotoSchema = new Schema({
     user_id: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     posted_at: { type: Date, default: Date.now },
     likes: { type: Schema.Types.Array, default: [] },
-    faves: { type: Schema.Types, Array, default: [] }
 });
 
-PhotoSchema.virtual("url").get(function () {
+PhotoSchema.virtual("url").get(function() {
     return "/photos/" + this._id;
 });
 
