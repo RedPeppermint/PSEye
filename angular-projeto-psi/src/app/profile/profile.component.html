@@ -1,27 +1,29 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<header>
+  <a routerLink="/dashboard"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
+</header>
 
-<head>
-  <meta charset="utf-8">
-  <title>{{title}}</title>
-</head>
-
-<body>
-  <header>
-    <a routerLink="/dashboard"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
-  </header>
-
-  <main>
+<main>
+  <div id="photos">
+    phtoso
     <div class="photo" *ngFor="let p of photos">
       <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
     </div>
-
-
-  </main>
-  <div id="upload">
-    <img src="../../assets/upload.png" alt="Update button">
   </div>
-</body>
 
 
-</html>
+  <nav>
+    <div id="user">
+      {{profile.username}}
+    </div>
+    <div id="links">
+      <a routerLink="/favorites">
+          My favorites
+      </a>
+    </div>
+  </nav>
+</main>
+
+
+<div id="upload">
+  <img src="../../assets/upload.png" alt="Update button">
+</div>

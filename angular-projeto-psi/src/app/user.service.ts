@@ -67,4 +67,8 @@ export class UserService {
     return (sessionStorage.getItem('access_token') !== null);
   }
 
+  getUserById(id: number): {
+    
+  }
+
 }

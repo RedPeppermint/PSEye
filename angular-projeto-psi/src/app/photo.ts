@@ -4,6 +4,7 @@ export interface Photo {
     image: HTMLImageElement;
     user_id: string;
     user: string;
-    likes: number;
+    number_of_likes: number;
     posted_at: string;
+    liked: boolean;
 }

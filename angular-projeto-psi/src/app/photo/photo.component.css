@@ -1,0 +1,42 @@
+
+.photocontainer {
+  display: flex;
+  flex-direction: column;
+  border: solid 1px #D0CECE;
+  background-color: white;
+  border-radius: 10px;
+  max-width: 700px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.topcontainer {
+  height: 40px;
+  padding: 5px;
+}
+
+.photo {
+  border: 1px solid #f2f2f2;
+}
+
+.pictureLoaded {
+  margin: 0px;
+  width: 100%;
+}
+
+.buttons {
+  height: 40px;
+  display: inline-flex;
+  flex-direction: row;
+  align-self: flex-end;
+}
+
+.buttons:hover {
+  cursor: pointer;
+}
+
+.description {
+  height: 100px;
+  padding: 10px;
+  text-align: justify;
+}

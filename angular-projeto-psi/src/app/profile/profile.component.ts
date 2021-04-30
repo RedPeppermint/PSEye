@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from "../user.service";
 import { PhotoService } from '../photo.service';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router, CanActivate, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +12,8 @@ export class ProfileComponent implements OnInit {
   title = "PSEye";
   photos = [];
   user;
-  constructor(private userService: UserService, private router: Router, private photoService: PhotoService) { }
+  profile;
+  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute, private photoService: PhotoService) { }
 
   ngOnInit(): void {
     if (!this.userService.getUser()) {
@@ -20,6 +21,8 @@ export class ProfileComponent implements OnInit {
     }
 
     this.user = this.userService.getUser();
+    var id = this.route.snapshot.paramMap.get('id');
+    this.profile = this.userService.getUserId(id).subscribe();
 
     // this.getPhotosById(this.user._id);
   }
@@ -35,4 +38,6 @@ export class ProfileComponent implements OnInit {
   //   });
   // }
   // }
+
+
 }
