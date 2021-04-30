@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
 
     this.user = this.userService.getUser();
     var id = this.route.snapshot.paramMap.get('id');
-    this.profile = this.userService.getUserId(id).subscribe();
+    // this.profile = this.userService.getUserById(id).subscribe();
 
     // this.getPhotosById(this.user._id);
   }
