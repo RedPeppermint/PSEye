@@ -38,8 +38,8 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:3000', '10.101.151.25:3017'],
-        disallowedRoutes: ['localhost:3000/users/login', '10.101.151.25:3017/users/login']
+        allowedDomains: ['localhost:3017', '10.101.151.25:3017'],
+        disallowedRoutes: ['localhost:3017/users/login', '10.101.151.25:3017/users/login']
       }
     })
   ],
