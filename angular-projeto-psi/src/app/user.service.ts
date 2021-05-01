@@ -70,12 +70,4 @@ export class UserService {
     return (sessionStorage.getItem('access_token') !== null);
   }
 
-  getUserById(user_id: string): Observable<User> {
-    return this.http.get<User>(this.url + user_id);
-  }
-
-  // getUserById(id: number): {
-  //
-  // }
-
 }

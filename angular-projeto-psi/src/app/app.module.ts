@@ -14,7 +14,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { PhotoService } from "./photo.service";
 import { UserService } from "./user.service";
 import { UserGuard } from './user.guard';
-import { PhotoComponent } from './photo/photo.component'
+import { PhotoComponent } from './photo/photo.component';
+import { PhotopageComponent } from './photopage/photopage.component'
 
 export function tokenGetter() {
   return sessionStorage.getItem('access_token');
@@ -29,7 +30,8 @@ export function tokenGetter() {
     UploadComponent,
     ProfileComponent,
     FavoritesComponent,
-    PhotoComponent
+    PhotoComponent,
+    PhotopageComponent
   ],
   imports: [
     BrowserModule,

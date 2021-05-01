@@ -34,6 +34,10 @@ export class DashboardComponent implements OnInit {
         photos.forEach(p => {
           var img = new Image();
           img.src = p.photoBase64;
+          this.userService.getUserByID(p.user_id).subscribe(u => {
+            p.user = u[0].name;
+          });
+
           p.image = img;
           this.photos.push(p);
         })
@@ -45,6 +49,10 @@ export class DashboardComponent implements OnInit {
         photos.forEach(p => {
           var img = new Image();
           img.src = p.photoBase64;
+          this.userService.getUserByID(p.user_id).subscribe(u => {
+            p.user = u[0].name;
+          });
+
           p.image = img;
           this.photos.push(p);
         })
@@ -56,5 +64,6 @@ export class DashboardComponent implements OnInit {
     var url = "profile/" + this.userid;
     this.router.navigate([url]);
   }
+
 
 }
