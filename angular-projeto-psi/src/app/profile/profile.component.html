@@ -3,18 +3,22 @@
 </header>
 
 <main>
-  <div id="photos">
-    phtoso
+  <div id="photos" *ngIf="photos">
     <div class="photo" *ngFor="let p of photos">
       <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
     </div>
+  </div>
+  <div id="empty" *ngIf="!photos">
+    User has no photos yet!
   </div>
 
 
   <nav>
     <div id="user">
+      <img src="../../assets/userdefault.png" id="useric" alt="user photo">
       Zé Carlos
     </div>
+
     <div id="links">
       <a routerLink="/favorites">
           My favorites

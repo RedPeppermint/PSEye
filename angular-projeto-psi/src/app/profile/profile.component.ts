@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
   photos = [];
   user;
   profile;
+  id;
   constructor(private userService: UserService, private router: Router, private route: ActivatedRoute, private photoService: PhotoService) { }
 
   ngOnInit(): void {
@@ -21,23 +22,23 @@ export class ProfileComponent implements OnInit {
     }
 
     this.user = this.userService.getUser();
-    var id = this.route.snapshot.paramMap.get('id');
-    // this.profile = this.userService.getUserById(id).subscribe();
+    this.id = this.route.snapshot.paramMap.get('id');
+    console.log(this.id);
 
-    // this.getPhotosById(this.user._id);
+    // this.profile = this.userService.getUserById(this.id).subscribe();
+
+    this.getPhotosById(this.id);
   }
 
-  // getPhotosById(id: number): void {
-  //   this.photoService.getPhotosById().subscribe(photos => {
-  //     photos.forEach(p => {
-  //       var img = new Image();
-  //       img.src = p.photoBase64;
-  //       p.image = img;
-  //       this.photos.push(p);
-  //     })
-  //   });
-  // }
-  // }
-
+  getPhotosById(id: number): void {
+    this.photoService.getPhotosById(this.id).subscribe(photos => {
+      photos.forEach(p => {
+        var img = new Image();
+        img.src = p.photoBase64;
+        p.image = img;
+        this.photos.push(p);
+      })
+    });
+  }
 
 }

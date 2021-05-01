@@ -17,15 +17,59 @@ main {
   margin-left: 4px;
 }
 
+#icon:hover {
+  cursor: pointer;
+}
+
 header {
   height: 45px;
   border-bottom: solid 1px #D0CECE;
   background-color: white;
 }
 
+#user{
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+
+}
+
+#useric {
+  height: 50px;
+  margin-right: 10px;
+}
+
+#links{
+  margin: 10px;
+  border-top: solid 1px #D0CECE;
+}
+
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
 #photos {
   grid-area: main;
-  display:
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.pictureLoaded{
+  background-color: white;
+  border: solid 1px #D0CECE;
+  object-fit: scale-down;
+  width: 250px;
+  height: 250px;
+}
+
+.pictureLoaded:hover{
+  cursor: pointer;
 }
 
 

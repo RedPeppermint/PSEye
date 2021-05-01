@@ -44,10 +44,19 @@
                 <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
             </div>
             <div class="buttons">
-                <img src="../../assets/heartempty.png" alt="Like button" id="like">
-                <img src="../../assets/starempty.png" alt="Favorite button" id="fav">
+                <div *ngIf="!p.liked">
+                  <img src="../../assets/heartempty.png" alt="Like button" id="like">
+                </div>
+                <div *ngIf="p.liked">
+                  <img src="../../assets/heartfilled.png" alt="Like button" id="like">
+                </div>
+                <div *ngIf="!p.faved">
+                  <img src="../../assets/starempty.png" alt="Favorite button" id="fav">
+                </div>
+                <div *ngIf="p.faved">
+                  <img src="../../assets/starfilled.png" alt="Favorite button" id="fav">
+                </div>
                 <img src="../../assets/share.png" alt="Share button" id="share">
-                <!--  TODO: meter isto a atualizar com o ts 2º sprint -->
 
             </div>
             <div class="description" *ngIf="p.description">

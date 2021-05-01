@@ -23,6 +23,10 @@ body {
   margin-left: 4px;
 }
 
+#icon:hover {
+  cursor: pointer;
+}
+
 header {
   border-bottom: solid 1px #D0CECE;
   grid-area: head;
@@ -42,8 +46,6 @@ nav ul {
   margin: 15px;
   margin-top: 35px;
   grid-area: filter;
-
-
 }
 
 #filter li {
@@ -125,7 +127,8 @@ main {
 }
 
 .photo {
-  border: 1px solid #f2f2f2;
+  border-top: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
 }
 
 .pictureLoaded {
