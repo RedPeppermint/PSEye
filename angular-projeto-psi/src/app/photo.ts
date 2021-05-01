@@ -1,4 +1,5 @@
 export interface Photo {
+    _id: string;
     description: string;
     photoBase64: string;
     image: HTMLImageElement;

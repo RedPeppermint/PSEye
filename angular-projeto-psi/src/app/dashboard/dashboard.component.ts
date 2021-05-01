@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from "../user.service";
 import { PhotoService } from '../photo.service';
 import { Router, CanActivate, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
+import { PhotoComponent } from '../photo/photo.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -52,7 +53,7 @@ export class DashboardComponent implements OnInit {
   }
 
   goToProfile(): void {
-    var url = "profile/"+this.userid;
+    var url = "profile/" + this.userid;
     this.router.navigate([url]);
   }
 

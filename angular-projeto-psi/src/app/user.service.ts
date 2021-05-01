@@ -12,7 +12,6 @@ import { User } from "./user";
 export class UserService {
   // private url = "http://10.101.151.25:3017/";
   private url = "http://localhost:3017/";
-  user: User;
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
   };
@@ -46,6 +45,10 @@ export class UserService {
       password: pass
     }
     return this.http.post<{ error: Array<String>, existsUser: boolean }>(url, userObj);
+  }
+
+  getUserByID(id: string): Observable<User> {
+    return this.http.get<User>(this.url + "users/" + id);
   }
 
   //if no user, returns undefined

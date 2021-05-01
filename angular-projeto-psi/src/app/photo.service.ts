@@ -58,4 +58,8 @@ export class PhotoService {
 
   }
 
+  getPhoto(id: string): Observable<Photo> {
+    return this.http.get<Photo>(this.url + "/" + id);
+  }
+
 }

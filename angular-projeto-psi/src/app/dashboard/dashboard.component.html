@@ -7,15 +7,15 @@
 </head>
 
 <body>
-  <header>
-      <a routerLink="/dashboard"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
-  </header>
-  <nav>
-    <ul>
-      <li>
-        <a routerLink="/" (click)="goToProfile()">
-          My profile
-        </a>
+    <header>
+        <a routerLink="/dashboard"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
+    </header>
+    <nav>
+        <ul>
+            <li>
+                <a routerLink="/" (click)="goToProfile()">
+                    My profile
+                </a>
 
             </li>
             <li>
@@ -29,15 +29,17 @@
         <form>
             Search by:
             <ul>
-                <li><input #recentbox type="radio" name="search" value="recent" checked (click)="getPhotos(recentbox.value)"><label>Recent</label></li>
-                <li><input #popularbox type="radio" name="search" value="popular" (click)="getPhotos(popularbox.value)"><label>Popular</label></li>
+                <li><input #recentbox type="radio" name="search" value="recent" checked
+                        (click)="getPhotos(recentbox.value)"><label>Recent</label></li>
+                <li><input #popularbox type="radio" name="search" value="popular"
+                        (click)="getPhotos(popularbox.value)"><label>Popular</label></li>
             </ul>
         </form>
     </div>
 
     <main>
         <div class="photocontainer" *ngFor="let p of photos">
-            <div class="topcontainer">
+            <!-- <div class="topcontainer">
                 {{p.user_id}}
             </div>
             <div class="photo">
@@ -46,14 +48,15 @@
             <div class="buttons">
                 <img src="../../assets/heartempty.png" alt="Like button" id="like">
                 <img src="../../assets/starempty.png" alt="Favorite button" id="fav">
-                <img src="../../assets/share.png" alt="Share button" id="share">
-                <!--  TODO: meter isto a atualizar com o ts 2º sprint -->
+                <img src="../../assets/share.png" alt="Share button" id="share"> -->
+            <!--  TODO: meter isto a atualizar com o ts 2º sprint -->
 
-            </div>
+            <!-- </div>
             <div class="description" *ngIf="p.description">
                 {{p.description}}
-            </div>
+            </div> -->
 
+            <app-photo [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
         </div>
 
 
