@@ -1,51 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from "../user.service";
 import { PhotoService } from '../photo.service';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-
+import { Router, ActivatedRoute } from '@angular/router';
+import { ClipboardService } from 'ngx-clipboard'
 @Component({
   selector: 'app-photo',
   templateUrl: './photo.component.html',
   styleUrls: ['./photo.component.css']
 })
 
-// TODO: MUDAR. está igual ao dash
-export class PhotoComponent implements OnInit {
-  title = "PSEye";
-  photos = [];
-  constructor(private userService: UserService, private router: Router, private photoService: PhotoService) { }
 
-  ngOnInit(): void {
-    if (!this.userService.getUser()) {
-      this.router.navigate(['/login']);
+export class PhotoComponent implements OnInit {
+  @Input() id: string;
+  @Input() user: string;
+  @Input() user_id: string
+  @Input() photo: HTMLImageElement;
+  @Input() description: string;
+  constructor(private clipboardService: ClipboardService, private userService: UserService, private router: Router, private route: ActivatedRoute, private photoService: PhotoService) { }
+
+  ngOnInit() {
+    var id = this.route.snapshot.paramMap.get('id');
+    if (!id) {
+      this.userService.getUserByID(this.user_id).subscribe(user => {
+        this.user = user[0].name;
+      });
+      return;
     }
-    this.getPhotos("recent");
+    this.photoService.getPhoto(id).subscribe(p => {
+      p = p[0];
+      this.id = p._id;
+      this.user_id = p.user_id;
+      var img = new Image();
+      img.src = p.photoBase64;
+      this.photo = img;
+      this.description = p.description;
+      this.userService.getUserByID(p.user_id).subscribe(user => {
+        this.user = user[0].name;
+      });
+    })
   }
 
-  getPhotos(filter): void {
-    console.log("Filtro: " + filter);
-    this.photos = [];
-    if (filter == "recent") {
-      this.photoService.getMostRecentPhotos(50).subscribe(photos => {
-        photos.forEach(p => {
-          var img = new Image();
-          img.src = p.photoBase64;
-          p.image = img;
-          this.photos.push(p);
-        })
-      });
-    } else {
-      console.log("Entrou no filter = popular");
-
-      this.photoService.getMostLikedPhotos(50).subscribe(photos => {
-        photos.forEach(p => {
-          var img = new Image();
-          img.src = p.photoBase64;
-          p.image = img;
-          this.photos.push(p);
-        })
-      });
-    }
+  share(): void {
+    ///
+    // INSERT INTERFACE HTML AND CSS LOGIC 
+    ///
+    this.clipboardService.copy(window.location.hostname.replace("www", "")
+      + ":" + location.port + "/photos/" + this.id);
+    console.log("Copied to linkboard")
   }
 
 }

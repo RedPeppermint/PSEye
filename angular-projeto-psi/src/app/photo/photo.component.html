@@ -1,19 +1,16 @@
-<!-- <div class="photocontainer">
-    <div class="topcontainer">
-        {{p.user_id}}
-    </div>
-    <div class="photo">
-        <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
-    </div>
-    <div class="buttons">
-        <img src="../../assets/heartempty.png" alt="Like button" id="like">
-        <img src="../../assets/starempty.png" alt="Favorite button" id="fav">
-        <img src="../../assets/share.png" alt="Share button" id="share">
+<div class="topcontainer">
+    {{this.user}}
+</div>
+<div class="photo">
+    <img *ngIf="this.photo" src="{{this.photo.src}}" alt="Picture" class="pictureLoaded">
+</div>
+<div class="buttons">
+    <img src="../../assets/heartempty.png" alt="Like button" id="like">
+    <img src="../../assets/starempty.png" alt="Favorite button" id="fav">
+    <img src="../../assets/share.png" alt="Share button" id="share" (click)="share()">
+    <!--  TODO: meter isto a atualizar com o ts 2º sprint -->
 
-
-    </div>
-    <div class="description" *ngIf="p.description">
-        {{p.description}}
-    </div>
-
-</div> -->
+</div>
+<div class="description" *ngIf="this.description">
+    {{this.description}}
+</div>
