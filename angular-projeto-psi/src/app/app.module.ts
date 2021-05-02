@@ -15,6 +15,7 @@ import { PhotoService } from "./photo.service";
 import { UserService } from "./user.service";
 import { UserGuard } from './user.guard';
 import { PhotoComponent } from './photo/photo.component'
+import { FormsModule } from '@angular/forms';
 
 export function tokenGetter() {
   return sessionStorage.getItem('access_token');
@@ -33,6 +34,7 @@ export function tokenGetter() {
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
     HttpClientModule,
     ClipboardModule,

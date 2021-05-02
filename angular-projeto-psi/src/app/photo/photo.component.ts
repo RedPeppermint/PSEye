@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { UserService } from "../user.service";
 import { PhotoService } from '../photo.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ClipboardService } from 'ngx-clipboard'
+import { ClipboardService } from 'ngx-clipboard';
 @Component({
   selector: 'app-photo',
   templateUrl: './photo.component.html',
@@ -16,7 +16,7 @@ export class PhotoComponent implements OnInit {
   @Input() user_id: string
   @Input() photo: HTMLImageElement;
   @Input() description: string;
-  constructor(private clipboardService: ClipboardService, private userService: UserService, private router: Router, private route: ActivatedRoute, private photoService: PhotoService) { }
+  constructor(/*private clipboardService: ClipboardService,*/ private userService: UserService, private router: Router, private route: ActivatedRoute, private photoService: PhotoService) { }
 
   ngOnInit() {
     var id = this.route.snapshot.paramMap.get('id');
@@ -43,7 +43,8 @@ export class PhotoComponent implements OnInit {
   share(): void {
     ///
     // INSERT INTERFACE HTML AND CSS LOGIC 
-    ///
+    /// 
+    
     this.clipboardService.copy(window.location.hostname.replace("www", "")
       + ":" + location.port + "/photos/" + this.id);
     console.log("Copied to linkboard")

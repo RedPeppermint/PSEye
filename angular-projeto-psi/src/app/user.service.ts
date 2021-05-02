@@ -57,8 +57,6 @@ export class UserService {
   }
 
   getUserId(): string {
-
-
     return JSON.parse(sessionStorage.getItem("user"))._id;
   }
 

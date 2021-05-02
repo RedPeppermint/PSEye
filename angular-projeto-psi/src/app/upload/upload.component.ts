@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PhotoService } from "../photo.service";
 import { UserService } from "../user.service";
+import {NgModule} from '@angular/core';
+import { User } from "../user";
 
 @Component({
   selector: 'app-upload',
@@ -8,27 +10,44 @@ import { UserService } from "../user.service";
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit {
-  title = "PSEye";
-  base64: string;
+	title = "PSEye";
+	images: Array<string> = []; 
+	descriptions: Array<string> = [];
+	tempD: string;
+	temptempD: string;
 
-  constructor(private photoService: PhotoService, private userService: UserService) { }
+	constructor(private photoService: PhotoService, private userService: UserService) { }
 
-  ngOnInit(): void {
+	ngOnInit(): void {
 
-  }
+	}
 
-  handleFileInput(files: any, description: string) {
-    const file = (files as HTMLInputElement).files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      this.base64 = reader.result as string;
-      this.photoService.uploadPhoto(description,this.base64,this.userService.getUserId()).subscribe(); 
-    }
-  }
+	handleFileInput(event) {
+		if(event.target.files && event.target.files[0]){
+			var filesAmount = event.target.files.length;
+			for (let i = 0; i < filesAmount; i++) {
+				const reader = new FileReader();
+				reader.onload = () => {
+					var base64 = reader.result as string;
+					this.images.push(base64);
+					this.temptempD = event.target.files[i].name;
+				}	
+				reader.readAsDataURL(event.target.files[i]);
+			}
+		}
+	}
 
-  log() {
-    console.log(this.base64);
+  submit() {
+	if(this.tempD){
+		console.log(this.tempD);
+		this.descriptions.push(this.tempD);
+		this.tempD = "";
+	} else {
+		this.descriptions.push(this.temptempD);
+	}
+	console.log(this.descriptions);
+	this.photoService.uploadPhoto(this.descriptions,this.images).subscribe(); 
+	this.images = [];
   }
 
 }

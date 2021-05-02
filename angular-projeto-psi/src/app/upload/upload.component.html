@@ -15,14 +15,16 @@
         <main>
             <div id="upload">
                 <div>
-                    <input #description type="text" placeholder="Description">
+                    <input id="description" type="text" placeholder="Description" [(ngModel)]="tempD">
                 </div>
                 <img src="../../assets/upload.png" alt="Update button">
                 <form action=" ">
                     <label for="imagem"></label>
-                    <input #imagem type="file" accept="image/*" id="imagem " name="imagem" (change)="handleFileInput(imagem, description.value)">
+                    <input #imagem type="file" accept="image/*" id="imagem " name="imagem" (change)="handleFileInput($event)">
                 </form>
-
+                <div>
+                    <button (click)="submit()">submit</button>
+                </div>
             </div>
 
 

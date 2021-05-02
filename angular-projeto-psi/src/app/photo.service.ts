@@ -41,19 +41,23 @@ export class PhotoService {
     return this.http.request<Photo[]>("GET", this.url, { params: params });
   }
 
-  uploadPhoto(description: string, photoBase64: string, user_id: string): Observable<any> {
-
+  uploadPhoto(description: Array<string>, photosBase64: Array<string>): Observable<any> {
+    const zip = (a, b) => a.map((k, i) => [k, b[i]]);
     interface response {
       description: string,
       photoBase64: string,
-      user_id: string
     }
-    const res: response = {
-      description: description,
-      photoBase64: photoBase64,
-      user_id: user_id
+    var naoEhMerda: Array<response> = [];
+    for(var i = 0; i<description.length;i++){
+      var newRes : response = {
+        description: description[i],
+        photoBase64: photosBase64[i]
+      }
+      naoEhMerda.push(newRes);
     }
-
+    console.log("naoEhMerda: " + naoEhMerda);
+    var res = {photos: naoEhMerda};
+    console.log("res: " + res);
     return this.http.post<{ Error: String, photo: Photo }>(this.url, res);
 
   }
