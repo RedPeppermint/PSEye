@@ -1,53 +1,48 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { PhotoService } from "../photo.service";
-import { UserService } from "../user.service";
-import {NgModule} from '@angular/core';
-import { User } from "../user";
+import { Component, OnInit } from '@angular/core';
+import { FileHandle } from '../dragDrop.directive';
 
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.css']
+  styleUrls: ['./upload.component.css'],
 })
 export class UploadComponent implements OnInit {
-	title = "PSEye";
-	images: Array<string> = []; 
-	descriptions: Array<string> = [];
-	tempD: string;
-	temptempD: string;
+  title = "PSEye";
+  imageUrl: string = "/assets/img/default-image.png";
+  fileToUpload: File = null;
 
-	constructor(private photoService: PhotoService, private userService: UserService) { }
 
-	ngOnInit(): void {
 
-	}
 
-	handleFileInput(event) {
-		if(event.target.files && event.target.files[0]){
-			var filesAmount = event.target.files.length;
-			for (let i = 0; i < filesAmount; i++) {
-				const reader = new FileReader();
-				reader.onload = () => {
-					var base64 = reader.result as string;
-					this.images.push(base64);
-					this.temptempD = event.target.files[i].name;
-				}	
-				reader.readAsDataURL(event.target.files[i]);
-			}
-		}
-	}
+  name = 'Angular 5';
+  files: FileHandle[] = [];
 
-  submit() {
-	if(this.tempD){
-		console.log(this.tempD);
-		this.descriptions.push(this.tempD);
-		this.tempD = "";
-	} else {
-		this.descriptions.push(this.temptempD);
-	}
-	console.log(this.descriptions);
-	this.photoService.uploadPhoto(this.descriptions,this.images).subscribe(); 
-	this.images = [];
+  filesDropped(files: FileHandle[]): void {
+    this.files = files;
   }
 
+  upload(): void {
+    //get image upload file obj;
+  }
+
+
+
+
+  constructor() {
+  }
+  ngOnInit() {
+  }
+
+  urls=[];
+  onselect(e){
+    if (e.target.files) {
+      for (let i = 0; i < File.length; i++) {
+        var reader = new FileReader();
+        reader.readAsDataURL(e.target.files[i]);
+        reader.onload=(events:any)=>{
+          this.urls.push(events.target.result);
+        }
+      }
+    }
+  }
 }

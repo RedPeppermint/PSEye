@@ -7,31 +7,36 @@
 </head>
 
 
-<body>
+  <body>
     <div id="site">
-        <header>
-            <a routerLink="/login"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
-        </header>
-        <main>
-            <div id="upload">
-                <div>
-                    <input id="description" type="text" placeholder="Description" [(ngModel)]="tempD">
-                </div>
-                <img src="../../assets/upload.png" alt="Update button">
-                <form action=" ">
-                    <label for="imagem"></label>
-                    <input #imagem type="file" accept="image/*" id="imagem " name="imagem" (change)="handleFileInput($event)">
-                </form>
-                <div>
-                    <button (click)="submit()">submit</button>
-                </div>
-            </div>
+      <header>
+        <a routerLink="/login"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
+      </header>
+      <main>
+        <div *ngIf="!files.length" class="col-12 rmpm dropzone" appDrag (files)="filesDropped($event)">
+        	<div class="text-wrapper">
+        		<div class="centered">Drop your file here!</div>
+        	</div>
+        </div>
 
+        <div *ngFor="let file of files">
+          <img *ngIf="file" [src]="file.url" width="100px" height="100px">
+        </div>
 
+        <button type="button" (click)="upload()">Upload Image</button>
 
-        </main>
+        <div id="textUpload">
+            <p> Drag and drop a file that you want to upload </p>
+            <img *ngFor='let url of urls'[src] ="url" height="100"><br>
+            <input type="file" (change)="onselect($event)" multiple>
+        </div>
+        <div id="upload">
+            <img src="../../assets/upload.png" alt="Update button">
+        </div>
+
+      </main>
     </div>
-</body>
+  </body>
 
 
 </html>
