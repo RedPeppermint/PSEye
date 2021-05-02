@@ -23,6 +23,7 @@ main {
 
 header {
   height: 45px;
+  /* max-height: 6% */
   border-bottom: solid 1px #D0CECE;
   background-color: white;
 }
@@ -58,6 +59,7 @@ a {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  gap: 50px;
 }
 
 .pictureLoaded{
@@ -82,6 +84,26 @@ nav{
     max-height: 200px;
     margin: 10px;
 }
+
+ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+ul li {
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: 300;
+  height: auto;
+  margin-top: 10px;
+}
+
+nav ul li:hover {
+  background-color: #ebebeb;
+}
+
 
 #upload {
   position: fixed;

@@ -2,32 +2,81 @@
   <a routerLink="/dashboard"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
 </header>
 
-<main>
-  <div id="photos" *ngIf="photos">
-    <div class="photo" *ngFor="let p of photos">
-      <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
+<div *ngIf="isDesktop">
+
+  <main>
+    <div id="photos" *ngIf="photos">
+      <div class="photo" *ngFor="let p of photos">
+        <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
+      </div>
     </div>
+    <div id="empty" *ngIf="!photos">
+      User has no photos yet!
+    </div>
+
+    <nav>
+      <div id="user">
+        <img src="../../assets/userdefault.png" id="useric" alt="user photo">
+        Zé Carlos
+      </div>
+
+      <div id="links">
+        <ul>
+          <li>
+            <a routerLink="/dashboard">
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a routerLink="/favorites">
+              My favorites
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </main>
+
+  <div id="upload">
+    <a routerLink="/upload"><img src="../../assets/upload.png" alt="Upload button"></a>
   </div>
-  <div id="empty" *ngIf="!photos">
-    User has no photos yet!
+
+</div>
+
+<div *ngIf="isMobile">
+
+  <div class="phone">
+
+
+    <div id="photosPhone" *ngIf="photos">
+      <div class="photoPhone" *ngFor="let p of photos">
+        <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
+      </div>
+    </div>
+    <div id="empty" *ngIf="!photos">
+      User has no photos yet!
+    </div>
+
+    <nav>
+      <div id="user">
+        <img src="../../assets/userdefault.png" id="useric" alt="user photo">
+        Zé Carlos
+      </div>
+
+      <div id="links">
+        <ul>
+          <li>
+            <a routerLink="/dashboard">
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a routerLink="/favorites">
+              My favorites
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
   </div>
-
-
-  <nav>
-    <div id="user">
-      <img src="../../assets/userdefault.png" id="useric" alt="user photo">
-      Zé Carlos
-    </div>
-
-    <div id="links">
-      <a routerLink="/favorites">
-          My favorites
-      </a>
-    </div>
-  </nav>
-</main>
-
-
-<div id="upload">
-  <img src="../../assets/upload.png" alt="Update button">
 </div>
