@@ -60,9 +60,9 @@ function like(photo_id, user_id, res) {
             res.json({ Error: "User not found." });
         } else {
             console.log(model);
-            PhotoModel.updateOne({ _id: photo_id }, { $push: { likes: user_id } }, function(err) {
+            PhotoModel.updateOne({ _id: photo_id, likes: { $ne: user_id } }, { $push: { likes: user_id } }, function(err) {
                 if (err) {
-                    res.status(500).json({ Error: "Error putting like on photo" });
+                    res.status(500).json({ Error: "Error liking a the photo" });
                 } else {
                     res.status(200).json({ INFO: "Liked" });
                 }
@@ -89,7 +89,7 @@ function dislike(photo_id, user_id, res) {
 
 
 function favourite(photo_id, user_id, res) {
-    UserModel.updateOne({ _id: user_id }, { $push: { favourites: photo_id } }, function(err, model) {
+    UserModel.updateOne({ _id: user_id, favourites: { $ne: photo_id } }, { $push: { favourites: photo_id } }, function(err, model) {
         if (err) {
             res.status(500).json({ Error: "User not found." });
         } else {
@@ -121,6 +121,7 @@ exports.photo_update = function(req, res) {
     } else if (action == "favourite") {
         favourite(id, user, res);
     } else if (action == "dislike") {
+        console.log("Entrou no dislike");
         dislike(id, user, res);
     } else if (action === "unfavourite") {
         unfavourite(id, user, res);
