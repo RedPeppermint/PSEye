@@ -11,6 +11,7 @@ main {
 }
 
 #icon {
+  align-self: flex-start;
   width: 52px;
   height: 38px;
   margin-top: 4px;
@@ -26,6 +27,8 @@ header {
   /* max-height: 6% */
   border-bottom: solid 1px #D0CECE;
   background-color: white;
+  display: flex;
+  flex-direction: row;
 }
 
 #user{
@@ -47,6 +50,10 @@ header {
   border-top: solid 1px #D0CECE;
 }
 
+#linksside{
+  margin: 10px;
+  border-top: solid 1px black;
+}
 
 a {
   color: black;
@@ -104,7 +111,6 @@ nav ul li:hover {
   background-color: #ebebeb;
 }
 
-
 #upload {
   position: fixed;
   bottom: 20px;
@@ -122,4 +128,23 @@ nav ul li:hover {
 #upload img {
   align-self: center;
   height: 35px;
+}
+
+#photosPhone {
+  margin: 20px;
+  display: flex;
+  align-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+#menu {
+  width: 40px;
+  margin: 4px;
+  cursor: pointer;
+}
+
+#linksside ul li:active {
+  background-color: #ffd49c;
 }

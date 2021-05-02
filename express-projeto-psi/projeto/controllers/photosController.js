@@ -1,6 +1,7 @@
 var PhotoModel = require('../schemas/photo');
 var UserModel = require('../schemas/user');
-const db = require('mongoose').connection;
+var mongoose = require('mongoose');
+const db = mongoose.connection;
 const shared_secret = require('../sharedSecret').shared_secret;
 const jwt = require('jsonwebtoken');
 
@@ -57,6 +58,7 @@ function like(photo_id, user_id, res) {
         if (err) {
             res.json({ Error: "User not found." });
         } else {
+            console.log(model);
             PhotoModel.updateOne({ _id: photo_id, likes: { $ne: user_id } }, { $push: { likes: user_id } }, function(err) {
                 if (err) {
                     res.status(500).json({ Error: "Error liking a the photo" });

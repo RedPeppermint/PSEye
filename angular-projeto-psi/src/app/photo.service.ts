@@ -48,15 +48,15 @@ export class PhotoService {
       photoBase64: string,
     }
     var naoEhMerda: Array<response> = [];
-    for(var i = 0; i<description.length;i++){
-      var newRes : response = {
+    for (var i = 0; i < description.length; i++) {
+      var newRes: response = {
         description: description[i],
         photoBase64: photosBase64[i]
       }
       naoEhMerda.push(newRes);
     }
     console.log("naoEhMerda: " + naoEhMerda);
-    var res = {photos: naoEhMerda};
+    var res = { photos: naoEhMerda };
     console.log("res: " + res);
     return this.http.post<{ Error: String, photo: Photo }>(this.url, res);
 
@@ -98,4 +98,7 @@ export class PhotoService {
     return this.http.put<{ Error: String }>(this.url + "/" + id, res);
   }
 
+  getFavourites(user_id: string): Observable<Photo[]> {
+    return this.http.get<Photo[]>(this.url + "/favourites/" + user_id);
+  }
 }
