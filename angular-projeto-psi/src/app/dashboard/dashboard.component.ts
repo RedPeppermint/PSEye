@@ -47,10 +47,7 @@ export class DashboardComponent implements OnInit {
           this.userService.getUserByID(p.user_id).subscribe(u => {
             p.user = u[0].name;
           });
-          this.photoService.isLiked(p._id).subscribe(b => {
-              console.log(b);
 
-          });
           p.image = img;
           this.photos.push(p);
         })

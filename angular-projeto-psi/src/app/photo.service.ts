@@ -83,6 +83,9 @@ export class PhotoService {
       action: "like",
       user_id: user_id
     }
+
+    console.log(this.url +"/" +id);
+
     return this.http.put<{ Error: String }>(this.url + "/" + id, res);
   }
 

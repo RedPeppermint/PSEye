@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 
 exports.photo_get = function(req, res) {
     var id = req.params.id;
+    console.log("photoget");
     PhotoModel.find({ _id: id }, function(err, model) {
         if (err) {
             res.status(500).json({ Error: "Photo not found." });
@@ -17,6 +18,7 @@ exports.photo_get = function(req, res) {
 }
 
 exports.fav_photos_get = function(req, res) {
+  console.log("favget");
     var user_id = req.params.id;
     UserModel.findById(user_id, function(err, result) {
         if (err) {
@@ -58,13 +60,16 @@ function like(photo_id, user_id, res) {
         if (err) {
             res.json({ Error: "User not found." });
         } else {
-            console.log(model);
             PhotoModel.updateOne({ _id: photo_id, likes: { $ne: user_id } }, { $push: { likes: user_id } }, function(err) {
+              console.log("entrou");
                 if (err) {
                     res.status(500).json({ Error: "Error liking a the photo" });
                 } else {
-                    res.status(200).json({ INFO: "Liked" });
+                  res.status(200).json({ INFO: "Liked" });
                 }
+            });
+            PhotoModel.find({ _id: photo_id }, function (err, model) {
+              console.log(model.likes);
             });
         }
     });
@@ -188,7 +193,7 @@ exports.photo_delete = function(req, res) {
 }
 
 exports.get_photo_status = function(req, res) {
-    console.log("HELLO");
+    console.log("status");
     var id = req.query.id;
     var action = req.query.action;
     var user = getUserIDofToken(req);
