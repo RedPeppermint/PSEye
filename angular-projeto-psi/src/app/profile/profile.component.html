@@ -6,7 +6,7 @@
   <main>
     <div id="photos" *ngIf="photos">
       <div class="photo" *ngFor="let p of photos">
-        <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
+        <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded" tabindex="0">
       </div>
     </div>
     <div id="empty" *ngIf="!photos">
@@ -36,8 +36,11 @@
     </nav>
   </main>
 
-  <div id="upload">
-    <a routerLink="/upload"><img src="../../assets/upload.png" alt="Upload button"></a>
+  <div id="upload" >
+    <div class="uploadhover">
+      <span class="uploadho">Upload (U)</span>
+      <a routerLink="/upload"><img src="../../assets/upload.png" alt="Upload button"></a>
+    </div>  
   </div>
 
 </div>
