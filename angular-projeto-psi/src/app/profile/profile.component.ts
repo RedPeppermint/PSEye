@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from "../user.service";
 import { PhotoService } from '../photo.service';
 import { Router, CanActivate, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-profile',
@@ -12,20 +13,25 @@ export class ProfileComponent implements OnInit {
   title = "PSEye";
   photos = [];
   user;
-  profile;
   id;
-  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute, private photoService: PhotoService) { }
+  deviceInfo;
+  isMobile;
+  isDesktop;
+
+  constructor(private deviceService: DeviceDetectorService, private userService: UserService, private router: Router, private route: ActivatedRoute, private photoService: PhotoService) { }
 
   ngOnInit(): void {
     if (!this.userService.getUser()) {
       this.router.navigate(['/login']);
     }
 
+    this.deviceInfo = this.deviceService.getDeviceInfo();
+    this.isMobile = this.deviceService.isMobile() || this.deviceService.isTablet();
+    this.isDesktop = this.deviceService.isDesktop();
+
     this.user = this.userService.getUser();
     this.id = this.route.snapshot.paramMap.get('id');
     console.log(this.id);
-
-    // this.profile = this.userService.getUserById(this.id).subscribe();
 
     this.getPhotosById(this.id);
   }

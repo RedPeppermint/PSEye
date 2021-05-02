@@ -21,6 +21,7 @@
     "@angular/router": "~9.1.13",
     "@auth0/angular-jwt": "^5.0.2",
     "ngx-clipboard": "^14.0.1",
+    "ngx-device-detector": "^2.0.8",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

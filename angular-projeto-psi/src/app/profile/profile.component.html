@@ -2,7 +2,7 @@
   <a routerLink="/dashboard"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
 </header>
 
-<main>
+<main *ngIf="isDesktop">
   <div id="photos" *ngIf="photos">
     <div class="photo" *ngFor="let p of photos">
       <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
@@ -12,7 +12,6 @@
     User has no photos yet!
   </div>
 
-
   <nav>
     <div id="user">
       <img src="../../assets/userdefault.png" id="useric" alt="user photo">
@@ -20,14 +19,26 @@
     </div>
 
     <div id="links">
-      <a routerLink="/favorites">
-          My favorites
-      </a>
+      <ul>
+        <li>
+          <a routerLink="/dashboard">
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a routerLink="/favorites">
+            My favorites
+          </a>
+        </li>
+      </ul>
     </div>
   </nav>
 </main>
 
+<div *ngIf="isMobile">
+    issa PHONE
+</div>
 
 <div id="upload">
-  <img src="../../assets/upload.png" alt="Update button">
+  <a routerLink="/upload"><img src="../../assets/upload.png" alt="Upload button"></a>
 </div>
