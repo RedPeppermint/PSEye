@@ -14,13 +14,9 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { PhotoService } from "./photo.service";
 import { UserService } from "./user.service";
 import { UserGuard } from './user.guard';
-<<<<<<< HEAD
-import { PhotoComponent } from './photo/photo.component'
 import { FormsModule } from '@angular/forms';
-=======
 import { PhotoComponent } from './photo/photo.component';
 import { PhotopageComponent } from './photopage/photopage.component'
->>>>>>> f5ad80e6fd1d09d4b92721a7e47e4c9039771adc
 
 export function tokenGetter() {
   return sessionStorage.getItem('access_token');
