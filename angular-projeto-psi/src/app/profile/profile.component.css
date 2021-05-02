@@ -27,7 +27,6 @@ main {
 
 header {
   height: 45px;
-  /* max-height: 6% */
   border-bottom: solid 1px #D0CECE;
   background-color: white;
   display: flex;
@@ -146,6 +145,11 @@ nav ul li:hover {
   width: 40px;
   margin: 4px;
   cursor: pointer;
+  margin-left: auto;
+}
+
+#linksside ul li{
+  text-align: right;
 }
 
 #linksside ul li:active {

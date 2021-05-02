@@ -1,41 +1,92 @@
-<header>
-    <a routerLink="/dashboard"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
-</header>
-<div id="main">
+<div *ngIf="isDesktop">
+  <header>
+      <a routerLink="/dashboard"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
+  </header>
+  <div id="main">
 
-  <nav>
-    <ul>
-      <li>
-        <a routerLink="/" (click)="goToProfile()">
-          My profile
-        </a>
-
-      </li>
-      <li>
-          <a routerLink="/favorites">
-              My favorites
+    <nav>
+      <ul>
+        <li>
+          <a routerLink="/" (click)="goToProfile()">
+            My profile
           </a>
-      </li>
-    </ul>
-  </nav>
-  <div id="filter">
-      <form>
-          Search by:
-          <ul>
-              <li><input #recentbox type="radio" name="search" value="recent" checked (click)="getPhotos(recentbox.value)"><label>Recent</label></li>
-              <li><input #popularbox type="radio" name="search" value="popular" (click)="getPhotos(popularbox.value)"><label>Popular</label></li>
-          </ul>
-      </form>
+
+        </li>
+        <li>
+            <a routerLink="/favorites">
+                My favorites
+            </a>
+        </li>
+      </ul>
+    </nav>
+    <div id="filter">
+        <form>
+            Search by:
+            <ul>
+                <li><input #recentbox type="radio" name="search" value="recent" checked (click)="getPhotos(recentbox.value)"><label>Recent</label></li>
+                <li><input #popularbox type="radio" name="search" value="popular" (click)="getPhotos(popularbox.value)"><label>Popular</label></li>
+            </ul>
+        </form>
+    </div>
+
+    <main>
+        <div *ngFor="let p of photos">
+            <app-photo [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
+        </div>
+
+    </main>
   </div>
 
-  <main>
-      <div *ngFor="let p of photos">
-          <app-photo [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
-      </div>
-
-  </main>
+  <div id="upload" >
+    <div class="uploadhover">
+      <span class="uploadho">Upload (U)</span>
+      <a routerLink="/upload"><img src="../../assets/upload.png" alt="Upload button"></a>
+    </div>
+  </div>
 </div>
 
-<div id="upload">
-    <a routerLink="/upload"><img src="../../assets/upload.png" alt="Upload button"></a>
+<div id="mobilemain" *ngIf="isMobile">
+  <app-side-nav
+    [sidenavTemplateRef]="navContent"
+    [direction]="'right'"
+    [navWidth]="280"
+    [duration]="0.5">
+  </app-side-nav>
+
+  <header>
+    <a routerLink="/dashboard"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
+    <img (click)="toggleSideNav()" src="../../assets/sidenav.png" id="menu" alt="menu">
+  </header>
+
+  <div id="mainphone">
+    <div class="cont" *ngFor="let p of photos">
+        <app-photo [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
+    </div>
+  </div>
+
+  <ng-template #navContent>
+    <div id="linksside">
+      <ul>
+        <li>
+          <a routerLink="/" (click)="goToProfile()">
+            My profile
+          </a>
+        </li>
+        <li>
+          <a routerLink="/favorites">
+            My favorites
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div id="filterside">
+      <form>
+        Search by:
+        <ul>
+          <li><input #recentbox type="radio" name="search" value="recent" checked (click)="getPhotos(recentbox.value)"><label>Recent</label></li>
+          <li><input #popularbox type="radio" name="search" value="popular" (click)="getPhotos(popularbox.value)"><label>Popular</label></li>
+        </ul>
+      </form>
+    </div>
+  </ng-template>
 </div>
