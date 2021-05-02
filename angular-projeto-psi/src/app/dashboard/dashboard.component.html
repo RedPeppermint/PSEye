@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<header>
+    <a routerLink="/dashboard"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
+</header>
+<div id="main">
 
-<head>
-    <meta charset="utf-8">
-    <title>{{title}}</title>
-</head>
-
-<body>
-  <header>
-      <a routerLink="/dashboard"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
-  </header>
   <nav>
     <ul>
       <li>
@@ -17,60 +10,32 @@
           My profile
         </a>
 
-            </li>
-            <li>
-                <a routerLink="/favorites">
-                    My favorites
-                </a>
-            </li>
-        </ul>
-    </nav>
-    <div id="filter">
-        <form>
-            Search by:
-            <ul>
-                <li><input #recentbox type="radio" name="search" value="recent" checked (click)="getPhotos(recentbox.value)"><label>Recent</label></li>
-                <li><input #popularbox type="radio" name="search" value="popular" (click)="getPhotos(popularbox.value)"><label>Popular</label></li>
-            </ul>
-        </form>
-    </div>
+      </li>
+      <li>
+          <a routerLink="/favorites">
+              My favorites
+          </a>
+      </li>
+    </ul>
+  </nav>
+  <div id="filter">
+      <form>
+          Search by:
+          <ul>
+              <li><input #recentbox type="radio" name="search" value="recent" checked (click)="getPhotos(recentbox.value)"><label>Recent</label></li>
+              <li><input #popularbox type="radio" name="search" value="popular" (click)="getPhotos(popularbox.value)"><label>Popular</label></li>
+          </ul>
+      </form>
+  </div>
 
-    <main>
-        <div class="photocontainer" *ngFor="let p of photos">
-            <div class="topcontainer">
-                {{p.user_id}}
-            </div>
-            <div class="photo">
-                <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
-            </div>
-            <div class="buttons">
-                <div *ngIf="!p.liked">
-                  <img src="../../assets/heartempty.png" alt="Like button" id="like">
-                </div>
-                <div *ngIf="p.liked">
-                  <img src="../../assets/heartfilled.png" alt="Like button" id="like">
-                </div>
-                <div *ngIf="!p.faved">
-                  <img src="../../assets/starempty.png" alt="Favorite button" id="fav">
-                </div>
-                <div *ngIf="p.faved">
-                  <img src="../../assets/starfilled.png" alt="Favorite button" id="fav">
-                </div>
-                <img src="../../assets/share.png" alt="Share button" id="share">
+  <main>
+      <div *ngFor="let p of photos">
+          <app-photo [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
+      </div>
 
-            </div>
-            <div class="description" *ngIf="p.description">
-                {{p.description}}
-            </div>
+  </main>
+</div>
 
-        </div>
-
-
-    </main>
-    <div id="upload">
-        <img src="../../assets/upload.png" alt="Update button">
-    </div>
-</body>
-
-
-</html>
+<div id="upload">
+    <img src="../../assets/upload.png" alt="Upload button">
+</div>

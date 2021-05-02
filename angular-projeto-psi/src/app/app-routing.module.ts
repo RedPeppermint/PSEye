@@ -10,6 +10,7 @@ import { UploadComponent } from "./upload/upload.component";
 import { ProfileComponent } from "./profile/profile.component";
 import { UserGuard } from './user.guard';
 import { PhotoComponent } from './photo/photo.component';
+import { PhotopageComponent } from './photopage/photopage.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "login", pathMatch: "full" },//todo - ir para dashboard, fazer verificacao se ha user autenticado
@@ -18,7 +19,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "profile/:id", component: ProfileComponent, canActivate: [UserGuard] },
-  { path: "photos/:id", component: PhotoComponent, canActivate: [UserGuard] },
+  { path: "photos/:id", component: PhotopageComponent, canActivate: [UserGuard] },
   { path: "upload", component: UploadComponent, canActivate: [UserGuard] }
 ];
 

@@ -1,16 +1,38 @@
-<div class="topcontainer">
-    {{this.user}}
-</div>
-<div class="photo">
-    <img *ngIf="this.photo" src="{{this.photo.src}}" alt="Picture" class="pictureLoaded">
-</div>
-<div class="buttons">
-    <img src="../../assets/heartempty.png" alt="Like button" id="like">
-    <img src="../../assets/starempty.png" alt="Favorite button" id="fav">
-    <img src="../../assets/share.png" alt="Share button" id="share" (click)="share()">
-    <!--  TODO: meter isto a atualizar com o ts 2º sprint -->
+<div class="photocontainer">
+  <div class="topcontainer">
+      {{user}}
+  </div>
+  <div class="photo">
+      <img *ngIf="photo" src="{{photo.src}}" alt="Picture" class="pictureLoaded">
+  </div>
+  <div class="buttons">
+    <div class="likehover">
+      <span class="likeho">Like (L)</span>
+      <div *ngIf="!liked">
+        <img (click)="like()" src="../../assets/heartempty.png" alt="Like button" id="like">
+      </div>
+      <div *ngIf="liked">
+        <img (click)="like()" src="../../assets/heartfilled.png" alt="Like button" id="like">
+      </div>
+    </div>
+    <div class="favehover">
+      <span class="faveho">Favorite (F)</span>
+      <div *ngIf="!faved">
+        <img (click)="fave()" src="../../assets/starempty.png" alt="Favorite button" id="fav">
+      </div>
+      <div *ngIf="faved">
+        <img (click)="fave()" src="../../assets/starfilled.png" alt="Favorite button" id="fav">
+      </div>
+    </div>
+    <div class="sharehover">
+      <span class="shareho">Share (S)</span>
+      <span class="pop" [style.visibility]="popup">Copied to clipboard!</span>
+      <img (click)="share()" src="../../assets/share.png" alt="Share button" id="share">
+    </div>
 
-</div>
-<div class="description" *ngIf="this.description">
-    {{this.description}}
+
+  </div>
+  <div class="description" *ngIf="description">
+      {{description}}
+  </div>
 </div>

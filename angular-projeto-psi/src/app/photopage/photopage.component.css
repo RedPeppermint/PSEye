@@ -1,0 +1,32 @@
+*{
+   height: 100%;
+   font-family: Poppins;
+}
+
+#icon {
+  width: 52px;
+  height: 38px;
+  margin-top: 4px;
+  margin-left: 4px;
+}
+
+app-photo {
+  width: 50%;
+  max-width: 700px;
+}
+
+header {
+  height: 45px;
+  border-bottom: solid 1px #D0CECE;
+  background-color: white;
+}
+
+main {
+  margin: 20px;
+  height: calc(100% - 46px);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
