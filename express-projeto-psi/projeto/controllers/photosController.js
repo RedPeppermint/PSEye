@@ -71,6 +71,23 @@ function like(photo_id, user_id, res) {
     });
 }
 
+function dislike(photo_id, user_id, res) {
+    UserModel.find({ _id: user_id }, function(err, model) {
+        if (err) {
+            res.json({ Error: "User not found." });
+        } else {
+            PhotoModel.updateOne({ _id: photo_id }, { $pull: { likes: user_id } }, function(err) {
+                if (err) {
+                    res.status(500).json({ Error: "Error taking like on photo" });
+                } else {
+                    res.status(200).json({ INFO: "Disliked" });
+                }
+            });
+        }
+    });
+}
+
+
 function favourite(photo_id, user_id, res) {
     UserModel.updateOne({ _id: user_id }, { $push: { favourites: photo_id } }, function(err, model) {
         if (err) {
@@ -81,6 +98,15 @@ function favourite(photo_id, user_id, res) {
     })
 }
 
+function unfavourite(photo_id, user_id, res) {
+    UserModel.updateOne({ _id: user_id }, { $pull: { favourites: photo_id } }, function(err, model) {
+        if (err) {
+            res.status(500).json({ Error: "User not found." });
+        } else {
+            res.status(200).json({ INFO: "Unfavourited" });
+        }
+    })
+}
 
 exports.photo_update = function(req, res) {
     var id = req.params.id;
@@ -91,11 +117,13 @@ exports.photo_update = function(req, res) {
         return;
     }
     if (action == "like") {
-        console.log("ACTION LIKE");
-        like(id, user, res)
+        like(id, user, res);
     } else if (action == "favourite") {
-        console.log("ACTION FAVOURITE");
-        favourite(id, user, res)
+        favourite(id, user, res);
+    } else if (action == "dislike") {
+        dislike(id, user, res);
+    } else if (action === "unfavourite") {
+        unfavourite(id, user, res);
     }
 }
 
