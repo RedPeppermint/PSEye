@@ -17,6 +17,7 @@
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.12.3",
         "morgan": "~1.9.1",
+        "ngx-clipboard": "^14.0.1",
         "regexp-clone": "^1.0.0"
     }
 }
