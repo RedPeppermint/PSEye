@@ -13,7 +13,7 @@ import { ClipboardService } from 'ngx-clipboard'
 export class PhotoComponent implements OnInit {
   @Input() id: string;
   @Input() user: string;
-  @Input() user_id: string
+  @Input() user_id: string;
   @Input() photo: HTMLImageElement;
   @Input() description: string;
   liked;
@@ -22,13 +22,13 @@ export class PhotoComponent implements OnInit {
 
   @HostListener('document:keypress', ['$event'])
     handleKeyboardEvent(event: KeyboardEvent) {
-      if(event.key=="s") {
+      if(event.key=="s" || event.key=="S") {
         this.share();
       }
-      if(event.key=="l") {
+      if(event.key=="l" || event.key=="L") {
         this.like();
       }
-      if(event.key=="f") {
+      if(event.key=="f" || event.key=="F") {
         this.fave();
       }
     }
@@ -44,14 +44,16 @@ export class PhotoComponent implements OnInit {
       return;
     }
     this.photoService.getPhoto(id).subscribe(p => {
+      console.log(p);
+
       p = p[0];
       this.id = p._id;
       this.user_id = p.user_id;
       var img = new Image();
       img.src = p.photoBase64;
       this.photo = img;
-      this.liked = false;
-      this.faved = true;
+      this.liked = false; //TODO GET FROM BACKEND
+      this.faved = false;
       this.description = p.description;
       this.userService.getUserByID(p.user_id).subscribe(user => {
         this.user = user[0].name;
@@ -61,11 +63,26 @@ export class PhotoComponent implements OnInit {
 
   like(): void {
     console.log("liked");
-
+    if(this.liked) {
+      this.liked = false;
+      //TODO UNLIKE MAKE function
+    } else {
+      this.liked = true;
+      var loggeduserID = this.userService.getUserId();
+      this.photoService.likePhoto(this.id, loggeduserID);
+    }
   }
 
   fave(): void {
     console.log("faved");
+    if(this.faved) {
+      this.faved = false;
+      //TODO UNFAVE MAKE function
+    } else {
+      this.faved = true;
+      var loggeduserID = this.userService.getUserId();
+      this.photoService.favouritePhoto(this.id, loggeduserID);
+    }
   }
 
   share(): void {

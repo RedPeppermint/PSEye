@@ -60,7 +60,6 @@
   border-radius: 6px;
   position: absolute;
   z-index: 100;
-  width: 120px;
   bottom: 100%;
   left: 50%;
   margin-left: -60px;
@@ -69,4 +68,70 @@
 .sharehover {
   position: relative;
   display: inline-block;
+}
+.likehover {
+  position: relative;
+  display: inline-block;
+}
+.favehover {
+  position: relative;
+  display: inline-block;
+}
+
+.shareho{
+  visibility: hidden;
+  width: 100px;
+  background-color: #292929;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 100;
+  bottom: 100%;
+  left: 65%;
+  margin-left: -60px;
+}
+
+.faveho{
+ visibility: hidden;
+ width: 120px;
+ background-color: #292929;
+ color: #fff;
+ text-align: center;
+ padding: 5px 0;
+ border-radius: 6px;
+ position: absolute;
+ z-index: 100;
+ bottom: 100%;
+ left: 65%;
+ margin-left: -60px;
+}
+
+.likeho{
+ visibility: hidden;
+ width: 80px;
+ background-color: #292929;
+ color: #fff;
+ text-align: center;
+ padding: 5px 0;
+ border-radius: 6px;
+ position: absolute;
+ z-index: 100;
+ bottom: 100%;
+ left: 65%;
+ margin-left: -60px;
+}
+
+
+.sharehover:hover .shareho{
+  visibility: visible;
+}
+
+.likehover:hover .likeho{
+  visibility: visible;
+}
+
+.favehover:hover .faveho{
+  visibility: visible;
 }
