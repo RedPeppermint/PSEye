@@ -2,6 +2,7 @@ import { Component, Input, OnInit,  HostListener  } from '@angular/core';
 import { UserService } from "../user.service";
 import { PhotoService } from '../photo.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Photo } from "../Photo";
 import { ClipboardService } from 'ngx-clipboard';
 @Component({
   selector: 'app-photo',
@@ -91,8 +92,6 @@ export class PhotoComponent implements OnInit {
     this.clipboardService.copy(window.location.hostname.replace("www", "")
       + ":" + location.port + "/photos/" + this.id);
 
-
-
     (async () => {
        // Do something before delay
        this.popup = "visible";
@@ -109,4 +108,6 @@ export class PhotoComponent implements OnInit {
   delay(ms: number) {
       return new Promise( resolve => setTimeout(resolve, ms) );
   }
+
+  
 }

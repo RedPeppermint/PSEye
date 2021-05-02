@@ -1,14 +1,13 @@
 var PhotoModel = require('../schemas/photo');
 var UserModel = require('../schemas/user');
-const db = require('mongoose').connection;
+var mongoose = require('mongoose');
+const db = mongoose.connection;
 const shared_secret = require('../sharedSecret').shared_secret;
 const jwt = require('jsonwebtoken');
 
-
-
-exports.photo_get = function (req, res) {
+exports.photo_get = function(req, res) {
     var id = req.params.id;
-    PhotoModel.find({ _id: id }, function (err, model) {
+    PhotoModel.find({ _id: id }, function(err, model) {
         if (err) {
             res.status(500).json({ Error: "Photo not found." });
         } else {
@@ -17,16 +16,16 @@ exports.photo_get = function (req, res) {
     });
 }
 
-exports.fav_photos_get = function (req, res) {
+exports.fav_photos_get = function(req, res) {
     var user_id = req.params.id;
-    UserModel.findById(user_id, function (err, result) {
+    UserModel.findById(user_id, function(err, result) {
         if (err) {
             res.status(500).json({ Error: "user not found." });
         } else {
             console.log("user: " + result);
             var ids = result.favourites.map(id => mongoose.Types.ObjectId(id));
             console.log("ids: " + ids);
-            PhotoModel.find({ '_id': { $in: ids } }, function (err, results) {
+            PhotoModel.find({ '_id': { $in: ids } }, function(err, results) {
                 if (err) {
                     res.status(500).json({ Error: "problem getting favourite photos." });
                 } else {
@@ -55,12 +54,12 @@ function photosFiltered(res, filter_used, number) {
 }
 
 function like(photo_id, user_id, res) {
-    UserModel.find({ _id: user_id }, function (err, model) {
+    UserModel.find({ _id: user_id }, function(err, model) {
         if (err) {
             res.json({ Error: "User not found." });
         } else {
             console.log(model);
-            PhotoModel.updateOne({ _id: photo_id, likes: { $ne: user_id } }, { $push: { likes: user_id } }, function (err) {
+            PhotoModel.updateOne({ _id: photo_id, likes: { $ne: user_id } }, { $push: { likes: user_id } }, function(err) {
                 if (err) {
                     res.status(500).json({ Error: "Error liking a the photo" });
                 } else {
@@ -72,11 +71,11 @@ function like(photo_id, user_id, res) {
 }
 
 function dislike(photo_id, user_id, res) {
-    UserModel.find({ _id: user_id }, function (err, model) {
+    UserModel.find({ _id: user_id }, function(err, model) {
         if (err) {
             res.json({ Error: "User not found." });
         } else {
-            PhotoModel.updateOne({ _id: photo_id }, { $pull: { likes: user_id } }, function (err) {
+            PhotoModel.updateOne({ _id: photo_id }, { $pull: { likes: user_id } }, function(err) {
                 if (err) {
                     res.status(500).json({ Error: "Error taking like on photo" });
                 } else {
@@ -89,7 +88,7 @@ function dislike(photo_id, user_id, res) {
 
 
 function favourite(photo_id, user_id, res) {
-    UserModel.updateOne({ _id: user_id, favourites: { $ne: photo_id } }, { $push: { favourites: photo_id } }, function (err, model) {
+    UserModel.updateOne({ _id: user_id, favourites: { $ne: photo_id } }, { $push: { favourites: photo_id } }, function(err, model) {
         if (err) {
             res.status(500).json({ Error: "User not found." });
         } else {
@@ -99,7 +98,7 @@ function favourite(photo_id, user_id, res) {
 }
 
 function unfavourite(photo_id, user_id, res) {
-    UserModel.updateOne({ _id: user_id }, { $pull: { favourites: photo_id } }, function (err, model) {
+    UserModel.updateOne({ _id: user_id }, { $pull: { favourites: photo_id } }, function(err, model) {
         if (err) {
             res.status(500).json({ Error: "User not found." });
         } else {
@@ -108,7 +107,7 @@ function unfavourite(photo_id, user_id, res) {
     })
 }
 
-exports.photo_update = function (req, res) {
+exports.photo_update = function(req, res) {
     var id = req.params.id;
     var action = req.body.action;
     var user = getUserIDofToken(req);
@@ -125,10 +124,12 @@ exports.photo_update = function (req, res) {
         dislike(id, user, res);
     } else if (action === "unfavourite") {
         unfavourite(id, user, res);
+    } else {
+        res.status(500).json({ Error: "Action not accepted" });
     }
 }
 
-exports.photos_get = function (req, res) {
+exports.photos_get = function(req, res) {
     var filter = req.query.filter;
     var number_of_results = parseInt(req.query.number_of_results);
     if (filter) {
@@ -138,9 +139,9 @@ exports.photos_get = function (req, res) {
     }
 }
 
-exports.photo_post = function (req, res) {
+exports.photo_post = function(req, res) {
     var photos = req.body.photos;
-    id = getUserIDofToken(req);
+    var id = getUserIDofToken(req);
     if (!id) {
         console.log("fudeu ID");
         res.status(500).json({ Error: "User not found" });
@@ -154,7 +155,7 @@ exports.photo_post = function (req, res) {
         const ids = val.map(val => val._id);
         UserModel.updateOne({ _id: id }, {
             $push: { photos_id: { $each: ids } }
-        }, function (err) {
+        }, function(err) {
             if (err) {
                 console.log(err);
                 res.status(500).json({ Error: "error while creating photo" });
@@ -169,19 +170,60 @@ exports.photo_post = function (req, res) {
     })
 }
 
-exports.photo_delete = function (req, res) {
+exports.photo_delete = function(req, res) {
     var id = req.params.id;
-    PhotoModel.findByIdAndRemove({ _id: id }, function (err, result) {
+    PhotoModel.findByIdAndRemove({ _id: id }, function(err, result) {
         if (err) {
             res.status(500).json({ Error: "Photo not found." });
         } else {
-            UserModel.findByIdAndUpdate(result.user_id, { $pull: { photos_id: id } }, function (err) {
+            UserModel.findByIdAndUpdate(result.user_id, { $pull: { photos_id: id } }, function(err) {
                 if (err) {
                     res.status(500).json({ Error: "Error trying to delete photo from user." });
                 } else {
                     res.status(200).json({ INFO: "Photo deleted" });
                 }
             });
+        }
+    });
+}
+
+exports.get_photo_status = function(req, res) {
+    console.log("HELLO");
+    var id = req.query.id;
+    var action = req.query.action;
+    var user = getUserIDofToken(req);
+    if (!user) {
+        res.status(500).json({ Error: "User not found" });
+        return;
+    }
+    console.log(req.query);
+    if (action === "like") {
+        return isLiked(id, user, res);
+    } else if (action === "favourite") {
+        return isFav(id, user, res);
+    } else {
+        res.status(500).json({ Error: "Action not accepted" });
+    }
+}
+
+function isLiked(id, user, res) {
+    PhotoModel.findById(id, function(err, model) {
+        if (err) {
+            res.status(500).json({ Error: "Photo not found." });
+        } else {
+            var like = model.likes.includes(user);
+            res.status(200).json({ Response: like });
+        }
+    });
+}
+
+function isFav(id, user, res) {
+    UserModel.findById(user, function(err, model) {
+        if (err) {
+            res.status(500).json({ Error: "Photo not found." });
+        } else {
+            var favourite = model.favourites.includes(id);
+            res.status(200).json({ Response: favourite });
         }
     });
 }
