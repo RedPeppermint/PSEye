@@ -3,6 +3,7 @@ import { UserService } from "../user.service";
 import { PhotoService } from '../photo.service';
 import { Router, CanActivate, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { NavigationService } from 'src/app/navigation.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +19,7 @@ export class ProfileComponent implements OnInit {
   isMobile;
   isDesktop;
 
-  constructor(private deviceService: DeviceDetectorService, private userService: UserService, private router: Router, private route: ActivatedRoute, private photoService: PhotoService) { }
+  constructor(private navService: NavigationService, private deviceService: DeviceDetectorService, private userService: UserService, private router: Router, private route: ActivatedRoute, private photoService: PhotoService) { }
 
   ngOnInit(): void {
     if (!this.userService.getUser()) {
@@ -47,4 +48,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  toggleSideNav() {
+      this.navService.setShowNav(true);
+  }
 }

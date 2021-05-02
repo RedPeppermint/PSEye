@@ -14,12 +14,12 @@
 
 }
 
-
 #icon {
   width: 52px;
   height: 38px;
   margin-top: 4px;
   margin-left: 4px;
+  align-self: flex-start;
 }
 
 #icon:hover {
@@ -30,6 +30,7 @@ header {
   height: 45px;
   border-bottom: solid 1px #D0CECE;
   background-color: white;
+  display: flex;
 }
 
 nav {
@@ -50,6 +51,18 @@ nav ul {
   height: 25px;
   font-weight: 300;
 }
+
+#filterside {
+  margin: 15px;
+  margin-top: 35px;
+  text-align: right;
+}
+
+#filterside li {
+  height: 25px;
+  font-weight: 300;
+}
+
 
 input[type=radio]{
   height: 15px;
@@ -118,4 +131,63 @@ main {
 #upload img {
   align-self: center;
   height: 35px;
+}
+
+#menu {
+  width: 40px;
+  margin: 4px;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+#linksside{
+  margin: 10px;
+  height: auto;
+}
+
+#linksside ul li{
+  text-align: right;
+}
+
+/* #linksside a{
+  text-align: righ;
+} */
+
+#mainphone {
+  margin: 10px;
+}
+
+.cont {
+  height: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+#linksside ul li:active {
+  background-color: #ffd49c;
+}
+
+.uploadhover {
+  position: relative;
+  display: inline-block;
+}
+
+.uploadho{
+  visibility: hidden;
+  width: 100px;
+  background-color: #292929;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 100;
+  bottom: 100%;
+  left: 65%;
+  margin-left: -60px;
+  height: auto;
+}
+
+.uploadhover:hover .uploadho{
+  visibility: visible;
 }

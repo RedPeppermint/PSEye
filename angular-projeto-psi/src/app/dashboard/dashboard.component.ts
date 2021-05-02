@@ -3,6 +3,8 @@ import { UserService } from "../user.service";
 import { PhotoService } from '../photo.service';
 import { Router, CanActivate, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
 import { PhotoComponent } from '../photo/photo.component';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { NavigationService } from 'src/app/navigation.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,13 +14,21 @@ import { PhotoComponent } from '../photo/photo.component';
 export class DashboardComponent implements OnInit {
   title = "PSEye";
   photos = [];
-  userid = ""
-  constructor(private route: ActivatedRoute, private userService: UserService, private router: Router, private photoService: PhotoService) { }
+  userid = "";
+  deviceInfo;
+  isMobile;
+  isDesktop;
+
+  constructor(private navService: NavigationService, private deviceService: DeviceDetectorService, private route: ActivatedRoute, private userService: UserService, private router: Router, private photoService: PhotoService) { }
 
   ngOnInit(): void {
     if (!this.userService.getUser()) {
       this.router.navigate(['/login']);
     }
+
+    this.deviceInfo = this.deviceService.getDeviceInfo();
+    this.isMobile = this.deviceService.isMobile() || this.deviceService.isTablet();
+    this.isDesktop = this.deviceService.isDesktop();
 
     this.userid = this.userService.getUserId();
     this.getPhotos("recent");
@@ -37,7 +47,10 @@ export class DashboardComponent implements OnInit {
           this.userService.getUserByID(p.user_id).subscribe(u => {
             p.user = u[0].name;
           });
+          this.photoService.isLiked(p._id).subscribe(b => {
+              console.log(b);
 
+          });
           p.image = img;
           this.photos.push(p);
         })
@@ -65,5 +78,7 @@ export class DashboardComponent implements OnInit {
     this.router.navigate([url]);
   }
 
-
+  toggleSideNav() {
+      this.navService.setShowNav(true);
+  }
 }
