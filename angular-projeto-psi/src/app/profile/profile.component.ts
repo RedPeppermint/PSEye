@@ -49,7 +49,7 @@ export class ProfileComponent implements OnInit {
         p.user = this.user;
 
         this.photoService.isLiked(p._id).subscribe(b => {
-            p.liked = b.Response;
+          p.liked = b.Response;
         });
 
         this.photoService.isFav(p._id).subscribe(b => {
@@ -66,6 +66,21 @@ export class ProfileComponent implements OnInit {
     });
 
   }
+
+  delete_photo(id: string) {
+    this.photoService.deletePhoto(id).subscribe(res => {
+      if (res.Error) {
+        console.log("Error deleting photo: " + Error);
+      } else if (res.INFO === "Photo deleted") {
+        this.photos = this.photos.filter(x => x._id != id);
+        this.close();
+      }
+      else {
+        console.log("Error deleting photo: something went wrong");
+      }
+    });
+  }
+
 
   toggleSideNav() {
     this.navService.setShowNav(true);
