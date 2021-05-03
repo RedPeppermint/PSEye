@@ -2,6 +2,7 @@ import { Component, Input, OnInit,  HostListener  } from '@angular/core';
 import { UserService } from "../user.service";
 import { PhotoService } from '../photo.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Photo } from "../Photo";
 import { ClipboardService } from 'ngx-clipboard';
 @Component({
   selector: 'app-photo',
@@ -53,7 +54,15 @@ export class PhotoComponent implements OnInit {
       var img = new Image();
       img.src = p.photoBase64;
       this.photo = img;
-      this.liked = false; //TODO GET FROM BACKEND
+
+      this.photoService.isLiked(p._id).subscribe(b => {
+          this.liked = b.response;
+      });
+
+      this.photoService.isFav(p._id).subscribe(b => {
+          this.faved = b.response;
+      });
+
       this.faved = false;
       this.description = p.description;
       this.userService.getUserByID(p.user_id).subscribe(user => {
@@ -63,14 +72,18 @@ export class PhotoComponent implements OnInit {
   }
 
   like(): void {
-    console.log("liked");
+
     if(this.liked) {
       this.liked = false;
-      //TODO UNLIKE MAKE function
+      console.log("unliked");
+      var loggeduserID = this.userService.getUserId();
+      this.photoService.likePhoto(this.id, loggeduserID).subscribe();
+
     } else {
       this.liked = true;
+      console.log("liked");
       var loggeduserID = this.userService.getUserId();
-      this.photoService.likePhoto(this.id, loggeduserID);
+      this.photoService.likePhoto(this.id, loggeduserID).subscribe();
     }
   }
 
@@ -91,17 +104,12 @@ export class PhotoComponent implements OnInit {
     this.clipboardService.copy(window.location.hostname.replace("www", "")
       + ":" + location.port + "/photos/" + this.id);
 
-
-
     (async () => {
-       // Do something before delay
        this.popup = "visible";
 
        await this.delay(1500);
 
-       // Do something after
        this.popup = "hidden";
-
    })();
 
   }
@@ -109,4 +117,6 @@ export class PhotoComponent implements OnInit {
   delay(ms: number) {
       return new Promise( resolve => setTimeout(resolve, ms) );
   }
+
+
 }

@@ -60,6 +60,10 @@ export class UserService {
     return JSON.parse(sessionStorage.getItem("user"))._id;
   }
 
+  getUsername(): string {
+    return this.getUserByID(this.getUserId()).subscribe.name;
+  }
+
   setUser(user: string) {
     sessionStorage.setItem("access_token", user);
   }
@@ -67,5 +71,7 @@ export class UserService {
   public get loggedIn(): boolean {
     return (sessionStorage.getItem('access_token') !== null);
   }
+
+  
 
 }

@@ -66,6 +66,14 @@ export class PhotoService {
     return this.http.get<Photo>(this.url + "/" + id);
   }
 
+  isLiked(id: string): Observable<any>{
+    return this.http.get<{ Error: String }>(this.url + "/status" + "?id=" + id + "&action=like");
+  }
+
+  isFav(id: string): Observable<any>{
+    return this.http.get<{ Error: String }>(this.url + "/status" + "?id=" + id + "&action=favourite");
+  }
+
   likePhoto(id: string, user_id: string): Observable<any> {
     interface response {
       action: string,
@@ -75,6 +83,9 @@ export class PhotoService {
       action: "like",
       user_id: user_id
     }
+
+    console.log(this.url +"/" +id);
+
     return this.http.put<{ Error: String }>(this.url + "/" + id, res);
   }
 
