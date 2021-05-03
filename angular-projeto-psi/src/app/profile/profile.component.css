@@ -38,6 +38,8 @@ main {
   grid-template-columns: 25% 75%;
   grid-template-areas:
   'nav main';
+  position: absolute;
+  z-index: 10;
 }
 
 #icon {
@@ -205,4 +207,49 @@ nav ul li:hover {
 
 .uploadhover:hover .uploadho{
   visibility: visible;
+}
+
+.overlay{
+  position: fixed;
+  width:100%;
+  height:100%;
+  z-index: 100;
+}
+
+.black{
+  background-color: black;
+  opacity: 0.2;
+}
+
+.close{
+  height: 40px;
+  z-index: 1004;
+  position: relative;
+  margin-top: 0px;
+  margin-left: calc(100% - 40px);
+}
+
+.mainover {
+  position: absolute;
+  z-index: 1000;
+  width:100%;
+  height:100%;
+  display: flex;
+  justify-content: center;
+
+}
+
+.overph{
+  height: 90%;
+  align-self: center;
+  z-index: 1002;
+  position: fixed;
+}
+
+app-photo{
+  position: relative;
+  z-index: 1003;
+}
+
+#btn {
 }

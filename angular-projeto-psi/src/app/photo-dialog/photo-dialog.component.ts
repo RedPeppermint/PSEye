@@ -5,16 +5,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Photo } from "../photo";
 import { ClipboardService } from 'ngx-clipboard';
 
-
-
 @Component({
-  selector: 'app-photo',
-  templateUrl: './photo.component.html',
-  styleUrls: ['./photo.component.css']
+  selector: 'app-photo-dialog',
+  templateUrl: './photo-dialog.component.html',
+  styleUrls: ['./photo-dialog.component.css']
 })
+export class PhotoDialogComponent implements OnInit {
 
-
-export class PhotoComponent implements OnInit {
   @Input() id: string;
   @Input() user: string;
   @Input() user_id: string;

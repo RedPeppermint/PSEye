@@ -19,6 +19,7 @@ import { PhotoComponent } from './photo/photo.component';
 import { PhotopageComponent } from './photopage/photopage.component';
 import { SideNavComponent } from './side-nav/side-nav.component'
 import { NavigationService } from "./navigation.service";
+import { PhotoDialogComponent } from './photo-dialog/photo-dialog.component';
 
 export function tokenGetter() {
   return sessionStorage.getItem('access_token');
@@ -35,7 +36,8 @@ export function tokenGetter() {
     FavoritesComponent,
     PhotoComponent,
     PhotopageComponent,
-    SideNavComponent
+    SideNavComponent,
+    PhotoDialogComponent
   ],
   imports: [
     BrowserModule,

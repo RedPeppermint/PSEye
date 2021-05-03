@@ -1,3 +1,12 @@
+<div class="overlay black" *ngIf="pop">
+</div>
+<div class="mainover" *ngIf="pop">
+  <img (click)="close()" src="../../assets/close.png" class="close" alt="">
+  <div class="overph">
+    <button id="btn" type="button" name="button">Remove photo</button>
+    <app-photo [number_of_likes]="ph.number_of_likes" [faved]="ph.faved" [liked]="ph.liked" [name]="ph.name" [description]="ph.description" [photo]="ph.image" [user_id]="ph.user_id" [id]="ph._id"></app-photo>
+  </div>
+</div>
 <div *ngIf="isDesktop">
   <header>
     <a routerLink="/dashboard"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
@@ -10,8 +19,9 @@
     </div>
 
     <div id="photos" *ngIf="photossize">
-      <div class="photo" *ngFor="let p of photos">
-        <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded" tabindex="0">
+      <div class="photo" *ngFor="let p of photos; let i = index" [attr.data-index]="i">
+        <img (click)="ph=p; pop= true" *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded" tabindex="0">
+
       </div>
     </div>
 
@@ -62,14 +72,15 @@
   </header>
 
   <div class="phone">
-    
+
     <div id="emptyphone" *ngIf="!photossize">
       You have no photos yet! <br>
       <a routerLink="/upload">Upload now</a>
     </div>
     <div id="photosPhone" *ngIf="photossize">
       <div class="photoPhone" *ngFor="let p of photos">
-        <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
+        <img (click)="ph=p; pop= true" *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
+
       </div>
     </div>
 

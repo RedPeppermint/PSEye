@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FileHandle } from '../dragDrop.directive';
 import { PhotoService } from '../photo.service';
 
 @Component({
@@ -19,7 +18,6 @@ export class UploadComponent implements OnInit {
   error= "";
   name;
   des;
-  base64;
   url;
   constructor(private photoService: PhotoService) {
   }
@@ -43,50 +41,50 @@ export class UploadComponent implements OnInit {
 
 
   upload(): void {
-    if (!this.error) {
-      this.changeNames();
-
-      for (let i = 0; i < this.urls.length; i++) {
-        if (!this.names[i]) {
-          this.names[i] = this.srcs[i];
-        }
-        if (!this.descrip[i]) {
-          this.error = "meter description";
-        } else{
-
-            // this.photoService.uploadPhoto(this.names, this.descrip, this.urls).subscribe( res => {
-            //   if(res.Error) {
-            //     this.error = res.Error;
-            //   } else {
-            //     console.log("yupi");
-            //
-            //   }
-            // });
-
-        }
-      }
-    }
+    // if (!this.error) {
+    //   this.changeNames();
+    //
+    //   for (let i = 0; i < this.urls.length; i++) {
+    //     if (!this.names[i]) {
+    //       this.names[i] = this.srcs[i];
+    //     }
+    //     if (!this.descrip[i]) {
+    //       this.error = "meter description";
+    //     } else{
+    //
+    //         // this.photoService.uploadPhoto(this.names, this.descrip, this.urls).subscribe( res => {
+    //         //   if(res.Error) {
+    //         //     this.error = res.Error;
+    //         //   } else {
+    //         //     console.log("yupi");
+    //         //
+    //         //   }
+    //         // });
+    //
+    //     }
+    //   }
+    // }
   }
 
-  changeNames() {
-    this.names = this.names[0];
-    for (let i = 0; i < this.names.length; i++) {
-      this.names[i] = this.names.value;
+  // changeNames() {
+  //   this.names = this.names[0];
+  //   for (let i = 0; i < this.names.length; i++) {
+  //     this.names[i] = this.names.value;
+  //
+  //   }
+  //   console.log(this.names);
+  //
+  // }
 
-    }
-    console.log(this.names);
-
-  }
-
-  changeNames() {
-    this.descrip = this.descrip[0];
-    for (let i = 0; i < this.descrip.length; i++) {
-      this.descrip[i] = this.descrip.value;
-
-    }
-    console.log(this.descrip);
-
-  }
+  // changeNames() {
+  //   this.descrip = this.descrip[0];
+  //   for (let i = 0; i < this.descrip.length; i++) {
+  //     this.descrip[i] = this.descrip.value;
+  //
+  //   }
+  //   console.log(this.descrip);
+  //
+  // }
 
   removeName(i) {
     this.names.splice(i, 1);

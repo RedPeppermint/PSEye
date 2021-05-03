@@ -4,6 +4,7 @@ import { PhotoService } from '../photo.service';
 import { Router, CanActivate, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { NavigationService } from 'src/app/navigation.service';
+import { PhotoDialogComponent } from '../photo-dialog/photo-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -19,6 +20,8 @@ export class ProfileComponent implements OnInit {
   deviceInfo;
   isMobile;
   isDesktop;
+  pop = false;
+  ph;
 
   constructor(private navService: NavigationService, private deviceService: DeviceDetectorService, private userService: UserService, private router: Router, private route: ActivatedRoute, private photoService: PhotoService) { }
 
@@ -34,6 +37,7 @@ export class ProfileComponent implements OnInit {
       console.log(this.user);
     });
 
+
     this.getPhotosById(this.id);
   }
 
@@ -43,18 +47,37 @@ export class ProfileComponent implements OnInit {
       photos.forEach(p => {
         var img = new Image();
         img.src = p.photoBase64;
+        p.user = this.user;
+
+        this.photoService.isLiked(p._id).subscribe(b => {
+            p.liked = b.Response;
+        });
+
+        this.photoService.isFav(p._id).subscribe(b => {
+          p.faved = b.Response;
+        });
+
+        p.number_of_likes = p.likes.length;
         p.image = img;
         this.photos.push(p);
+
+
+
       });
       this.photossize = this.photos.length;
-      // console.log(this.photossize);
-
 
     });
+
 
   }
 
   toggleSideNav() {
     this.navService.setShowNav(true);
   }
+
+  close() {
+    this.ph = null;
+    this.pop = false;
+  }
+
 }
