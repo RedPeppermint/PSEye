@@ -251,3 +251,38 @@ app-photo{
   position: relative;
   z-index: 1003;
 }
+
+.removehover {
+  position: relative;
+  display: inline-block;
+}
+
+.removeho{
+  visibility: hidden;
+  width: 100px;
+  color: black;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 100;
+  bottom: 100%;
+  left: 65%;
+  margin-left: -60px;
+}
+
+#yesbtn{
+  margin-left: 5px;
+}
+
+#nobtn{
+  margin-left: 10px;
+  background-color: #ff8924;
+  border-radius: 2px;
+  padding: 2px 7px 2px 7px;
+  border: solid 1px black;
+}
+
+.pop {
+  margin-left: 10px;
+}

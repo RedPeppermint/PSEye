@@ -3,7 +3,19 @@
 <div class="mainover" *ngIf="pop">
   <img (click)="close()" src="../../assets/close.png" class="close" alt="">
   <div class="overph">
-    <button id="btn" type="button" name="button" (click)="delete_photo(ph._id)">Remove photo</button>
+
+    <div class="removehover">
+      <button id="btn" type="button" name="button" (click)="delete_popup_open()">Remove photo</button>
+
+      <span class="pop" [style.visibility]="popup">
+        Are you sure you want to delete this photo?
+        <button id="yesbtn" type="button" name="button" (click)="delete_photo(ph._id)">Yes</button>
+        <button id="nobtn" type="button" name="button" (click)="delete_popup_close()">No</button>
+      </span>
+
+    </div>
+
+
     <app-photo [number_of_likes]="ph.number_of_likes" [faved]="ph.faved" [liked]="ph.liked" [name]="ph.name"
       [description]="ph.description" [photo]="ph.image" [user_id]="ph.user_id" [id]="ph._id"></app-photo>
   </div>
