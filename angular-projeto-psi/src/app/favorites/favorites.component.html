@@ -61,15 +61,16 @@
   </header>
 
   <div class="phone">
-    <div id="photosPhone" *ngIf="photos">
+    <div id="emptyphone" *ngIf="!photossize">
+      You have no favorite photos yet!
+    </div>
+    <div id="photosPhone" *ngIf="photossize">
       <div class="photoPhone" *ngFor="let p of photos">
         <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
       </div>
     </div>
-    <div id="empty" *ngIf="!photos">
-      You have no favorite photos yet!
-    </div>
   </div>
+  
   <ng-template #navContent>
     <div id="user">
       <img src="../../assets/userdblack.png" id="useric" alt="user photo">
