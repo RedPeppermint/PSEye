@@ -157,7 +157,7 @@ exports.photo_post = function (req, res) {
     var photos = req.body.photos;
     var id = getUserIDofToken(req);
     if (!id) {
-        console.log("fudeu ID");
+        console.log("oh no, ID");
         res.status(500).json({ Error: "User not found" });
         return;
     }
