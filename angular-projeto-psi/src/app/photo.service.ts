@@ -48,19 +48,23 @@ export class PhotoService {
       description: string,
       photoBase64: string,
     }
-    var naoEhMerda: Array<response> = [];
+    var resArray: Array<response> = [];
     for (var i = 0; i < description.length; i++) {
       var newRes: response = {
         description: description[i],
         photoBase64: photosBase64[i]
       }
-      naoEhMerda.push(newRes);
+      resArray.push(newRes);
     }
-    console.log("naoEhMerda: " + naoEhMerda);
-    var res = { photos: naoEhMerda };
+    console.log("resArray: " + resArray);
+    var res = { photos: resArray };
     console.log("res: " + res);
     return this.http.post<{ Error: String, photo: Photo }>(this.url, res);
 
+  }
+
+  deletePhoto(id: string): Observable<any> {
+    return this.http.delete<{ Error: String }>(this.url + "/" + id);
   }
 
   getPhoto(id: string): Observable<Photo> {
@@ -100,7 +104,7 @@ export class PhotoService {
       user_id: user_id
     }
 
-    console.log(this.url +"/" +id);
+    console.log(this.url + "/" + id);
 
     return this.http.put<{ Error: String }>(this.url + "/" + id, res);
   }
