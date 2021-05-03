@@ -14,7 +14,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { PhotoService } from "./photo.service";
 import { UserService } from "./user.service";
 import { UserGuard } from './user.guard';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PhotoComponent } from './photo/photo.component';
 import { PhotopageComponent } from './photopage/photopage.component';
 import { SideNavComponent } from './side-nav/side-nav.component'
@@ -40,6 +40,7 @@ export function tokenGetter() {
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
     ClipboardModule,
