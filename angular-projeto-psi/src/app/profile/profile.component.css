@@ -2,6 +2,17 @@
   font-family: Poppins;
 }
 
+#empty{
+  margin: 50px;
+  text-align: center;
+  font-size: 50px;
+}
+
+#empty a {
+  color: #ff8924;
+  border-bottom: dotted 1px #ff8924;
+}
+
 main {
   width: 100%;
   height: 100%;

@@ -17,6 +17,7 @@ export class PhotoComponent implements OnInit {
   @Input() user_id: string;
   @Input() photo: HTMLImageElement;
   @Input() description: string;
+  @Input() name: string;
   @Input() number_of_likes: number;
   @Input() liked: boolean;
   @Input() faved: boolean;
@@ -54,6 +55,8 @@ export class PhotoComponent implements OnInit {
       img.src = p.photoBase64;
       this.photo = img;
       this.number_of_likes = p.likes.length;
+      this.name = p.name;
+
       console.log(p);
 
       this.photoService.isLiked(p._id).subscribe(b => {

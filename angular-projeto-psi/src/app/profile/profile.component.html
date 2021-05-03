@@ -4,19 +4,21 @@
   </header>
 
   <main>
-    <div id="photos" *ngIf="photos">
+    <div id="empty" *ngIf="!photossize">
+      You have no photos yet! <br>
+      <a routerLink="/upload">Upload now</a>
+    </div>
+
+    <div id="photos" *ngIf="photossize">
       <div class="photo" *ngFor="let p of photos">
         <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded" tabindex="0">
       </div>
-    </div>
-    <div id="empty" *ngIf="!photos">
-      User has no photos yet!
     </div>
 
     <nav>
       <div id="user">
         <img src="../../assets/userdefault.png" id="useric" alt="user photo">
-        Zé Carlos
+        {{user}}
       </div>
 
       <div id="links">
@@ -72,7 +74,7 @@
   <ng-template #navContent>
     <div id="user">
       <img src="../../assets/userdblack.png" id="useric" alt="user photo">
-      Zé Carlos
+      {{user}}
     </div>
 
     <div id="linksside">

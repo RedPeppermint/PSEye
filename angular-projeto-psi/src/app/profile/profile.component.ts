@@ -13,6 +13,7 @@ import { NavigationService } from 'src/app/navigation.service';
 export class ProfileComponent implements OnInit {
   title = "PSEye";
   photos = [];
+  photossize;
   user;
   id;
   deviceInfo;
@@ -26,22 +27,30 @@ export class ProfileComponent implements OnInit {
     this.isMobile = this.deviceService.isMobile() || this.deviceService.isTablet();
     this.isDesktop = this.deviceService.isDesktop();
 
-    this.user = this.userService.getUser();
+
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log(this.id);
+    this.userService.getUserByID(this.id).subscribe(u => {
+      this.user = u[0].name;
+    });
 
     this.getPhotosById(this.id);
   }
 
   getPhotosById(id: number): void {
+
     this.photoService.getPhotosById(this.id).subscribe(photos => {
       photos.forEach(p => {
         var img = new Image();
         img.src = p.photoBase64;
         p.image = img;
         this.photos.push(p);
-      })
+      });
+      this.photossize = this.photos.length;
+      // console.log(this.photossize);
+
+
     });
+
   }
 
   toggleSideNav() {
