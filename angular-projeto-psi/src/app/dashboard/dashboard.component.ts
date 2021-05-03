@@ -29,12 +29,10 @@ export class DashboardComponent implements OnInit {
 
     this.userid = this.userService.getUserId();
     this.getPhotos("recent");
-    console.log(this.userid);
 
   }
 
   getPhotos(filter): void {
-    console.log("Filtro: " + filter);
     this.photos = [];
     if (filter == "recent") {
       this.photoService.getMostRecentPhotos(50).subscribe(photos => {
@@ -47,8 +45,6 @@ export class DashboardComponent implements OnInit {
           });
 
           this.photoService.isLiked(p._id).subscribe(b => {
-            console.log(b.Response);
-
               p.liked = b.Response;
           });
 
@@ -62,7 +58,6 @@ export class DashboardComponent implements OnInit {
         })
       });
     } else {
-      console.log("Entrou no filter = popular");
 
       this.photoService.getMostLikedPhotos(50).subscribe(photos => {
         photos.forEach(p => {
@@ -73,8 +68,6 @@ export class DashboardComponent implements OnInit {
           });
 
           this.photoService.isLiked(p._id).subscribe(b => {
-            console.log(b.Response);
-
               p.liked = b.Response;
           });
 

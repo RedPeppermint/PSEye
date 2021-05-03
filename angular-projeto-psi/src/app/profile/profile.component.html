@@ -62,14 +62,17 @@
   </header>
 
   <div class="phone">
-    <div id="photosPhone" *ngIf="photos">
+    
+    <div id="emptyphone" *ngIf="!photossize">
+      You have no photos yet! <br>
+      <a routerLink="/upload">Upload now</a>
+    </div>
+    <div id="photosPhone" *ngIf="photossize">
       <div class="photoPhone" *ngFor="let p of photos">
         <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
       </div>
     </div>
-    <div id="empty" *ngIf="!photos">
-      User has no photos yet!
-    </div>
+
   </div>
   <ng-template #navContent>
     <div id="user">

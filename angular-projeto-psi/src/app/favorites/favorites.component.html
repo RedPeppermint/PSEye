@@ -1,1 +1,94 @@
-<p>favorites works!</p>
+<div *ngIf="isDesktop">
+  <header>
+    <a routerLink="/dashboard"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
+  </header>
+
+  <main>
+    <div id="empty" *ngIf="!photossize">
+      You have no favorite photos yet!
+    </div>
+
+    <div id="photos" *ngIf="photossize">
+      <div class="photo" *ngFor="let p of photos">
+        <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded" tabindex="0">
+      </div>
+    </div>
+
+    <nav>
+      <div id="user">
+        <img src="../../assets/userdefault.png" id="useric" alt="user photo">
+        {{user}}
+      </div>
+
+      <div id="links">
+        <ul>
+          <li>
+            <a routerLink="/dashboard">
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a routerLink="/" (click)="goToProfile()">
+              My profile
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </main>
+
+  <div id="upload" >
+    <div class="uploadhover">
+      <span class="uploadho">Upload (U)</span>
+      <a routerLink="/upload"><img src="../../assets/upload.png" alt="Upload button"></a>
+    </div>
+  </div>
+
+</div>
+
+<div id="mobilemain" *ngIf="isMobile">
+
+  <app-side-nav
+    [sidenavTemplateRef]="navContent"
+    [direction]="'right'"
+    [navWidth]="280"
+    [duration]="0.5">
+  </app-side-nav>
+
+  <header>
+    <a routerLink="/dashboard"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
+    <img (click)="toggleSideNav()" src="../../assets/sidenav.png" id="menu" alt="menu">
+  </header>
+
+  <div class="phone">
+    <div id="photosPhone" *ngIf="photos">
+      <div class="photoPhone" *ngFor="let p of photos">
+        <img *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded">
+      </div>
+    </div>
+    <div id="empty" *ngIf="!photos">
+      You have no favorite photos yet!
+    </div>
+  </div>
+  <ng-template #navContent>
+    <div id="user">
+      <img src="../../assets/userdblack.png" id="useric" alt="user photo">
+      {{user}}
+    </div>
+
+    <div id="linksside">
+      <ul>
+        <li>
+          <a routerLink="/dashboard">
+            Dashboard
+          </a>
+        </li>
+        <li>
+          <a routerLink="/" (click)="goToProfile()">
+            My profile
+          </a>
+        </li>
+      </ul>
+    </div>
+  </ng-template>
+</div>
