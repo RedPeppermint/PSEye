@@ -22,10 +22,6 @@ export class ProfileComponent implements OnInit {
   constructor(private navService: NavigationService, private deviceService: DeviceDetectorService, private userService: UserService, private router: Router, private route: ActivatedRoute, private photoService: PhotoService) { }
 
   ngOnInit(): void {
-    if (!this.userService.getUser()) {
-      this.router.navigate(['/login']);
-    }
-
     this.deviceInfo = this.deviceService.getDeviceInfo();
     this.isMobile = this.deviceService.isMobile() || this.deviceService.isTablet();
     this.isDesktop = this.deviceService.isDesktop();
@@ -49,6 +45,6 @@ export class ProfileComponent implements OnInit {
   }
 
   toggleSideNav() {
-      this.navService.setShowNav(true);
+    this.navService.setShowNav(true);
   }
 }

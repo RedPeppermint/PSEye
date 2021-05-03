@@ -22,9 +22,6 @@ export class DashboardComponent implements OnInit {
   constructor(private navService: NavigationService, private deviceService: DeviceDetectorService, private route: ActivatedRoute, private userService: UserService, private router: Router, private photoService: PhotoService) { }
 
   ngOnInit(): void {
-    if (!this.userService.getUser()) {
-      this.router.navigate(['/login']);
-    }
 
     this.deviceInfo = this.deviceService.getDeviceInfo();
     this.isMobile = this.deviceService.isMobile() || this.deviceService.isTablet();
@@ -76,6 +73,6 @@ export class DashboardComponent implements OnInit {
   }
 
   toggleSideNav() {
-      this.navService.setShowNav(true);
+    this.navService.setShowNav(true);
   }
 }

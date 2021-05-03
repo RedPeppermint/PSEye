@@ -35,9 +35,10 @@ export class PhotoService {
       .request<Photo[]>("GET", this.url, { params: params });
   }
 
-  getPhotosById(number: number): Observable<Photo[]> {
-    let params = new HttpParams().set('_id', number.toString());
-
+  getPhotosById(id: string): Observable<Photo[]> {
+    let params = new HttpParams().set('_id', id);
+    // let params = new HttpParams().set('_id', number.toString()).set('filter', 'posted_at').set('number_of_results',NUMPHOTOS);
+    // let params = new HttpParams().set('_id', number.toString()).set('filter', 'likes').set('number_of_results',NUMPHOTOS);
     return this.http.request<Photo[]>("GET", this.url, { params: params });
   }
 
@@ -66,11 +67,11 @@ export class PhotoService {
     return this.http.get<Photo>(this.url + "/" + id);
   }
 
-  isLiked(id: string): Observable<any>{
+  isLiked(id: string): Observable<any> {
     return this.http.get<{ Error: String }>(this.url + "/status" + "?id=" + id + "&action=like");
   }
 
-  isFav(id: string): Observable<any>{
+  isFav(id: string): Observable<any> {
     return this.http.get<{ Error: String }>(this.url + "/status" + "?id=" + id + "&action=favourite");
   }
 
@@ -84,7 +85,7 @@ export class PhotoService {
       user_id: user_id
     }
 
-    console.log(this.url +"/" +id);
+    console.log(this.url + "/" + id);
 
     return this.http.put<{ Error: String }>(this.url + "/" + id, res);
   }
