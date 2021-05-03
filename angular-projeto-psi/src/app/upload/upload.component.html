@@ -6,10 +6,11 @@
 
     <div id="textUpload">
       <div class="photoup">
-        <div *ngFor='let p of photos' class="photoContainer">
+        <div *ngFor='let p of photos; let i = index;' class="photoContainer">
           <img [src]="p.photoBase64" height="100" name="url" class="thumbs"><br>
-          <input (ngValue)="p.name" placeholder="Name" class="names">
-          <input (ngValue)="p.description" placeholder="Description" class="description">
+          <button type="button" (click)="removeIndex(i)" class="rmvbtn">X</button>
+          <input [(ngModel)]="p.name" placeholder="Name" class="names">
+          <input [(ngModel)]="p.description" placeholder="Description" class="description">
         </div>
 
         <input type="file" id="ficheiro" (change)="onselect($event)" multiple id="select">

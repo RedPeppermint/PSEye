@@ -61,5 +61,9 @@ export class UploadComponent implements OnInit {
     }
   }
 
+  removeIndex(index): void {
+    this.photos.splice(index, 1);
+  }
+
 
 }
