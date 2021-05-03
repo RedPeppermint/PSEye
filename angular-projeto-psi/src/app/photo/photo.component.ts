@@ -17,9 +17,10 @@ export class PhotoComponent implements OnInit {
   @Input() user_id: string;
   @Input() photo: HTMLImageElement;
   @Input() description: string;
+  @Input() number_of_likes: number;
+  @Input() liked: boolean;
+  @Input() faved: boolean;
 
-  liked;
-  faved;
   popup="hidden";
 
   @HostListener('document:keypress', ['$event'])
@@ -46,24 +47,27 @@ export class PhotoComponent implements OnInit {
       return;
     }
     this.photoService.getPhoto(id).subscribe(p => {
-      console.log(p);
-
       p = p[0];
       this.id = p._id;
       this.user_id = p.user_id;
       var img = new Image();
       img.src = p.photoBase64;
       this.photo = img;
+      this.number_of_likes = p.likes.length;
+      console.log(p);
 
       this.photoService.isLiked(p._id).subscribe(b => {
-          this.liked = b.response;
+        console.log(b.Response);
+
+          this.liked = b.Response;
       });
 
       this.photoService.isFav(p._id).subscribe(b => {
-          this.faved = b.response;
+        this.faved = b.Response;
       });
 
-      this.faved = false;
+      this.faved = p.faved;
+
       this.description = p.description;
       this.userService.getUserByID(p.user_id).subscribe(user => {
         this.user = user[0].name;
@@ -75,27 +79,28 @@ export class PhotoComponent implements OnInit {
 
     if(this.liked) {
       this.liked = false;
-      console.log("unliked");
+      this.number_of_likes -= 1;
       var loggeduserID = this.userService.getUserId();
-      this.photoService.likePhoto(this.id, loggeduserID).subscribe();
+      this.photoService.unlikePhoto(this.id, loggeduserID).subscribe();
 
     } else {
       this.liked = true;
-      console.log("liked");
+      this.number_of_likes += 1;
       var loggeduserID = this.userService.getUserId();
       this.photoService.likePhoto(this.id, loggeduserID).subscribe();
     }
   }
 
   fave(): void {
-    console.log("faved");
     if(this.faved) {
       this.faved = false;
-      //TODO UNFAVE MAKE function
+      var loggeduserID = this.userService.getUserId();
+      this.photoService.unfavouritePhoto(this.id, loggeduserID).subscribe();
+
     } else {
       this.faved = true;
       var loggeduserID = this.userService.getUserId();
-      this.photoService.favouritePhoto(this.id, loggeduserID);
+      this.photoService.favouritePhoto(this.id, loggeduserID).subscribe();
     }
   }
 

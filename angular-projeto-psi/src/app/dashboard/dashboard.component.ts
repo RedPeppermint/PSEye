@@ -39,12 +39,24 @@ export class DashboardComponent implements OnInit {
     if (filter == "recent") {
       this.photoService.getMostRecentPhotos(50).subscribe(photos => {
         photos.forEach(p => {
+
           var img = new Image();
           img.src = p.photoBase64;
           this.userService.getUserByID(p.user_id).subscribe(u => {
             p.user = u[0].name;
           });
 
+          this.photoService.isLiked(p._id).subscribe(b => {
+            console.log(b.Response);
+
+              p.liked = b.Response;
+          });
+
+          this.photoService.isFav(p._id).subscribe(b => {
+            p.faved = b.Response;
+          });
+
+          p.number_of_likes = p.likes.length;
           p.image = img;
           this.photos.push(p);
         })
@@ -60,6 +72,17 @@ export class DashboardComponent implements OnInit {
             p.user = u[0].name;
           });
 
+          this.photoService.isLiked(p._id).subscribe(b => {
+            console.log(b.Response);
+
+              p.liked = b.Response;
+          });
+
+          this.photoService.isFav(p._id).subscribe(b => {
+            p.faved = b.Response;
+          });
+
+          p.number_of_likes = p.likes.length;
           p.image = img;
           this.photos.push(p);
         })

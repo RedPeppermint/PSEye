@@ -6,6 +6,9 @@
       <img *ngIf="photo" src="{{photo.src}}" alt="Picture" class="pictureLoaded">
   </div>
   <div class="buttons">
+    <div class="nlikes">
+      {{number_of_likes}}
+    </div>
     <div class="likehover">
       <span class="likeho">Like (L)</span>
       <div *ngIf="!liked">

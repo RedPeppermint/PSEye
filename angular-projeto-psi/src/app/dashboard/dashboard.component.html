@@ -24,14 +24,14 @@
             Search by:
             <ul>
                 <li><input #recentbox type="radio" name="search" value="recent" checked (click)="getPhotos(recentbox.value)"><label>Recent</label></li>
-                <li><input #popularbox type="radio" name="search" value="popular" (click)="getPhotos(popularbox.value)"><label>Popular</label></li>
+                <li><input tabindex="0" #popularbox type="radio" name="search" value="popular" (click)="getPhotos(popularbox.value)"><label>Popular</label></li>
             </ul>
         </form>
     </div>
 
     <main>
         <div *ngFor="let p of photos">
-            <app-photo [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
+            <app-photo tabindex="0" [number_of_likes]="p.number_of_likes" [faved]="p.faved" [liked]="p.liked" [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
         </div>
 
     </main>

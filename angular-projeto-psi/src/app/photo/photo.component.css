@@ -135,3 +135,11 @@
 .favehover:hover .faveho{
   visibility: visible;
 }
+
+.nlikes{
+  align-self: flex-start;
+  font-size: 25px;
+  text-align: middle;
+  padding: 5px;
+
+}

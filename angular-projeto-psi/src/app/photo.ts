@@ -9,4 +9,5 @@ export interface Photo {
     posted_at: string;
     liked: boolean;
     faved: boolean;
+    likes: string[];
 }
