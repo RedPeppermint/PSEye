@@ -1,4 +1,4 @@
-import { Component, Input, OnInit,  HostListener  } from '@angular/core';
+import { Component, Input, OnInit, HostListener } from '@angular/core';
 import { UserService } from "../user.service";
 import { PhotoService } from '../photo.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -25,20 +25,20 @@ export class PhotoComponent implements OnInit {
   @Input() liked: boolean;
   @Input() faved: boolean;
 
-  popup="hidden";
+  popup = "hidden";
 
   @HostListener('document:keypress', ['$event'])
-    handleKeyboardEvent(event: KeyboardEvent) {
-      if(event.key=="s" || event.key=="S") {
-        this.share();
-      }
-      if(event.key=="l" || event.key=="L") {
-        this.like();
-      }
-      if(event.key=="f" || event.key=="F") {
-        this.fave();
-      }
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key == "s" || event.key == "S") {
+      this.share();
     }
+    if (event.key == "l" || event.key == "L") {
+      this.like();
+    }
+    if (event.key == "f" || event.key == "F") {
+      this.fave();
+    }
+  }
 
   constructor(private clipboardService: ClipboardService, private userService: UserService, private router: Router, private route: ActivatedRoute, private photoService: PhotoService) { }
 
@@ -50,7 +50,7 @@ export class PhotoComponent implements OnInit {
       });
       return;
     }
-    this.photoService.getPhoto(id).subscribe(p => {
+    this.photoService.getPhoto(this.id).subscribe(p => {
       p = p[0];
       this.id = p._id;
       this.user_id = p.user_id;
@@ -60,12 +60,10 @@ export class PhotoComponent implements OnInit {
       this.number_of_likes = p.likes.length;
       this.name = p.name;
 
-      console.log(p);
-
       this.photoService.isLiked(p._id).subscribe(b => {
         console.log(b.Response);
 
-          this.liked = b.Response;
+        this.liked = b.Response;
       });
 
       this.photoService.isFav(p._id).subscribe(b => {
@@ -83,7 +81,7 @@ export class PhotoComponent implements OnInit {
 
   like(): void {
 
-    if(this.liked) {
+    if (this.liked) {
       this.liked = false;
       this.number_of_likes -= 1;
       var loggeduserID = this.userService.getUserId();
@@ -98,7 +96,7 @@ export class PhotoComponent implements OnInit {
   }
 
   fave(): void {
-    if(this.faved) {
+    if (this.faved) {
       this.faved = false;
       var loggeduserID = this.userService.getUserId();
       this.photoService.unfavouritePhoto(this.id, loggeduserID).subscribe();
@@ -116,17 +114,17 @@ export class PhotoComponent implements OnInit {
       + ":" + location.port + "/photos/" + this.id);
 
     (async () => {
-       this.popup = "visible";
+      this.popup = "visible";
 
-       await this.delay(1500);
+      await this.delay(1500);
 
-       this.popup = "hidden";
-   })();
+      this.popup = "hidden";
+    })();
 
   }
 
   delay(ms: number) {
-      return new Promise( resolve => setTimeout(resolve, ms) );
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 
