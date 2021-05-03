@@ -3,8 +3,9 @@
 <div class="mainover" *ngIf="pop">
   <img (click)="close()" src="../../assets/close.png" class="close" alt="">
   <div class="overph">
-    <button id="btn" type="button" name="button">Remove photo</button>
-    <app-photo [number_of_likes]="ph.number_of_likes" [faved]="ph.faved" [liked]="ph.liked" [name]="ph.name" [description]="ph.description" [photo]="ph.image" [user_id]="ph.user_id" [id]="ph._id"></app-photo>
+    <button id="btn" type="button" name="button" (click)="delete_photo(ph._id)">Remove photo</button>
+    <app-photo [number_of_likes]="ph.number_of_likes" [faved]="ph.faved" [liked]="ph.liked" [name]="ph.name"
+      [description]="ph.description" [photo]="ph.image" [user_id]="ph.user_id" [id]="ph._id"></app-photo>
   </div>
 </div>
 <div *ngIf="isDesktop">
@@ -20,7 +21,8 @@
 
     <div id="photos" *ngIf="photossize">
       <div class="photo" *ngFor="let p of photos; let i = index" [attr.data-index]="i">
-        <img (click)="ph=p; pop= true" *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded" tabindex="0">
+        <img (click)="ph=p; pop= true" *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded"
+          tabindex="0">
 
       </div>
     </div>
@@ -48,7 +50,7 @@
     </nav>
   </main>
 
-  <div id="upload" >
+  <div id="upload">
     <div class="uploadhover">
       <span class="uploadho">Upload (U)</span>
       <a routerLink="/upload"><img src="../../assets/upload.png" alt="Upload button"></a>
@@ -59,11 +61,7 @@
 
 <div id="mobilemain" *ngIf="isMobile">
 
-  <app-side-nav
-    [sidenavTemplateRef]="navContent"
-    [direction]="'right'"
-    [navWidth]="280"
-    [duration]="0.5">
+  <app-side-nav [sidenavTemplateRef]="navContent" [direction]="'right'" [navWidth]="280" [duration]="0.5">
   </app-side-nav>
 
   <header>
