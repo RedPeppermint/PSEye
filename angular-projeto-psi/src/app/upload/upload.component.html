@@ -6,34 +6,20 @@
 
     <div id="textUpload">
       <div class="photoup">
-        <div class="thumbs" *ngFor='let url of urls'>
-          <img [src] = "url" height="100" (change)= "addSource()" name = "url"><br>
-          <button *ngIf="url" type="button" name="button" id="removePhoto"> X </button>
-
+        <div *ngFor='let p of photos; let i = index;' class="photoContainer">
+          <img [src]="p.photoBase64" height="100" name="url" class="thumbs"><br>
+          <button type="button" (click)="removeIndex(i)" class="rmvbtn">X</button>
+          <input [(ngModel)]="p.name" placeholder="Name" class="names">
+          <input [(ngModel)]="p.description" placeholder="Description" class="description">
         </div>
 
-        <input type="file" id="ficheiro" (change)="onselect($event)" multiple (change)= "addName()" (change)= "addDescription()">
-        <div *ngFor="let value of names; let i = index" id="name">
-          <input type ="text" [(ngModel)]="value.value" #name = "ngModel" name = "value{{i}}">
-          <!-- <button (click)="removeName(i)"> Remove</button> -->
-        </div>
+        <input type="file" id="ficheiro" (change)="onselect($event)" multiple id="select">
 
-        <div *ngFor="let value of descrip; let i = index" id="descrip">
-          <input type ="text" [(ngModel)]="value.value" #name = "ngModel" name = "value{{i}}">
-          <!-- <button (click)="removeDescription(i)"> Remove</button> -->
-        </div>
-
-        <button type="button" (click)="upload()">Upload Image</button>
-        <div class="error">
+        <button type="button" (click)="upload()" id="upload">Upload Image</button>
+        <div *ngIf="error" class="error">
           {{error}}
         </div>
       </div>
     </div>
-
-
-    <!-- <div id="upload">
-        <img src="../../assets/upload.png" alt="Update button">
-    </div> -->
-
   </main>
 </div>
