@@ -89,6 +89,23 @@ export class PhotoService {
     return this.http.put<{ Error: String }>(this.url + "/" + id, res);
   }
 
+  unlikePhoto(id: string, user_id: string): Observable<any> {
+    interface response {
+      action: string,
+      user_id: string
+    }
+    const res: response = {
+      action: "dislike",
+      user_id: user_id
+    }
+
+    console.log(this.url +"/" +id);
+
+    return this.http.put<{ Error: String }>(this.url + "/" + id, res);
+  }
+
+
+
   favouritePhoto(id: string, user_id: string): Observable<any> {
     interface response {
       action: string,
@@ -96,6 +113,18 @@ export class PhotoService {
     }
     const res: response = {
       action: "favourite",
+      user_id: user_id
+    }
+    return this.http.put<{ Error: String }>(this.url + "/" + id, res);
+  }
+
+  unfavouritePhoto(id: string, user_id: string): Observable<any> {
+    interface response {
+      action: string,
+      user_id: string
+    }
+    const res: response = {
+      action: "unfavourite",
       user_id: user_id
     }
     return this.http.put<{ Error: String }>(this.url + "/" + id, res);
