@@ -2,8 +2,11 @@
 </div>
 <div class="mainover" *ngIf="pop">
   <img (click)="close()" src="../../assets/close.png" class="close" alt="">
-  <div class="overph">
+  <div class="overph" *ngIf="isDesktop">
     <app-photo id="popup" [number_of_likes]="ph.number_of_likes" [faved]="ph.faved" [liked]="ph.liked" [name]="ph.name" [description]="ph.description" [photo]="ph.image" [user_id]="ph.user_id" [id]="ph._id"></app-photo>
+  </div>
+  <div class="overphone" *ngIf="isMobile">
+    <app-photo id="popupphone" [number_of_likes]="ph.number_of_likes" [faved]="ph.faved" [liked]="ph.liked" [name]="ph.name" [description]="ph.description" [photo]="ph.image" [user_id]="ph.user_id" [id]="ph._id"></app-photo>
   </div>
 </div>
 <div *ngIf="isDesktop">
@@ -31,15 +34,15 @@
         <form>
             Search by:
             <ul>
-                <li><input #recentbox type="radio" name="search" value="recent" checked (click)="getPhotos(recentbox.value)"><label>Recent</label></li>
-                <li><input #popularbox type="radio" name="search" value="popular" (click)="getPhotos(popularbox.value)"><label>Popular</label></li>
+              <li><input type="radio" name="filtro" [checked]="recent" (click)="getPhotos()"><label>Recent</label></li>
+              <li><input type="radio" name="filtro" [checked]="!recent" (click)="getPhotos()"><label>Popular</label></li>
             </ul>
         </form>
     </div>
 
     <main>
         <div *ngFor="let p of photos">
-            <app-photo (click)="ph=p; pop= true" tabindex="0" [number_of_likes]="p.number_of_likes" [faved]="p.faved" [liked]="p.liked" [name]="p.name" [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
+            <app-photo [dashboard]="true" (click)="ph=p; pop= true" tabindex="0" [number_of_likes]="p.number_of_likes" [faved]="p.faved" [liked]="p.liked" [name]="p.name" [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
         </div>
 
     </main>
@@ -68,7 +71,7 @@
 
   <div id="mainphone">
     <div class="cont" *ngFor="let p of photos">
-        <app-photo (click)="ph=p; pop= true" [number_of_likes]="p.number_of_likes" [faved]="p.faved" [liked]="p.liked" [name]="p.name" [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
+        <app-photo [dashboard]="true" (click)="ph=p; pop= true" [number_of_likes]="p.number_of_likes" [faved]="p.faved" [liked]="p.liked" [name]="p.name" [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
     </div>
   </div>
 
@@ -91,8 +94,9 @@
       <form>
         Search by:
         <ul>
-          <li><input #recentbox type="radio" name="search" value="recent" checked (click)="getPhotos(recentbox.value)"><label>Recent</label></li>
-          <li><input #popularbox type="radio" name="search" value="popular" (click)="getPhotos(popularbox.value)"><label>Popular</label></li>
+
+          <li><input type="radio" name="filtro" [checked]="recent" (click)="getPhotos()"><label>Recent</label></li>
+          <li><input type="radio" name="filtro" [checked]="!recent" (click)="getPhotos()"><label>Popular</label></li>
         </ul>
       </form>
     </div>

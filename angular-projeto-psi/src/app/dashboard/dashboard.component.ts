@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { UserService } from "../user.service";
 import { PhotoService } from '../photo.service';
 import { Router, CanActivate, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
@@ -20,6 +20,19 @@ export class DashboardComponent implements OnInit {
   isDesktop;
   pop = false;
   ph;
+  recent = true;
+
+  @HostListener('document:keypress', ['$event'])
+    handleKeyboardEvent(event: KeyboardEvent) {
+      if(event.key=="r" || event.key=="R") {
+        this.recent = true;
+      }
+      if(event.key=="p" || event.key=="P") {
+        this.recent = false;
+      }
+      this.getPhotos();
+
+    }
 
   constructor(private navService: NavigationService, private deviceService: DeviceDetectorService, private route: ActivatedRoute, private userService: UserService, private router: Router, private photoService: PhotoService) { }
 
@@ -30,13 +43,13 @@ export class DashboardComponent implements OnInit {
     this.isDesktop = this.deviceService.isDesktop();
 
     this.userid = this.userService.getUserId();
-    this.getPhotos("recent");
+    this.getPhotos();
 
   }
 
-  getPhotos(filter): void {
+  getPhotos(): void {
     this.photos = [];
-    if (filter == "recent") {
+    if (this.recent) {
       this.photoService.getMostRecentPhotos(50).subscribe(photos => {
         photos.forEach(p => {
 

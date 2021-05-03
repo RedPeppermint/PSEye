@@ -24,6 +24,7 @@ export class PhotoComponent implements OnInit {
   @Input() number_of_likes: number;
   @Input() liked: boolean;
   @Input() faved: boolean;
+  @Input() dashboard: boolean;
 
   popup="hidden";
 
