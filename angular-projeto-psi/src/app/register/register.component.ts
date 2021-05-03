@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from "../user.service";
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { first } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-register',
@@ -9,57 +7,23 @@ import { first } from 'rxjs/operators';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  title = "PSEye";
-  error = "";
-  incomplete = false;
-  errorPassConf = "";
-  errors: Array<string>;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
-    if (this.userService.getUser()) {
-      this.router.navigate(["/dashboard"]);
-    }
-  }
 
-  register(name: string, email: string, username: string, password: string, conf: string): void {
-    username = username.trim();
-    email = email.trim();
-    
-    if (!username || !password || !name || !email || !conf) {
-      this.displayError("Necessary Fields *");
-      this.errorPassConf = "";
-      this.incomplete = true;
-      return;
-    }
+    const sign_in_btn = document.querySelector("#sign-in-btn");
+    const sign_up_btn = document.querySelector("#sign-up-btn");
+    const container = document.querySelector(".container");
 
-    if(conf != password){
-      this.error= "";
-      this.displayErrPass("Password confirmation doesn't match");
-      return;
-    }
+    sign_up_btn.addEventListener("click", () => {
+      container.classList.add("sign-up-mode");
+    });
 
-    this.incomplete = false;
-    this.error= "";
-    this.errorPassConf = "";
-    this.userService.registerUser(username, password).subscribe(result => {
-      console.log(result);
-      if(!result.error.length && !result.existsUser){
-        this.router.navigate(["/login"]);
-      } else if(result.existsUser){
-          this.errors = ["There is already a user with that username"];
-      } else {
-          this.errors= result.error;
-      }
+    sign_in_btn.addEventListener("click", () => {
+      container.classList.remove("sign-up-mode");
     });
   }
 
-  displayError(msg: string): void {
-    this.errors = [msg];
-  }
 
-  displayErrPass(msg: string): void {
-    this.errorPassConf = msg;
-  }
 }

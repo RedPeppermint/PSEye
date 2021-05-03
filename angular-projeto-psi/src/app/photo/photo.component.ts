@@ -2,7 +2,7 @@ import { Component, Input, OnInit,  HostListener  } from '@angular/core';
 import { UserService } from "../user.service";
 import { PhotoService } from '../photo.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Photo } from "../Photo";
+import { Photo } from "../photo";
 import { ClipboardService } from 'ngx-clipboard';
 @Component({
   selector: 'app-photo',
