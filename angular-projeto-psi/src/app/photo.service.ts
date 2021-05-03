@@ -42,15 +42,16 @@ export class PhotoService {
     return this.http.request<Photo[]>("GET", this.url, { params: params });
   }
 
-  uploadPhoto(description: Array<string>, photosBase64: Array<string>): Observable<any> {
-    const zip = (a, b) => a.map((k, i) => [k, b[i]]);
+  uploadPhoto(name: Array<string>, description: Array<string>, photosBase64: Array<string>): Observable<any> {
     interface response {
+      name: string;
       description: string,
       photoBase64: string,
     }
     var resArray: Array<response> = [];
     for (var i = 0; i < description.length; i++) {
       var newRes: response = {
+        name: name[i],
         description: description[i],
         photoBase64: photosBase64[i]
       }
