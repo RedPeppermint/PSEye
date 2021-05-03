@@ -8,11 +8,11 @@
       <div class="photoup">
         <div class="thumbs" *ngFor='let url of urls'>
           <img [src] = "url" height="100" (change)= "addSource()" name = "url"><br>
+          <button *ngIf="url" type="button" name="button" id="removePhoto"> X </button>
+
         </div>
 
         <input type="file" id="ficheiro" (change)="onselect($event)" multiple (change)= "addName()" (change)= "addDescription()">
-        <button *ngIf="url" type="button" name="button" id="removePhoto"> X </button>
-
         <div *ngFor="let value of names; let i = index" id="name">
           <input type ="text" [(ngModel)]="value.value" #name = "ngModel" name = "value{{i}}">
           <!-- <button (click)="removeName(i)"> Remove</button> -->
