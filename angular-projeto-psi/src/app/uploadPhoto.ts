@@ -1,5 +1,5 @@
 export interface UploadPhoto {
     description: string;
     name: string;
-    base64: string;
+    photoBase64: string;
 }

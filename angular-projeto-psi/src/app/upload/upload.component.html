@@ -7,7 +7,7 @@
     <div id="textUpload">
       <div class="photoup">
         <div *ngFor='let p of photos' class="photoContainer">
-          <img [src]="p.base64" height="100" name="url" class="thumbs"><br>
+          <img [src]="p.photoBase64" height="100" name="url" class="thumbs"><br>
           <input (ngValue)="p.name" placeholder="Name" class="names">
           <input (ngValue)="p.description" placeholder="Description" class="description">
         </div>

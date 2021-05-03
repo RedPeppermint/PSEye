@@ -21,6 +21,7 @@ export class UploadComponent implements OnInit {
   check() {
     for (let i = 0; i < this.photos.length; i++) {
       const photo = this.photos[i];
+      console.log(photo);
       if (!photo.name || !photo.description || photo.name.length > 100 || photo.description.length > 500)
         return false;
     }
@@ -34,7 +35,7 @@ export class UploadComponent implements OnInit {
         var reader = new FileReader();
         reader.readAsDataURL(fileToUpload[i]);
         reader.onload = (events: any) => {
-          this.photos.push({ base64: events.target.result, name: "", description: "" });
+          this.photos.push({ photoBase64: events.target.result, name: "", description: "" });
         }
       }
     }

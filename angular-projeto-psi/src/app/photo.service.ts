@@ -44,7 +44,7 @@ export class PhotoService {
 
 
   uploadPhoto(photos: Array<UploadPhoto>): Observable<any> {
-    return this.http.post(this.url, photos).pipe(
+    return this.http.post(this.url, { photos: photos }).pipe(
       catchError((err) => {
         console.log('error caught in service')
         console.error(err);
