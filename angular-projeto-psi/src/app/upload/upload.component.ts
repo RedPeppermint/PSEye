@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PhotoService } from '../photo.service';
-
+import { UploadPhoto } from '../uploadPhoto';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
@@ -9,31 +9,32 @@ import { PhotoService } from '../photo.service';
 export class UploadComponent implements OnInit {
   title = "PSEye";
   imageUrl: string = "/assets/img/default-image.png";
-  fileToUpload: File[] = null;
-  names = [];
-  descrip = [];
-  urls = [];
-  base64 = [];
-  srcs =[];
-  error= "";
-  name;
-  des;
-  url;
+  error = null;
+  photos: UploadPhoto[] = []
+
   constructor(private photoService: PhotoService) {
   }
 
   ngOnInit() {
+  }
 
+  check() {
+    for (let i = 0; i < this.photos.length; i++) {
+      const photo = this.photos[i];
+      if (!photo.name || !photo.description || photo.name.length > 100 || photo.description.length > 500)
+        return false;
+    }
+    return true;
   }
 
   onselect(e) {
     if (e.target.files) {
-      this.fileToUpload = e.target.files;
-      for (let i = 0; i < this.fileToUpload.length; i++) {
+      let fileToUpload = e.target.files;
+      for (let i = 0; i < fileToUpload.length; i++) {
         var reader = new FileReader();
-        reader.readAsDataURL(e.target.files[i]);
+        reader.readAsDataURL(fileToUpload[i]);
         reader.onload = (events: any) => {
-          this.urls.push(events.target.result);
+          this.photos.push({ base64: events.target.result, name: "", description: "" });
         }
       }
     }
@@ -41,69 +42,22 @@ export class UploadComponent implements OnInit {
 
 
   upload(): void {
-    // if (!this.error) {
-    //   this.changeNames();
-    //
-    //   for (let i = 0; i < this.urls.length; i++) {
-    //     if (!this.names[i]) {
-    //       this.names[i] = this.srcs[i];
-    //     }
-    //     if (!this.descrip[i]) {
-    //       this.error = "meter description";
-    //     } else{
-    //
-    //         // this.photoService.uploadPhoto(this.names, this.descrip, this.urls).subscribe( res => {
-    //         //   if(res.Error) {
-    //         //     this.error = res.Error;
-    //         //   } else {
-    //         //     console.log("yupi");
-    //         //
-    //         //   }
-    //         // });
-    //
-    //     }
-    //   }
-    // }
-  }
-
-  // changeNames() {
-  //   this.names = this.names[0];
-  //   for (let i = 0; i < this.names.length; i++) {
-  //     this.names[i] = this.names.value;
-  //
-  //   }
-  //   console.log(this.names);
-  //
-  // }
-
-  // changeNames() {
-  //   this.descrip = this.descrip[0];
-  //   for (let i = 0; i < this.descrip.length; i++) {
-  //     this.descrip[i] = this.descrip.value;
-  //
-  //   }
-  //   console.log(this.descrip);
-  //
-  // }
-
-  removeName(i) {
-    this.names.splice(i, 1);
-  }
-
-  removeDescription(i) {
-    this.descrip.splice(i, 1);
-  }
-
-  addName() {
-    this.names.push({ value: "name" });
-  }
-
-  addSource() {
-    this.srcs.push({ value: "source" });
-  }
-
-  addDescription() {
-    this.descrip.push({ value: "description" });
+    if (this.check()) {
+      this.photoService.uploadPhoto(this.photos).subscribe(res => {
+        console.log(res);
+        if (!res.INFO) {
+          this.error = "Erro ao enviar fotos para o servidor, por favor contacte um administrador.";
+        }
+        else {
+          window.location.reload();
+        }
+      }, error => {
+        this.error = "Erro ao enviar fotos para o servidor, por favor contacte um administrador.";
+      })
+    }
+    else {
+      this.error = "Erro! Não cumpriu os requisitos do nome (100 caracteres) e da descrição(500 caracteres).";
+    }
   }
 
 

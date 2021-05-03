@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { UserService } from "./user.service";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Photo } from "./photo";
-import { Observable, of } from "rxjs";
+import { Observable, throwError } from "rxjs";
 import { catchError, map, tap } from "rxjs/operators";
-
+import { UploadPhoto } from './uploadPhoto';
 
 @Injectable({
   providedIn: 'root'
@@ -42,27 +42,39 @@ export class PhotoService {
     return this.http.request<Photo[]>("GET", this.url, { params: params });
   }
 
-  uploadPhoto(name: Array<string>, description: Array<string>, photosBase64: Array<string>): Observable<any> {
-    interface response {
-      name: string;
-      description: string,
-      photoBase64: string,
-    }
-    var resArray: Array<response> = [];
-    for (var i = 0; i < description.length; i++) {
-      var newRes: response = {
-        name: name[i],
-        description: description[i],
-        photoBase64: photosBase64[i]
-      }
-      resArray.push(newRes);
-    }
-    console.log("resArray: " + resArray);
-    var res = { photos: resArray };
-    console.log("res: " + res);
-    return this.http.post<{ Error: String, photo: Photo }>(this.url, res);
 
+  uploadPhoto(photos: Array<UploadPhoto>): Observable<any> {
+    return this.http.post(this.url, photos).pipe(
+      catchError((err) => {
+        console.log('error caught in service')
+        console.error(err);
+        return throwError(err);
+      })
+    )
   }
+
+
+  // uploadPhoto(name: Array<string>, description: Array<string>, photosBase64: Array<string>): Observable<any> {
+  //   interface response {
+  //     name: string;
+  //     description: string,
+  //     photoBase64: string,
+  //   }
+  //   var resArray: Array<response> = [];
+  //   for (var i = 0; i < description.length; i++) {
+  //     var newRes: response = {
+  //       name: name[i],
+  //       description: description[i],
+  //       photoBase64: photosBase64[i]
+  //     }
+  //     resArray.push(newRes);
+  //   }
+  //   console.log("resArray: " + resArray);
+  //   var res = { photos: resArray };
+  //   console.log("res: " + res);
+  //   return this.http.post<{ Error: String, photo: Photo }>(this.url, res);
+
+  // }
 
   deletePhoto(id: string): Observable<any> {
     return this.http.delete<{ Error: String }>(this.url + "/" + id);
