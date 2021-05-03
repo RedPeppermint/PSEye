@@ -19,6 +19,8 @@ export class FavoritesComponent implements OnInit {
   deviceInfo;
   isMobile;
   isDesktop;
+  pop = false;
+  ph;
 
   constructor(private navService: NavigationService, private route: ActivatedRoute, private deviceService: DeviceDetectorService, private userService: UserService, private router: Router, private photoService: PhotoService) { }
 
@@ -50,11 +52,21 @@ export class FavoritesComponent implements OnInit {
           p.user = u[0].name;
         });
 
+        this.photoService.isLiked(p._id).subscribe(b => {
+            p.liked = b.Response;
+        });
+
+        this.photoService.isFav(p._id).subscribe(b => {
+          p.faved = b.Response;
+        });
+
+        p.number_of_likes = p.likes.length;
         p.image = img;
         this.photos.push(p);
       });
 
       this.photossize = this.photos.length;
+
     });
   }
 
@@ -67,5 +79,11 @@ export class FavoritesComponent implements OnInit {
 
   toggleSideNav() {
     this.navService.setShowNav(true);
+  }
+
+
+  close() {
+    this.ph = null;
+    this.pop = false;
   }
 }

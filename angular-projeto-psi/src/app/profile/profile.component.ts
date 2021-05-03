@@ -4,7 +4,6 @@ import { PhotoService } from '../photo.service';
 import { Router, CanActivate, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { NavigationService } from 'src/app/navigation.service';
-import { PhotoDialogComponent } from '../photo-dialog/photo-dialog.component';
 
 @Component({
   selector: 'app-profile',
@@ -41,7 +40,7 @@ export class ProfileComponent implements OnInit {
     this.getPhotosById(this.id);
   }
 
-  getPhotosById(id: number): void {
+  getPhotosById(id: string): void {
 
     this.photoService.getPhotosById(this.id).subscribe(photos => {
       photos.forEach(p => {
@@ -61,13 +60,10 @@ export class ProfileComponent implements OnInit {
         p.image = img;
         this.photos.push(p);
 
-
-
       });
       this.photossize = this.photos.length;
 
     });
-
 
   }
 

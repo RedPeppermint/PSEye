@@ -240,16 +240,14 @@ nav ul li:hover {
 }
 
 .overph{
-  height: 90%;
-  align-self: center;
+  width: 100%;
+  margin-top: 10px;
+  margin-left: 50%;
   z-index: 1002;
-  position: fixed;
+  position: absolute;
 }
 
 app-photo{
   position: relative;
   z-index: 1003;
-}
-
-#btn {
 }

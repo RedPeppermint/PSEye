@@ -1,3 +1,11 @@
+<div class="overlay black" *ngIf="pop">
+</div>
+<div class="mainover" *ngIf="pop">
+  <img (click)="close()" src="../../assets/close.png" class="close" alt="">
+  <div class="overph">
+    <app-photo id="popup" [number_of_likes]="ph.number_of_likes" [faved]="ph.faved" [liked]="ph.liked" [name]="ph.name" [description]="ph.description" [photo]="ph.image" [user_id]="ph.user_id" [id]="ph._id"></app-photo>
+  </div>
+</div>
 <div *ngIf="isDesktop">
   <header>
       <a routerLink="/dashboard"><img src="../../assets/iconrec.png" id="icon" alt="icon"></a>
@@ -31,7 +39,7 @@
 
     <main>
         <div *ngFor="let p of photos">
-            <app-photo tabindex="0" [number_of_likes]="p.number_of_likes" [faved]="p.faved" [liked]="p.liked" [name]="p.name" [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
+            <app-photo (click)="ph=p; pop= true" tabindex="0" [number_of_likes]="p.number_of_likes" [faved]="p.faved" [liked]="p.liked" [name]="p.name" [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
         </div>
 
     </main>
@@ -60,7 +68,7 @@
 
   <div id="mainphone">
     <div class="cont" *ngFor="let p of photos">
-        <app-photo [number_of_likes]="p.number_of_likes" [faved]="p.faved" [liked]="p.liked" [name]="p.name" [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
+        <app-photo (click)="ph=p; pop= true" [number_of_likes]="p.number_of_likes" [faved]="p.faved" [liked]="p.liked" [name]="p.name" [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
     </div>
   </div>
 
