@@ -47,6 +47,11 @@ export class DashboardComponent implements OnInit {
 
   }
 
+
+  logout() {
+    this.userService.logout();
+  }
+  
   getPhotos(): void {
     this.photos = [];
     if (this.recent) {

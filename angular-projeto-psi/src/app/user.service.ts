@@ -3,6 +3,7 @@ import { Observable, of } from "rxjs";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { catchError, map, tap } from "rxjs/operators";
 import { defaultIfEmpty } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 import { User } from "./user";
 
@@ -26,7 +27,7 @@ export class UserService {
     };
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   loginUser(user: string, pass: string): Observable<{ token: string, model: string }> {
     var url = this.url + "users/login";
@@ -36,6 +37,11 @@ export class UserService {
     }
 
     return this.http.post<{ token: string, model: string }>(url, userObj);
+  }
+
+  logout(){
+    sessionStorage.clear();
+    this.router.navigate(["/register"]);
   }
 
   registerUser(user: string, pass: string): Observable<any> {

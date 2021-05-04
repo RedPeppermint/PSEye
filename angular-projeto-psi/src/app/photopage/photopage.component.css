@@ -30,3 +30,24 @@ main {
   justify-content: center;
   align-items: center;
 }
+
+
+.logout{
+  position: relative;
+  top: 8%;
+  left: 92%;
+  background-color: #fa992f;
+  border: none;
+  color: white;
+
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.8;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.logout:hover {opacity: 1}

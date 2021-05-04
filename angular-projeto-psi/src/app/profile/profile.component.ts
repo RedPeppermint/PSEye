@@ -39,9 +39,13 @@ export class ProfileComponent implements OnInit {
 
 
     this.getPhotosById(this.id);
-    
+
   }
 
+  logout() {
+    this.userService.logout();
+  }
+  
   getPhotosById(id: string): void {
 
     this.photoService.getPhotosById(this.id).subscribe(photos => {

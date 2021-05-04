@@ -42,6 +42,11 @@ export class FavoritesComponent implements OnInit {
     console.log(this.userid);
   }
 
+
+  logout() {
+    this.userService.logout();
+  }
+  
   getFavourites() {
     this.photos = [];
     this.photoService.getFavourites(this.userid).subscribe(photos => {

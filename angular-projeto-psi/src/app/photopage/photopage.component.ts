@@ -61,4 +61,8 @@ export class PhotopageComponent implements OnInit {
 
   }
 
+  logout() {
+    this.userService.logout();
+  }
+
 }

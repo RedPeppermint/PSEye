@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PhotoService } from '../photo.service';
+import { UserService } from '../user.service';
 import { UploadPhoto } from '../uploadPhoto';
-import { Router, CanActivate, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
+import { CanActivate, ActivatedRoute, RouterStateSnapshot } from '@angular/router';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
@@ -13,7 +15,7 @@ export class UploadComponent implements OnInit {
   error = null;
   photos: UploadPhoto[] = []
   askConfirm = false;
-  constructor(private photoService: PhotoService, private router: Router) {
+  constructor(private photoService: PhotoService, private userService: UserService, private router: Router) {
   }
 
   ngOnInit() {
@@ -43,7 +45,9 @@ export class UploadComponent implements OnInit {
   )}
 
 
-
+logout() {
+  this.userService.logout();
+}
 
 
   async onselect(e) {
