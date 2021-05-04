@@ -99,6 +99,7 @@ export class ProfileComponent implements OnInit {
   close() {
     this.ph = null;
     this.pop = false;
+    this.delete_popup_close();
   }
 
 }

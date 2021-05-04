@@ -211,8 +211,8 @@ nav ul li:hover {
 
 .overlay{
   position: fixed;
-  width:100%;
-  height:100%;
+  width:100vw;
+  height:100vh;
   z-index: 100;
 }
 
@@ -223,26 +223,32 @@ nav ul li:hover {
 
 .close{
   height: 40px;
+  width: 40px;
   z-index: 1004;
-  position: relative;
-  margin-top: 0px;
-  margin-left: calc(100% - 40px);
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 
 .mainover {
   position: absolute;
   z-index: 1000;
-  width:100%;
-  height:100%;
+  top: 20px;
+  right: 20px;
+  bottom: 20px;
+  left: 20px;
+  width: 100vw;
+  max-height:100vh;
   display: flex;
   justify-content: center;
 
 }
 
 .overph{
-  width: 100%;
+  /* width: 100vw; */
+  max-height:80vh;
   margin-top: 10px;
-  margin-left: 50%;
+  /* margin-left: 50%; */
   z-index: 1002;
   position: absolute;
 }
@@ -250,6 +256,7 @@ nav ul li:hover {
 app-photo{
   position: relative;
   z-index: 1003;
+  max-height:100vh;
 }
 
 .removehover {
