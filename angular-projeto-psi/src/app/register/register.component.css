@@ -9,15 +9,7 @@ body, input{
    font-family:"Poppins", sans-serif;
 }
 
-/*
-.container{
-  position: relative;
-  width: 100%;
-  background:linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(224,15,210,1)14%, rgba(240, 35,16,1) 86%);
-  min-height: 100vh;
-  overflow: hidden;
-}
-*/
+
 .container{
   position: relative;
   min-width: 100%;

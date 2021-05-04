@@ -55,8 +55,6 @@ export class RegisterComponent implements OnInit {
         validator: CustomValidators.passwordMatchValidator
       }
 
-
-
     );
   }
 
@@ -69,10 +67,6 @@ export class RegisterComponent implements OnInit {
       }
     );
   }
-
-
-
-
 
 
   ngOnInit(): void {
