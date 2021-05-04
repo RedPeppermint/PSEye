@@ -12,6 +12,7 @@ import { UserService } from "../user.service";
 export class RegisterComponent implements OnInit {
   public frmSignup: FormGroup;
   public frmSignin: FormGroup;
+  public userExists: boolean;
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
     this.frmSignup = this.createSignupForm();
@@ -89,6 +90,7 @@ export class RegisterComponent implements OnInit {
 
   submitRegister() {
     console.log("REGISTER COMPONENT");
+    this.userExists = false;
     this.userService.registerUser(this.frmSignup.value.usernameRegister, this.frmSignup.value.passwordRegister).subscribe(result => {
       console.log(result);
       if (result.error.length != 0) {
@@ -100,6 +102,7 @@ export class RegisterComponent implements OnInit {
         //user já existe
         console.log("user exists");
         this.displayError('This username already exists');
+        this.userExists = true;
       }
       else {
         //user nao existe

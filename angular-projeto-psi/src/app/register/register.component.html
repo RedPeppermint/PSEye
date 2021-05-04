@@ -103,6 +103,7 @@
           <button [disabled]="frmSignup.invalid" type="submit" class="btn btn-primary btn-block font-weight-bold"
             (click)="submitRegister()">Sign
             Up</button>
+          <div *ngIf="userExists">This username is already taken</div>
 
         </form>
 
