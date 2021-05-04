@@ -18,6 +18,7 @@
           </div>
           <button type="submit" class="btn btn-primary btn-block font-weight-bold" (click)="submitLogin()">Sign
             In</button>
+          <div *ngIf="!authenticated">Your username or password is incorrect</div>
         </form>
 
         <form [formGroup]="frmSignup" class="sign-up-form">
@@ -103,6 +104,7 @@
           <button [disabled]="frmSignup.invalid" type="submit" class="btn btn-primary btn-block font-weight-bold"
             (click)="submitRegister()">Sign
             Up</button>
+          <div *ngIf="userExists">This username is already taken</div>
 
         </form>
 

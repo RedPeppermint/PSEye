@@ -12,10 +12,14 @@ import { UserService } from "../user.service";
 export class RegisterComponent implements OnInit {
   public frmSignup: FormGroup;
   public frmSignin: FormGroup;
+  public userExists: boolean;
+  public authenticated: boolean;
 
   constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
     this.frmSignup = this.createSignupForm();
     this.frmSignin = this.createSigninForm();
+    this.authenticated = true;
+    this.userExists = false;
     this.ngOnInit;
   }
 
@@ -89,6 +93,7 @@ export class RegisterComponent implements OnInit {
 
   submitRegister() {
     console.log("REGISTER COMPONENT");
+    this.userExists = false;
     this.userService.registerUser(this.frmSignup.value.usernameRegister, this.frmSignup.value.passwordRegister).subscribe(result => {
       console.log(result);
       if (result.error.length != 0) {
@@ -100,6 +105,7 @@ export class RegisterComponent implements OnInit {
         //user já existe
         console.log("user exists");
         this.displayError('This username already exists');
+        this.userExists = true;
       }
       else {
         //user nao existe
@@ -123,10 +129,10 @@ export class RegisterComponent implements OnInit {
   incomplete = false;
 
   submitLogin(): void {
+    this.authenticated = true;
+    console.log(this.authenticated)
     var username = this.frmSignin.value.username;
     var password = this.frmSignin.value.password;
-    console.log(username);
-    console.log(password);
     username = username.trim();
     if (!username || !password) {
       this.displayError("Campos obrigatórios *");
@@ -138,7 +144,9 @@ export class RegisterComponent implements OnInit {
     this.userService.loginUser(username, password)
       .subscribe(result => {
         if (!result.token || !result.model) {
+          console.log(this.authenticated)
           this.displayError('Could not authenticate');
+          this.authenticated = false;
         }
         else {
           sessionStorage.setItem("access_token", result.token);
@@ -151,6 +159,7 @@ export class RegisterComponent implements OnInit {
       }
       );
   }
+
   displayError(msg: string): void {
     this.error = msg;
   }
