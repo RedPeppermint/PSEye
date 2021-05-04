@@ -251,13 +251,13 @@ main {
   max-height: 100%;
 }
 
-#popup{
+/* #popup{
   position: relative;
   z-index: 1003;
   align-self: center;
   max-height: 80%;
   height: 500px;
-}
+} */
 
 
 .hover {

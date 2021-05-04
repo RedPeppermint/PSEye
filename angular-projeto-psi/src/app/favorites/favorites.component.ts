@@ -43,7 +43,6 @@ export class FavoritesComponent implements OnInit {
   }
 
   getFavourites() {
-    this.photos = [];
     this.photoService.getFavourites(this.userid).subscribe(photos => {
       photos.forEach(p => {
         var img = new Image();

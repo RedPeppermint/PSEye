@@ -231,25 +231,26 @@ nav ul li:hover {
 
 .mainover {
   position: absolute;
-  z-index: 1000;
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
-
 }
 
 .overph{
-  width: 100%;
-  margin-left: 50%;
-  z-index: 1002;
-  position: absolute;
-}
+  position: fixed;
+  z-index: 1000;
+  width: 50%;
+  max-width: 380px;
+  height: 500px;
+  max-height: 80%;
 
+}
+/*
 app-photo{
   position: relative;
   z-index: 1003;
-}
+} */
 
 .overphone{
   height: 100%;
