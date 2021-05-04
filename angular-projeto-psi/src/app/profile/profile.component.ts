@@ -39,6 +39,7 @@ export class ProfileComponent implements OnInit {
 
 
     this.getPhotosById(this.id);
+    
   }
 
   getPhotosById(id: string): void {
@@ -99,6 +100,7 @@ export class ProfileComponent implements OnInit {
   close() {
     this.ph = null;
     this.pop = false;
+    this.delete_popup_close();
   }
 
 }

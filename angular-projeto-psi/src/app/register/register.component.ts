@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from '../custom-validators';
 import { Router } from '@angular/router';
+import { PhotoService } from '../photo.service';
 import { UserService } from "../user.service";
 
 @Component({
@@ -15,7 +16,7 @@ export class RegisterComponent implements OnInit {
   public userExists: boolean;
   public authenticated: boolean;
 
-  constructor(private fb: FormBuilder, private userService: UserService, private router: Router) {
+  constructor(private fb: FormBuilder, private userService: UserService, private router: Router, private photoService: PhotoService) {
     this.frmSignup = this.createSignupForm();
     this.frmSignin = this.createSigninForm();
     this.authenticated = true;
@@ -81,6 +82,13 @@ export class RegisterComponent implements OnInit {
     sign_in_btn.addEventListener("click", () => {
       container.classList.remove("sign-up-mode");
     });
+
+
+    if (this.userService.getUser()) {
+      var id = this.userService.getUserId();
+      var url = "profile/" + id;
+      this.router.navigate([url]);
+    }
   }
 
 
@@ -145,8 +153,20 @@ export class RegisterComponent implements OnInit {
           sessionStorage.setItem("access_token", result.token);
           sessionStorage.setItem("user", result.model);
           var id = this.userService.getUserId();
-          var url = "profile/" + id;
-          this.router.navigate([url]);
+
+          this.photoService.getPhotosById(id).subscribe(photos => {
+            if(photos.length) {
+              var url = "profile/" + id;
+              this.router.navigate([url]);
+
+            } else {
+              this.router.navigate(["/dashboard"]);
+
+            }
+
+            });
+
+
         }
 
       }

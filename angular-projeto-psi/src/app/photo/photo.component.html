@@ -12,25 +12,25 @@
     <div class="likehover">
       <span class="likeho">Like (L)</span>
       <div *ngIf="!liked">
-        <img (click)="like()" src="../../assets/heartempty.png" alt="Like button" id="like" tabindex="0">
+        <img (keydown.enter)="like()" (click)="like()" src="../../assets/heartempty.png" alt="Like button" id="like" tabindex="0">
       </div>
       <div *ngIf="liked">
-        <img (click)="like()" src="../../assets/heartfilled.png" alt="Like button" id="like" tabindex="0">
+        <img (keydown.enter)="like()" (click)="like()" src="../../assets/heartfilled.png" alt="Like button" id="like" tabindex="0">
       </div>
     </div>
     <div class="favehover">
       <span class="faveho">Favorite (F)</span>
       <div *ngIf="!faved">
-        <img (click)="fave()" src="../../assets/starempty.png" alt="Favorite button" id="fav" tabindex="0">
+        <img (keydown.enter)="fave()"  (click)="fave()" src="../../assets/starempty.png" alt="Favorite button" id="fav" tabindex="0">
       </div>
       <div *ngIf="faved">
-        <img (click)="fave()" src="../../assets/starfilled.png" alt="Favorite button" id="fav" tabindex="0">
+        <img (keydown.enter)="fave()" (click)="fave()" src="../../assets/starfilled.png" alt="Favorite button" id="fav" tabindex="0">
       </div>
     </div>
     <div class="sharehover">
       <span class="shareho">Share (S)</span>
       <span class="pop" [style.visibility]="popup">Copied to clipboard!</span>
-      <img (click)="share()" src="../../assets/share.png" alt="Share button" id="share" tabindex="0">
+      <img (keydown.enter)="share()" (click)="share()" src="../../assets/share.png" alt="Share button" id="share" tabindex="0">
     </div>
 
 

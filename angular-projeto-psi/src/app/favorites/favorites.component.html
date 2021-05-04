@@ -18,7 +18,7 @@
 
     <div id="photos" *ngIf="photossize">
       <div class="photo" *ngFor="let p of photos">
-        <img (click)="ph=p; pop= true" *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded" tabindex="0">
+        <img (keydown.enter)="ph=p; pop= true" (click)="ph=p; pop= true" *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded" tabindex="0">
       </div>
     </div>
 

@@ -42,7 +42,7 @@
 
     <main>
         <div *ngFor="let p of photos">
-            <app-photo [dashboard]="true" (click)="ph=p; pop= true" tabindex="0" [number_of_likes]="p.number_of_likes" [faved]="p.faved" [liked]="p.liked" [name]="p.name" [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
+            <app-photo (keydown.enter)="ph=p; pop= true" [dashboard]="true" (click)="ph=p; pop= true" tabindex="0" [number_of_likes]="p.number_of_likes" [faved]="p.faved" [liked]="p.liked" [name]="p.name" [description]="p.description" [photo]="p.image" [user_id]="p.user_id" [id]="p._id"></app-photo>
         </div>
 
     </main>
