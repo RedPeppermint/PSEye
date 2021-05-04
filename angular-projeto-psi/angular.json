@@ -24,7 +24,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
               "node_modules/bootstrap/scss/bootstrap-grid.scss",
               "node_modules/bootstrap/scss/bootstrap-reboot.scss",
               "node_modules/bootstrap/scss/bootstrap.scss"
