@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     if (this.userService.getUser()) {
       var id = this.userService.getUserId();
-      var url = "profile/"+id;
+      var url = "profile/" + id;
       this.router.navigate([url]);
     }
   }
@@ -42,7 +42,8 @@ export class LoginComponent implements OnInit {
           sessionStorage.setItem("access_token", result.token);
           sessionStorage.setItem("user", result.model);
           var id = this.userService.getUserId();
-          var url = "profile/"+id;
+          console.log(id);
+          var url = "profile/" + id;
           this.router.navigate([url]);
         }
 

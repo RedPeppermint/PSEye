@@ -190,7 +190,7 @@ main {
   bottom: 100%;
   left: 65%;
   margin-left: -60px;
-  height: auto;
+  /* height: auto; */
 }
 
 .uploadhover:hover .uploadho{

@@ -15,7 +15,7 @@ export class UserGuard implements CanActivate {
             return true;
         }
         console.log("NAO PODES");
-        this.router.navigate(['login']);
+        this.router.navigate(['register']);
         return false;
     }
 

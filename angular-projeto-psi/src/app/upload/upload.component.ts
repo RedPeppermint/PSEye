@@ -38,6 +38,7 @@ export class UploadComponent implements OnInit {
           this.photos.push({ photoBase64: events.target.result, name: "", description: "" });
         }
       }
+      e.srcElement.value = null;
     }
   }
 

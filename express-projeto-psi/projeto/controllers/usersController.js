@@ -11,11 +11,11 @@ function generateAndSendToken(user, res) {
 }
 
 // Login 
-exports.user_login = function(req, res) {
+exports.user_login = function (req, res) {
     console.log("Body: " + JSON.stringify(req.body));
     var name = req.body.username;
     var password = req.body.password;
-    UserModel.findOne({ name: name, password: password }, function(err, result) {
+    UserModel.findOne({ name: name, password: password }, function (err, result) {
         if (err) {
             res.json({
                 response: false
@@ -31,9 +31,9 @@ exports.user_login = function(req, res) {
 }
 
 // get user
-exports.user_get = function(req, res) {
+exports.user_get = function (req, res) {
     var id = req.params.id;
-    UserModel.find({ _id: id }, function(err, model) {
+    UserModel.find({ _id: id }, function (err, model) {
         if (err) {
             res.json({ Error: "User not found." });
         } else {
@@ -42,9 +42,9 @@ exports.user_get = function(req, res) {
     });
 }
 
-exports.user_delete = function(req, res) {
+exports.user_delete = function (req, res) {
     var id = req.params.id;
-    UserModel.remove({ _id: id }, function(err) {
+    UserModel.remove({ _id: id }, function (err) {
         if (err) {
             res.json({ Error: "User not found." });
         } else {
@@ -53,11 +53,22 @@ exports.user_delete = function(req, res) {
     });
 }
 
+function generateAndSendTokenRegister(user, res) {
+    var token = jwt.sign({ userID: user._id }, shared_secret, { expiresIn: '2h' });
+    res.json({
+        token: token,
+        model: JSON.stringify(user),
+        error: [],
+        existsUser: false
+    });
+}
+
 // UC10 Registo do utilizador
-exports.user_post = function(req, res) {
+exports.user_post = function (req, res) {
     var username = req.body.username;
     var password = req.body.password;
-    UserModel.find({ name: username }, function(err, results) {
+    UserModel.find({ name: username }, function (err, results) {
+        console.log(err);
         if (err) {
             res.json({
                 error: ["error while creating user"]
@@ -76,10 +87,12 @@ exports.user_post = function(req, res) {
                         name: username,
                         password: password
                     });
-                    newUser.save(function(err, user) {
+                    newUser.save(function (err, user) {
                         if (err) { return next(err); }
-                        res.json({ error: [], existsUser: false });
                     });
+                    //gerar token: user logged in
+
+                    generateAndSendTokenRegister(newUser, res)
                 }
             }
         } else { // there is someone with that name

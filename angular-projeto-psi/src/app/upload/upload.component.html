@@ -15,7 +15,8 @@
 
         <input type="file" id="ficheiro" (change)="onselect($event)" multiple id="select">
 
-        <button type="button" (click)="upload()" id="upload">Upload Image</button>
+        <button type="button" (click)="upload()" id="upload"
+          [style.visibility]="photos.length > 0 ? 'visible' : 'hidden'">Upload Image(s)</button>
         <div *ngIf="error" class="error">
           {{error}}
         </div>

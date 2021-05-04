@@ -1,5 +1,4 @@
 
-@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=s);
 *{
   margin: 0;
   padding: 0;
@@ -10,12 +9,32 @@ body, input{
    font-family:"Poppins", sans-serif;
 }
 
+/*
 .container{
   position: relative;
   width: 100%;
   background:linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(224,15,210,1)14%, rgba(240, 35,16,1) 86%);
   min-height: 100vh;
   overflow: hidden;
+}
+*/
+.container{
+  position: relative;
+  min-width: 100%;
+  background: #121111;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+
+#loginError, #userExists {
+  color: white;
+}
+
+
+
+label {
+  display: flex;
 }
 
 .forms-container{
@@ -24,6 +43,7 @@ body, input{
   height: 100%;
   top: 0;
   left: 0;
+
 }
 
 .signin-signup{
@@ -40,19 +60,20 @@ body, input{
 
 form{
   display: flex;
-  align-items: center;
+  align-items: left;
   justify-content: center;
   flex-direction: column;
   padding: 0rem 5rem;
   transition: all 0.2s 0.7s;
   overflow: hidden;
   grid-column: 1 / 2;
-  grid-row: 1 / 2;
+  grid-row: 2 / 2;
 }
 
 form.sign-up-form{
   opacity: 0;
   z-index: 1;
+  margin-left: 10%;
 }
 
 form.sign-in-form {
@@ -61,16 +82,17 @@ form.sign-in-form {
 
 .title {
   font-size: 2.2rem;
-  color: #444;
+  color: rgb(255, 255, 255);
   margin-bottom: 10px;
 }
 
 .input-field {
+  margin-top: 10px;
   max-width: 380px;
   width: 100%;
-  background-color: #f0f0f0;
+  background-color: #ffffff;
   margin-left: 10px 0;
-  height: 55px;
+  height: 40px;
   border-radius: 55px;
   display: grid;
   grid-template-columns: 15% 85%;
@@ -111,29 +133,9 @@ form.sign-in-form {
   justify-content: center;
 }
 
-.social-icon{
-  height: 46px;
-  width: 46px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 0.45rem;
-  color: #333;
-  border-radius: 50%;
-  border: 1px solid #333;
-  text-decoration: none;
-  font-size:  1.1rem;
-  transition: 0.3s;
-}
-
-.social-icon:hover{
-  color: #4481eb;
-  border-color: #4481eb;
-}
-
 .btn {
   width: 150px;
-  background-color: #5995fd;
+  background-color: #e4501b;
   border:none;
   outline: none;
   height: 49px;
@@ -147,7 +149,7 @@ form.sign-in-form {
 }
 
 .btn:hover {
-  background-color: #4d84e2;
+  background-color: #b7380a;
 }
 
 .panels-container{
@@ -168,23 +170,10 @@ form.sign-in-form {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-image: linear-gradient(-45deg, #2872f1 0%, #04befe 100%);
+  background: linear-gradient(90deg, rgba(251, 91, 4)  40%, rgba(255, 119, 2)60%);
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;
-}
-
-.image {
-  width: 100%;
-  transition: transform 1.1s ease-in-out;
-  transition-delay: 0.4s;
-}
-
-.company-logo{
-  height: 60px;
-  width: 60px;
-  border-radius: 30px;
-  align-items: center;
 }
 
 
@@ -285,6 +274,11 @@ form.sign-in-form {
 .container.sign-up-mode .right-panel {
   pointer-events: all;
 }
+
+#ajusts {
+  margin-right: 20%;
+}
+
 
 @media (max-width: 870px) {
   .container {

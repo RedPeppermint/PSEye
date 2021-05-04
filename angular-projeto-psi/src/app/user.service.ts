@@ -40,6 +40,7 @@ export class UserService {
 
   registerUser(user: string, pass: string): Observable<any> {
     var url = this.url + "users/register";
+    console.log("REGISTER USER SERVICE");
     const userObj: User = {
       username: user,
       password: pass
@@ -72,6 +73,6 @@ export class UserService {
     return (sessionStorage.getItem('access_token') !== null);
   }
 
-  
+
 
 }
