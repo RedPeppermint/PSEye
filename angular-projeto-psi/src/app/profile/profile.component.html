@@ -33,7 +33,7 @@
 
     <div id="photos" *ngIf="photossize">
       <div class="photo" *ngFor="let p of photos; let i = index" [attr.data-index]="i">
-        <img (click)="ph=p; pop= true" *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded"
+        <img (keydown.enter)="ph=p; pop= true" (click)="ph=p; pop= true" *ngIf="p.image" src="{{p.image.src}}" alt="Picture" class="pictureLoaded"
           tabindex="0">
 
       </div>
