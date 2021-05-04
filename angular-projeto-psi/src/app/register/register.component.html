@@ -102,7 +102,7 @@
             </label>
           </div>
           <button [disabled]="frmSignup.invalid" type="submit" class="btn btn-primary btn-block font-weight-bold"
-            (click)="submitRegister()">Sign
+            (click)="submitRegister()" (keydown.enter)="submitRegister()">Sign
             Up</button>
           <div *ngIf="userExists" id="userExists">This username is already taken</div>
 
