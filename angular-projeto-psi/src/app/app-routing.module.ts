@@ -13,7 +13,7 @@ import { PhotoComponent } from './photo/photo.component';
 import { PhotopageComponent } from './photopage/photopage.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: "login", pathMatch: "full" },//todo - ir para dashboard, fazer verificacao se ha user autenticado
+  { path: "", redirectTo: "register", pathMatch: "full" },//todo - ir para dashboard, fazer verificacao se ha user autenticado
   { path: "dashboard", component: DashboardComponent, canActivate: [UserGuard] },
   { path: "favorites", component: FavoritesComponent, canActivate: [UserGuard] },
   { path: "login", component: LoginComponent },

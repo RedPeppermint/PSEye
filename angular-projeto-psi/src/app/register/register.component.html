@@ -10,13 +10,13 @@
           <h2 class="title">Sign In</h2>
           <div class="input-field">
             <i class="fas fa-user"></i>
-            <input type="text" placeholder="Username" class="form-control">
+            <input type="text" formControlName="username" placeholder="Username" class="form-control">
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" class="form-control">
+            <input type="password" formControlName="password" placeholder="Password" class="form-control">
           </div>
-          <button type="submit" class="btn btn-primary btn-block font-weight-bold" (click)="submitLogin()"  >Sign
+          <button type="submit" class="btn btn-primary btn-block font-weight-bold" (click)="submitLogin()">Sign
             In</button>
         </form>
 
@@ -25,8 +25,8 @@
           <div>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input id="username" formControlName="usernameRegister" type="text" class="form-control" placeholder="Username"
-                [ngClass]="frmSignup.controls['usernameRegister'].invalid ? 'is-invalid' : ''">
+              <input id="username" formControlName="usernameRegister" type="text" class="form-control"
+                placeholder="Username" [ngClass]="frmSignup.controls['usernameRegister'].invalid ? 'is-invalid' : ''">
             </div>
             <label class="col"
               [ngClass]="frmSignup.controls['usernameRegister'].hasError('required') || frmSignup.controls['usernameRegister'].hasError('minlength') ? 'text-danger' : 'text-success'">
@@ -100,7 +100,8 @@
               Password não é igual
             </label>
           </div>
-          <button [disabled]="frmSignup.invalid" type="submit" class="btn btn-primary btn-block font-weight-bold" (click)="submitRegister()">Sign
+          <button [disabled]="frmSignup.invalid" type="submit" class="btn btn-primary btn-block font-weight-bold"
+            (click)="submitRegister()">Sign
             Up</button>
 
         </form>

@@ -108,7 +108,6 @@ export class RegisterComponent implements OnInit {
           this.displayError('Could not authenticate');
         }
         else {
-          console.log("OIOIOIOIOIOIOI");
           sessionStorage.setItem("access_token", result.token);
           sessionStorage.setItem("user", result.model);
           var id = this.userService.getUserId();
@@ -124,8 +123,10 @@ export class RegisterComponent implements OnInit {
   incomplete = false;
 
   submitLogin(): void {
-    var username = this.frmSignup.value.username;
-    var password = this.frmSignup.value.password;
+    var username = this.frmSignin.value.username;
+    var password = this.frmSignin.value.password;
+    console.log(username);
+    console.log(password);
     username = username.trim();
     if (!username || !password) {
       this.displayError("Campos obrigatórios *");
