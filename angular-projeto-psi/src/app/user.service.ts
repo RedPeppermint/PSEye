@@ -11,8 +11,8 @@ import { User } from "./user";
   providedIn: 'root'
 })
 export class UserService {
-  // private url = "http://10.101.151.25:3017/";
-  private url = "http://localhost:3017/";
+  private url = "http://10.101.151.25:3017/";
+  // private url = "http://localhost:3017/";
   httpOptions = {
     headers: new HttpHeaders({ "Content-Type": "application/json" })
   };
@@ -39,7 +39,7 @@ export class UserService {
     return this.http.post<{ token: string, model: string }>(url, userObj);
   }
 
-  logout(){
+  logout() {
     sessionStorage.clear();
     this.router.navigate(["/register"]);
   }
