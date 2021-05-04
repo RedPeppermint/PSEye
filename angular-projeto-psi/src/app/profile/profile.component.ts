@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
   isDesktop;
   pop = false;
   ph;
+  popup = "hidden";
 
   constructor(private navService: NavigationService, private deviceService: DeviceDetectorService, private userService: UserService, private router: Router, private route: ActivatedRoute, private photoService: PhotoService) { }
 
@@ -67,7 +68,16 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  delete_popup_open(){
+    this.popup = "visible";
+  }
+
+  delete_popup_close(){
+    this.popup = "hidden";
+  }
+
   delete_photo(id: string) {
+
     this.photoService.deletePhoto(id).subscribe(res => {
       if (res.Error) {
         console.log("Error deleting photo: " + Error);
