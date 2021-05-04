@@ -94,6 +94,10 @@ export class PhotoComponent implements OnInit {
       var loggeduserID = this.userService.getUserId();
       this.photoService.likePhoto(this.id, loggeduserID).subscribe();
     }
+    //
+    // this.photoService.isLiked(this.id).subscribe(b => {
+    //   this.liked = b.Response;
+    // });
   }
 
   fave(): void {
@@ -107,6 +111,10 @@ export class PhotoComponent implements OnInit {
       var loggeduserID = this.userService.getUserId();
       this.photoService.favouritePhoto(this.id, loggeduserID).subscribe();
     }
+
+    // this.photoService.isFav(this.id).subscribe(b => {
+    //   this.faved = b.Response;
+    // });
   }
 
   share(): void {

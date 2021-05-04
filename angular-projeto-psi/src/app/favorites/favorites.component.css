@@ -221,9 +221,11 @@ nav ul li:hover {
 
 .close{
   height: 40px;
+  width: 40px;
   z-index: 1004;
-  position: relative;
-  margin-top: 0px;
+  position: fixed;
+  top: 20px;
+  right:0;
   margin-left: calc(100% - 40px);
 }
 
@@ -247,4 +249,18 @@ nav ul li:hover {
 app-photo{
   position: relative;
   z-index: 1003;
+}
+
+.overphone{
+  height: 100%;
+  width: 100%;
+  z-index: 1002;
+  position: fixed;
+}
+
+#popupphone{
+  position: relative;
+  z-index: 1003;
+  align-self: center;
+  max-height: 100%;
 }

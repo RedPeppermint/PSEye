@@ -251,9 +251,28 @@ main {
   max-height: 100%;
 }
 
-#popupphone{
+.hover {
   position: relative;
-  z-index: 1003;
-  align-self: center;
-  max-height: 100%;
+  display: inline-block;
+}
+
+.ho{
+ visibility: hidden;
+ width: 100px;
+ background-color: #292929;
+ color: #fff;
+ text-align: center;
+ padding: 5px 0;
+ border-radius: 6px;
+ position: absolute;
+ z-index: 100;
+ bottom: 100%;
+ left: 65%;
+ margin-left: -60px;
+ font-size: 15px;
+}
+
+
+.hover:hover .ho{
+  visibility: visible;
 }

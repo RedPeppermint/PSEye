@@ -2,8 +2,11 @@
 </div>
 <div class="mainover" *ngIf="pop">
   <img (click)="close()" src="../../assets/close.png" class="close" alt="">
-  <div class="overph">
-    <app-photo [number_of_likes]="ph.number_of_likes" [faved]="ph.faved" [liked]="ph.liked" [name]="ph.name" [description]="ph.description" [photo]="ph.image" [user_id]="ph.user_id" [id]="ph._id"></app-photo>
+  <div class="overph" *ngIf="isDesktop">
+    <app-photo id="popup" [number_of_likes]="ph.number_of_likes" [faved]="ph.faved" [liked]="ph.liked" [name]="ph.name" [description]="ph.description" [photo]="ph.image" [user_id]="ph.user_id" [id]="ph._id"></app-photo>
+  </div>
+  <div class="overphone" *ngIf="isMobile">
+    <app-photo id="popupphone" [number_of_likes]="ph.number_of_likes" [faved]="ph.faved" [liked]="ph.liked" [name]="ph.name" [description]="ph.description" [photo]="ph.image" [user_id]="ph.user_id" [id]="ph._id"></app-photo>
   </div>
 </div>
 <div *ngIf="isDesktop">

@@ -33,9 +33,23 @@
     <div id="filter">
         <form>
             Search by:
+
+
+
+
             <ul>
-              <li><input type="radio" name="filtro" [checked]="recent" (click)="getPhotos()"><label>Recent</label></li>
-              <li><input type="radio" name="filtro" [checked]="!recent" (click)="getPhotos()"><label>Popular</label></li>
+              <li>
+                <div class="hover">
+                  <span class="ho">Recent (R)</span>
+                <input type="radio" name="filtro" [checked]="recent" (click)="getPhotos()"><label>Recent</label>
+               </div>
+              </li>
+              <li>
+                <div class="hover">
+                  <span class="ho">Popular (P)</span>
+                  <input type="radio" name="filtro" [checked]="!recent" (click)="getPhotos()"><label>Popular</label>
+               </div>
+              </li>
             </ul>
         </form>
     </div>
