@@ -47,7 +47,6 @@ export class ProfileComponent implements OnInit {
   }
   
   getPhotosById(id: string): void {
-
     this.photoService.getPhotosById(this.id).subscribe(photos => {
       photos.forEach(p => {
         var img = new Image();

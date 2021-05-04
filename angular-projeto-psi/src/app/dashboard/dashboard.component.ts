@@ -57,6 +57,7 @@ export class DashboardComponent implements OnInit {
     if (this.recent) {
       this.photoService.getMostRecentPhotos(50).subscribe(photos => {
         photos.forEach(p => {
+          console.log(p);
 
           var img = new Image();
           img.src = p.photoBase64;

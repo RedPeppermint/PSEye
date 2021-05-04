@@ -35,8 +35,10 @@
 
 
   </div>
-  <div class="description" *ngIf="description">
+  <div class="description">
       <b>Name: {{name}}</b> <br>
-      {{description}}
+      <div *ngIf="description">
+        {{description}}
+      </div>
   </div>
 </div>
