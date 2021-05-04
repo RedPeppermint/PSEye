@@ -21,10 +21,17 @@ body, input{
 .container{
   position: relative;
   min-width: 100%;
-  background:linear-gradient(0deg, rgb(13, 20, 65) 40%,  rgb(194, 50, 100));
+  background: #121111;
   min-height: 100vh;
   overflow: hidden;
 }
+
+
+#loginError, #userExists {
+  color: white;
+}
+
+
 
 label {
   display: flex;
@@ -66,6 +73,7 @@ form{
 form.sign-up-form{
   opacity: 0;
   z-index: 1;
+  margin-left: 10%;
 }
 
 form.sign-in-form {
@@ -162,7 +170,7 @@ form.sign-in-form {
   top: -10%;
   right: 48%;
   transform: translateY(-50%);
-  background-color: #e4501b;
+  background: linear-gradient(90deg, rgba(251, 91, 4)  40%, rgba(255, 119, 2)60%);
   transition: 1.8s ease-in-out;
   border-radius: 50%;
   z-index: 6;
@@ -266,6 +274,11 @@ form.sign-in-form {
 .container.sign-up-mode .right-panel {
   pointer-events: all;
 }
+
+#ajusts {
+  margin-right: 20%;
+}
+
 
 @media (max-width: 870px) {
   .container {

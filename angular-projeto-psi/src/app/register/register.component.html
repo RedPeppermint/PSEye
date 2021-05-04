@@ -7,7 +7,7 @@
       <div class="signin-signup">
 
         <form [formGroup]="frmSignin" class="sign-in-form">
-          <h2 class="title">Sign In</h2>
+          <h2 class="title">PSEye <br> Sign In</h2>
           <div class="input-field">
             <i class="fas fa-user"></i>
             <input type="text" formControlName="username" placeholder="Username" class="form-control">
@@ -18,11 +18,11 @@
           </div>
           <button type="submit" class="btn btn-primary btn-block font-weight-bold" (click)="submitLogin()">Sign
             In</button>
-          <div *ngIf="!authenticated">Your username or password is incorrect</div>
+          <div *ngIf="!authenticated" id="loginError" >Your username or password is incorrect</div>
         </form>
 
         <form [formGroup]="frmSignup" class="sign-up-form">
-          <h2 class="title">Sign Up</h2>
+          <h2 class="title">PSEye <br> Sign Up </h2>
           <div>
             <div class="input-field">
               <i class="fas fa-user"></i>
@@ -34,7 +34,7 @@
               <i class="material-icons">{{ frmSignup.controls['usernameRegister'].hasError('required') ||
                 frmSignup.controls['usernameRegister'].hasError('minlength') ? 'cancel' :
                 'check_circle' }}</i>
-              Tem de ter mínimo de 3 carateres
+              Must have at least 3 characters
             </label>
             <label
               [ngClass]="frmSignup.controls['usernameRegister'].hasError('required') || frmSignup.controls['usernameRegister'].hasError('hasSymbol') ? 'text-danger' : 'text-success'">
@@ -42,7 +42,7 @@
                 frmSignup.controls['usernameRegister'].hasError('hasSymbol') ?
                 'cancel' :
                 'check_circle' }}</i>
-              Só pode ter letras e números
+              Can only have letters and numbers
             </label>
           </div>
           <div>
@@ -63,28 +63,28 @@
               <i class="material-icons">{{ frmSignup.controls['passwordRegister'].hasError('required') ||
                 frmSignup.controls['passwordRegister'].hasError('minlength') ? 'cancel' :
                 'check_circle' }}</i>
-              Tem de ter mínimo de 8 carateres
+              Must have at least 8 characters
             </label>
             <label
               [ngClass]="frmSignup.controls['passwordRegister'].hasError('required') || frmSignup.controls['passwordRegister'].hasError('hasNumber')  ? 'text-danger' : 'text-success'">
               <i class="material-icons">{{ frmSignup.controls['passwordRegister'].hasError('required') ||
                 frmSignup.controls['passwordRegister'].hasError('hasNumber') ? 'cancel' :
                 'check_circle' }}</i>
-              Tem de ter um número
+              Must have a number
             </label>
             <label
               [ngClass]="frmSignup.controls['passwordRegister'].hasError('required') || frmSignup.controls['passwordRegister'].hasError('hasCapitalCase')  ? 'text-danger' : 'text-success'">
               <i class="material-icons">{{ frmSignup.controls['passwordRegister'].hasError('required') ||
                 frmSignup.controls['passwordRegister'].hasError('hasCapitalCase') ? 'cancel' :
                 'check_circle' }}</i>
-              Tem de ter uma maiúscula
+              Must have a capital letter
             </label>
             <label
               [ngClass]="frmSignup.controls['passwordRegister'].hasError('required') || frmSignup.controls['passwordRegister'].hasError('hasSmallCase')  ? 'text-danger' : 'text-success'">
               <i class="material-icons">{{ frmSignup.controls['passwordRegister'].hasError('required') ||
                 frmSignup.controls['passwordRegister'].hasError('hasSmallCase') ? 'cancel' :
                 'check_circle' }}</i>
-              Tem de ter uma minúscula
+              Must have a lowercase
             </label>
           </div>
           <div>
@@ -95,16 +95,16 @@
                 [ngClass]="frmSignup.controls['confirmPassword'].invalid ? 'is-invalid' : ''">
             </div>
             <label class="text-danger" *ngIf="frmSignup.controls['confirmPassword'].hasError('required')">
-              Introduza a mesma password
+              Enter the same password
             </label>
             <label class="text-danger" *ngIf="frmSignup.controls['confirmPassword'].hasError('NoPassswordMatch')">
-              Password não é igual
+              Password is not the same
             </label>
           </div>
           <button [disabled]="frmSignup.invalid" type="submit" class="btn btn-primary btn-block font-weight-bold"
             (click)="submitRegister()">Sign
             Up</button>
-          <div *ngIf="userExists">This username is already taken</div>
+          <div *ngIf="userExists" id="userExists">This username is already taken</div>
 
         </form>
 
@@ -113,10 +113,10 @@
 
     <div class="panels-container">
       <div class="panel left-panel">
-        <div class="content">
+        <div class="content" id="ajusts">
           <h3>New here?</h3>
           <p>
-            If you want learn new things in everyday here we go.
+            If you want to see and share photos join us.
           </p>
           <button class="btn transparent" id="sign-up-btn">
             Sign up
@@ -127,7 +127,7 @@
         <div class="content">
           <h3>One of us?</h3>
           <p>
-            Everyday learning is most important to succed in life.
+            Enter and continue to enjoy the application.
           </p>
           <button class="btn transparent" id="sign-in-btn">
             Sign in

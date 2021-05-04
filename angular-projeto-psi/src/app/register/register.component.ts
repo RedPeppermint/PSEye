@@ -36,8 +36,7 @@ export class RegisterComponent implements OnInit {
           ])
         ],
         email: [null, Validators.compose([
-          Validators.email,
-          Validators.required])
+          ])
         ],
         passwordRegister: [
           null,
