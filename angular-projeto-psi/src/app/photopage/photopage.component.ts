@@ -15,12 +15,16 @@ export class PhotopageComponent implements OnInit {
   description;
   liked;
   faved;
+  name;
+  number_of_likes;
+
 
 
   constructor(private userService: UserService, private router: Router, private route: ActivatedRoute, private photoService: PhotoService) { }
 
   ngOnInit(): void {
     var id = this.route.snapshot.paramMap.get('id');
+
     if (!id) {
       this.userService.getUserByID(this.user_id).subscribe(user => {
         this.user = user[0].name;
@@ -29,19 +33,33 @@ export class PhotopageComponent implements OnInit {
     }
 
     this.photoService.getPhoto(id).subscribe(p => {
+      console.log(p);
+
       p = p[0];
       this.id = p._id;
       this.user_id = p.user_id;
       var img = new Image();
       img.src = p.photoBase64;
       this.photo = img;
-      this.liked = false;
+      this.name = p.name;
+
+      this.photoService.isLiked(p._id).subscribe(b => {
+        this.liked = b.Response;
+      });
+
+      this.photoService.isFav(p._id).subscribe(b => {
+        this.faved = b.Response;
+      });
+
       this.faved = true;
       this.description = p.description;
+      p.number_of_likes = p.likes.length;
       this.userService.getUserByID(p.user_id).subscribe(user => {
         this.user = user[0].name;
       });
-    })
+
+    });
+
 
   }
 

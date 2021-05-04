@@ -39,6 +39,9 @@ export class ProfileComponent implements OnInit {
 
 
     this.getPhotosById(this.id);
+    if (!this.photossize) {
+        this.router.navigate(["/dashboard"]);
+    }
   }
 
   getPhotosById(id: string): void {
