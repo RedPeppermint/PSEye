@@ -1,0 +1,130 @@
+Projeto de PSI 2020/21
+Objetivo do projeto
+O projeto deverá desenvolver funcionalidades para uma aplicação web de partilha de fotografias.
+
+Execução do projeto
+As caraterísticas deste projeto requerem uma equipa composta por 5 a 6 elementos, com competências e responsabilidades bem definidas e distintas, que serão avaliadas. Devido à importância do projeto, o processo de avaliação seguirá regras rigorosas. A constituição das equipas é realizada na atividade Grupos de PSI na página de PSI no moodle. O projeto seguirá uma metodologia de desenvolvimento de software inspirada na metodologia Scrum, que possui papéis e atividades bem definidos, operacionalizada pela plataforma JIRA Agile.
+
+Como parte da metodologia Scrum, o conjunto de funcionalidades a implementar durante cada sprint é definido no início do sprint. O backlog inicial é composto pelos seguintes items (estes items podem sofrer alterações a qualquer momento).
+
+US1 - Como fotógrafo autenticado na plataforma quero poder fazer upload de uma fotografia para que os utilizadores da plataforma a possam ver
+Prioridade: Alta
+Critérios de aceitação
+O fotógrafo deve escolher uma fotografia do sistema de ficheiros do seu computador, e deve aparecer um thumbnail desta na página para ele poder confirmar que é a fotografia desejada.
+O fotógrafo deve indicar um nome para a fotografia (máximo de 100 carateres) e fornecer uma descrição da fotografia (máximo de 500 caracteres)
+Se o fotógrafo não indicar um nome para a fotografia, o nome desta deve ser o nome do ficheiro selecionado
+Se o fotógrafo não indicar uma descrição para a fotografia e tentar fazer o upload deve-lhe ser pedido para confirmar que não quer mesmo fornecer uma descrição. Se confirmar o processo de upload deve prosseguir. Se não confirmar, deve voltar ao ecrã de upload para fornecer a descrição
+O botão que inicia o envio da fotografia (e restante informação) para o servidor, não deve poder ser selecionado até ter sido escolhida uma fotografia
+Se existir um erro no armazenamento da fotografia na plataforma, deve ser apresentada uma mensagem de erro a informar o utilizador do sucedido
+Deve ser possível concluir o processo de upload num browser desktop sem usar o rato
+US2 - Como fotógrafo autenticado na plataforma quero poder fazer upload de várias fotografias em simultâneo para não ter de gastar tanto tempo a fazer uploads
+Prioridade: Baixa
+Critérios de aceitação
+O fotógrafo deve escolher uma pasta do sistema de ficheiros do seu computador que contenha imagens
+As 10 primeiras fotografias presentes na pasta devem ser mostradas ao fotógrafo sob a forma de thumbnails para ele poder confirmar que é a pasta desejada
+O nome de cada fotografia deve ser igual ao nome do ficheiro
+Quando o fotógrafo tentar fazer upload das fotografias, deve-lhe ser perguntado se pretende inserir uma descrição para cada fotografia. Se responder negativamente, o processo continua. Se responder positivamente, deve-lhe ser apresentada uma fotografia de cada vez e deve-lhe ser possível escrever uma descrição para cada fotografia (máximo 500 carateres por descrição) ou saltar algumas fotografias
+O botão que inicia o envio das fotografias (e restante informação) para o servidor, não deve poder ser selecionado até ter sido escolhida uma pasta
+Se existir um erro no armazenamento das fotografias na plataforma, deve ser apresentada uma mensagem de erro a informar o utilizador do sucedido
+Deve ser possível concluir o processo de upload num browser desktop sem usar o rato
+US3 - Como utilizador da plataforma quero poder ter acesso a um link de partilha de uma fotografia para poder enviar esse link aos meus amigos e estes terem acesso imediato à fotografia
+Prioridade: Média
+Critérios de aceitação
+Quando um utilizador está a visualizar uma fotografia deve existir um elemento na interface que quando ativado copia para o clipboard um url que identifica univocamente a fotografia visualizada
+Deve ser possível aceder ao link de partilha num browser desktop ou mobile
+Deve ser possível aceder ao link de partilha num browser desktop sem usar o rato
+Quando esse url é carregado num browser a mesma fotografia deve ser visualizada no contexto da aplicação (i.e. o browser não deve abrir uma tab cujo conteúdo seja apenas a fotografia)
+US4 - Como utilizador autenticado na plataforma quero poder gostar de fotografias para que o fotógrafo saiba que é uma boa fotografia
+Prioridade: Média
+Critérios de aceitação
+Quando um utilizador está a visualizar uma fotografia deve existir um elemento na interface que quando ativado indica que o utilizador gosta dessa fotografia
+Quando o utilizador visualiza uma fotografia de que tenha gostado no passado deve existir uma indicação na fotografia assinalando que o utilizador gostou da fotografia
+Deve ser possível ao utilizador anular o gosto de uma fotografia, ativando o mesmo elemento da interface
+Deve ser possível aceder ao gosto num browser desktop ou mobile
+Deve ser possível aceder gosto num browser desktop sem usar o rato
+Quando se visualiza uma fotografia deve ser apresentado o número total de "gostos" que a fotografia recebeu até ao momento
+US5 - Como utilizador autenticado na plataforma quero poder marcar fotografias como favoritas para poder aceder a essas fotografias mais tarde de forma rápida
+Prioridade: Baixa
+Critérios de aceitação 
+Quando um utilizador está a visualizar uma fotografia deve existir um elemento na interface que quando ativado indica que o utilizador marcou a fotografia como favorita
+Quando o utilizador visualiza uma fotografia marcada como favorita por si deve existir uma indicação na fotografia assinalando que o utilizador a marcou como favorita
+Deve ser possível ao utilizador anular o favorito de uma fotografia, ativando o mesmo elemento da interface
+Deve ser possível marcar como favorita num browser desktop ou mobile
+Deve ser possível marcar como favorita num browser desktop sem usar o rato
+US6 - Como utilizador autenticado na plataforma quero ter acesso às fotografias que marquei como favoritas para as poder rever de cada vez que me apetecer
+Prioridade: Baixa
+Critérios de aceitação
+A plataforma deve fornecer um método de acesso a todas as fotografias que o utilizador marcou como favoritas.
+Quando o utilizador ativa esse método deve-lhe ser apresentada uma visualização com thumbnails de todas as imagens que o utilizador marcou como favoritas.
+Se o utilizador selecionar um thumbnail deve-lhe ser apresentada uma visualização com a fotografia, o seu nome e a descrição (caso exista).
+Deve ser possível ver as fotografias favoritas num browser desktop ou mobile
+Deve ser possível ver as fotografias favoritas num browser desktop sem usar o rato
+US7 - Como utilizador da plataforma quero poder ver as fotografias mais recentes para poder saber quais as novidades na plataforma
+Prioridade: Alta
+Critérios de aceitação
+A plataforma deve fornecer um método de acesso às fotografias mais recentes.
+Quando o utilizador ativa esse método deve-lhe ser apresentada uma visualização com thumbnails das 50 fotografias mais recentes.
+Se o utilizador selecionar um thumbnail deve-lhe ser apresentada uma visualização com a fotografia, o seu nome e a descrição (caso exista).
+Deve ser possível ver as fotografias mais recentes num browser desktop ou mobile
+Deve ser possível ver as fotografias mais recentes num browser desktop sem usar o rato
+US8 - Como utilizador da plataforma quero poder ver as fotografias com mais gostos para ver as fotografias mais populares
+Prioridade: Média
+Critérios de aceitação
+A plataforma deve fornecer um método de acesso às fotografias mais populares.
+Quando o utilizador ativa esse método deve-lhe ser apresentada uma visualização com thumbnails das 50 fotografias com mais gostos de todos os utilizadores.
+Se o utilizador selecionar um thumbnail deve-lhe ser apresentada uma visualização com a fotografia, o seu nome e a descrição (caso exista).
+Deve ser possível ver as fotografias mais populares num browser desktop ou mobile
+Deve ser possível ver as fotografias mais populares num browser desktop sem usar o rato
+US9 - Como fotógrafo autenticado na plataforma quero poder apagar uma fotografia que eu tenha feito upload anteriormente para retirar fotografias que já não queira partilhar
+Prioridade: Média
+Critérios de aceitação
+A plataforma deve fornecer um método ao utilizador para consultar todas as fotografias que fez upload.
+Ao selecionar uma das suas fotografias, deve ser apresentado ao utilizador uma visualização da fotografia com o seu nome e descrição (caso exista).
+Nessa visualização deve haver um elemento da interface que permita remover a fotografia da plataforma.
+Ao selecionar esse elemento, deve ser pedido ao utilizador para confirmar a intenção de remover a fotografia da plataforma. Caso confirme, a fotografia e toda a informação associada à fotografia deve ser removida da plataforma.
+US10 - Como potencial utilizador da plataforma quero poder registar-me na plataforma para poder ter acesso a funções restritas a utilizadores autenticados
+Prioridade: Alta
+Critérios de aceitação
+Para se registar o utilizador deve fornecer um nickname e uma password
+O nickname será o nome pelo qual o utilizador é conhecido na plataforma e deve ser único e ter 3 ou mais carateres (só pode ter letras ou algarismos)
+Se o utilizador tentar registar um nickname que já existe, a mensagem de erro deve indicá-lo claramente
+A password deve ter 8 ou mais carateres, incluindo pelo menos uma letra maiúscula, uma letra minúscula e um algarismo
+Os requisitos de construção da password devem ser apresentados no ecrã de registo
+Se a password não cumprir os requisitos a mensagem devem indicar qual ou quais os requisitos que não foram cumpridos
+Deve ser possível concluir o processo de registo num browser desktop ou mobile
+Deve ser possível concluir o processo de registo num browser desktop sem usar o rato
+US11 - Como utilizador registado na plataforma quero poder autenticar-me na plataforma para poder fazer upload, gostos e favoritos
+Prioridade: Alta
+Critérios de aceitação
+Para se autenticar o utilizador deve usar o nickname e password fornecidos durante o processo de registo
+Em caso de falha na autenticação, a mensagem de erro não deve permitir saber se o nickname existe no sistema
+Em caso de sucesso na autenticação o utilizador deve ser levado para um ecrã que mostra as fotografias que carregou para a plataforma no passado, ou, se não tiver carregado nenhuma, para o ecrã com as fotografias mais recentes na plataforma
+Deve ser possível concluir o processo de autenticação num browser desktop ou mobile
+Deve ser possível concluir o processo de autenticação num browser desktop sem usar o rato
+As funcionalidades serão implementadas ao longo de 2 sprints de desenvolvimento de software, cada um com duas semanas de duração.
+
+Em cada sprint pretende-se que seja construída uma versão completa de funcionalidades do sistema de informação na framework escolhida. No final de cada sprint é feita uma demonstração das funcionalidades.
+
+Entregas
+Os vídeos que demonstram os resultados obtidos em cada sprint devem ser entregues através da atividade existente na página da disciplina no Moodle. O nome do ficheiro deve seguir o seguinte formato: psi_xxx_sprint_y, onde xxx é o número do grupo e y o número do sprint.
+
+Avaliações
+A avaliação do projeto tem em consideração a qualidade do produto desenvolvido e a qualidade do process de desenvolvimento. Os dois sprints têm o mesmo peso na avaliação.  
+
+Aspetos técnicos
+Os projetos utilizarão servidores implementando o stack tecnológico MEAN (MongoDB, Express, Angular, NodeJS). Os clientes terão obrigatoriamente de ser browsers web. É ainda necessário estruturar o sistema de informação de acordo com as seguintes quatro camadas: 1) cliente browser; 2) servidor web com lógica de apresentação; 3) servidor aplicacional com regras de negócio; e 4) servidor de base de dados.
+
+Plataforma de execução do projeto
+O projeto deve ser executado no servidor appserver.alunos.di.fc.ul.pt
+O acesso ao servidor é feito através de ssh sendo o username o número do grupo. A password inicial é também o número do grupo e deve ser alterada após o primeiro login
+> ssh psi050@appserver.alunos.di.fc.ul.pt
+O appserver tem instalados node, npm e mongo. Todos os módulos necessários para funcionamento do projeto devem ser instalados recorrendo ao npm.
+Cada grupo tem uma base de dados criada no servidor mongo. O nome da base de dados é igual ao número do grupo (p.ex. o grupo psi050 deve usar a base de dados psi050). 
+Cada grupo tem um utilizador no servidor mongo. O nome do utilizador é igual ao número do grupo. A password também é igual ao número do grupo. Para acederem à consola do mongo usem o comando (substituindo psiXXX pelo número do grupo)
+mongo --username psiXXX --password --authenticationDatabase psiXXX appserver.alunos.di.fc.ul.pt/psiXXX
+Cada grupo tem dois portos abertos para acesso por http a servidores node. O primeiro porto no intervalo 3001 a 3035 e o segundo porto no intervalo 3051 a 3085. Por exemplo, o grupo psi003 deve usar os portos 3003 e 3053. É assim importante que configurem os servidores node (para o front-end e back-end) nesses portos.
+A forma de executar o servidor node que serve o front-end Angular deve ser a seguinte (onde o XXXX que define o porto deve ser o específico de cada grupo)
+ng serve --port XXXX --host 0.0.0.0 --disableHostCheck true
+Para o servidor node que serve o back-end não é necessário mudar a forma de execução.
+A connection string para acesso à base de dados mongo deve ser a seguinte (onde devem substituir psiXXX pelo número do grupo)
+mongodb://psiXXX:psiXXX@localhost:27017/psiXXX?retryWrites=true&authSource=psiXXX
